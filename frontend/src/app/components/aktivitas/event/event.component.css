@@ -1,0 +1,11 @@
+.event-container {
+  font-family: 'Inter', sans-serif;
+}
+
+img {
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.03);
+}

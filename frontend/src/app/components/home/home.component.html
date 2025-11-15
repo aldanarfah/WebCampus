@@ -1,0 +1,130 @@
+<!-- HERO SECTION -->
+<section class="relative w-full h-96 overflow-hidden">
+  <img [src]="heroImages[currentSlide].img"
+       alt="{{ heroImages[currentSlide].text }}"
+       class="w-full h-full object-cover transition-opacity duration-700" />
+  <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+    <h1 class="text-white text-4xl font-bold">{{ heroImages[currentSlide].text }}</h1>
+  </div>
+</section>
+
+<!-- STATISTIK & PROFIL -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <!-- Statistik -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow text-center">
+        <h3 class="text-3xl font-bold text-blue-700">{{ stats.murid }}</h3>
+        <p class="text-gray-600">Mahasiswa</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow text-center">
+        <h3 class="text-3xl font-bold text-blue-700">{{ stats.dosen }}</h3>
+        <p class="text-gray-600">Dosen</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow text-center">
+        <h3 class="text-3xl font-bold text-blue-700">{{ stats.prodi }}</h3>
+        <p class="text-gray-600">Program Studi</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow text-center">
+        <h3 class="text-3xl font-bold text-blue-700">{{ stats.organisasi }}</h3>
+        <p class="text-gray-600">Organisasi</p>
+      </div>
+    </div>
+
+    <!-- Profil Singkat -->
+    <div>
+      <h2 class="text-3xl font-bold mb-4">Profil Singkat</h2>
+      <p class="text-gray-700 mb-6">
+        Politeknik Negeri Malang PSDKU Lumajang adalah salah satu kampus vokasi unggulan
+        yang berfokus pada pengembangan kompetensi praktikal dan profesional mahasiswa.
+      </p>
+      <a routerLink="/profil"
+         class="bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+        Selengkapnya
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BERITA -->
+<section class="py-16">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-bold mb-10">Berita Terbaru</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div *ngFor="let b of berita" class="bg-white shadow rounded-xl overflow-hidden hover:shadow-lg transition">
+        <img [src]="b.img" alt="berita" class="w-full h-40 object-cover" />
+        <div class="p-4 text-left">
+          <h3 class="font-semibold text-lg mb-2">{{ b.title }}</h3>
+          <p class="text-gray-600 text-sm line-clamp-3">{{ b.desc }}</p>
+        </div>
+      </div>
+    </div>
+    <a routerLink="/berita"
+       class="inline-block mt-8 bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+      Lihat Semua Berita
+    </a>
+  </div>
+</section>
+
+<!-- EVENT -->
+<section class="py-16 bg-blue-700 text-white">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    <!-- Kiri -->
+    <div class="bg-white text-gray-800 rounded-xl p-8 shadow">
+      <h2 class="text-3xl font-bold mb-4">Event Kampus</h2>
+      <p class="text-gray-600 mb-6">
+        Temukan berbagai kegiatan menarik, seminar, dan kompetisi yang diadakan oleh kampus kami.
+      </p>
+      <a routerLink="/event"
+         class="bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+        Lihat Semua Event
+      </a>
+    </div>
+
+    <!-- Carousel Manual -->
+    <div class="relative">
+      <div class="flex transition-transform duration-500"
+           [style.transform]="'translateX(-' + currentEvent * 100 + '%)'">
+        <div *ngFor="let e of events" class="min-w-full p-4">
+          <div class="bg-white rounded-xl text-gray-800 shadow overflow-hidden">
+            <img [src]="e.img" alt="Event" class="w-full h-40 object-cover" />
+            <div class="p-4">
+              <h3 class="font-semibold text-lg">{{ e.title }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tombol Navigasi -->
+      <div class="flex justify-center mt-4 space-x-2">
+        <button *ngFor="let e of events; let i = index"
+                (click)="currentEvent = i"
+                class="w-3 h-3 rounded-full"
+                [ngClass]="i === currentEvent ? 'bg-white' : 'bg-gray-400'"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SARANA -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <div>
+      <h2 class="text-4xl font-bold text-blue-700 mb-4">
+        Sarana Terbaik Untuk Menunjang Kegiatan Akademismu
+      </h2>
+      <p class="text-gray-700 mb-6">
+        Fasilitas lengkap mulai dari laboratorium, ruang belajar modern, hingga area rekreasi yang nyaman.
+      </p>
+    </div>
+
+    <!-- Carousel Otomatis -->
+    <div class="relative overflow-hidden rounded-xl shadow">
+      <div class="flex transition-transform duration-700 ease-in-out"
+           [style.transform]="'translateX(-' + currentFacility * 100 + '%)'">
+        <img *ngFor="let f of fasilitas" [src]="f.img" alt="Fasilitas"
+             class="w-full h-64 object-cover flex-shrink-0" />
+      </div>
+    </div>
+  </div>
+</section>
