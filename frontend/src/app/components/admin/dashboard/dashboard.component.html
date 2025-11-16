@@ -1,0 +1,21 @@
+<div class="flex min-h-screen bg-gray-100">
+
+  <!-- SIDEBAR -->
+  <aside class="w-64 bg-white shadow-md border-r p-5">
+    <h2 class="text-xl font-bold mb-6">ADMIN PANEL</h2>
+
+    <nav class="flex flex-col space-y-2">
+      <a routerLink="/dashboard" class="p-2 rounded hover:bg-gray-200">Dashboard</a>
+      <a routerLink="/dashboard/organisasi" class="p-2 rounded hover:bg-gray-200">Organisasi</a>
+      <a routerLink="/dashboard/ukm" class="p-2 rounded hover:bg-gray-200">UKM</a>
+      <a routerLink="/dashboard/berita" class="p-2 rounded hover:bg-gray-200">Berita</a>
+      <a routerLink="/dashboard/event" class="p-2 rounded hover:bg-gray-200">Event</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 p-8">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

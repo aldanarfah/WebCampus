@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-sejarah',
+  selector: 'app-profil',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, RouterModule],
   templateUrl: './sejarah.component.html',
-  styleUrl: './sejarah.component.css'
+  styleUrls: ['./sejarah.component.css']
 })
-export class SejarahComponent {
-
-}
+export class SejarahComponent {}

@@ -1,1 +1,64 @@
-<p>data-dosen works!</p>
+<div class="p-6 max-w-5xl mx-auto">
+
+  <!-- TITLE -->
+  <h1 class="text-3xl font-bold mb-4 text-[#002D72]">Data Dosen</h1>
+
+  <!-- SEARCH + FILTER -->
+  <div class="bg-white p-4 shadow rounded-lg flex flex-col md:flex-row gap-4 mb-6">
+
+    <!-- Search -->
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      placeholder="Cari nama atau NIDN..."
+      class="border p-2 rounded w-full"
+    />
+
+    <!-- Filter Jabatan -->
+    <select
+      [(ngModel)]="filterJabatan"
+      class="border p-2 rounded w-full md:w-48"
+    >
+      <option value="">Semua Jabatan</option>
+      <option value="Dosen">Dosen</option>
+      <option value="Rektor">Rektor</option>
+      <option value="Tata Usaha">Tata Usaha</option>
+    </select>
+
+    <!-- Tombol -->
+    <button
+      class="bg-[#002D72] text-white px-5 py-2 rounded hover:bg-blue-900"
+    >
+      Cari
+    </button>
+  </div>
+
+  <!-- CARD DOSEN LIST -->
+  <div class="grid gap-4">
+    <div
+      class="flex gap-4 bg-white shadow rounded-xl p-4 cursor-pointer hover:shadow-lg transition"
+      *ngFor="let dosen of filteredDosen"
+      (click)="openDetail(dosen)"
+    >
+      <img
+        [src]="dosen.foto"
+        class="w-24 h-24 rounded-lg object-cover"
+      />
+
+      <div class="flex flex-col justify-center">
+        <h3 class="text-xl font-semibold">{{ dosen.nama }}</h3>
+        <p class="text-gray-600">NIDN: {{ dosen.nidn }}</p>
+        <p class="text-gray-600">Prodi: {{ dosen.prodi }}</p>
+        <p class="text-gray-600">Jabatan: {{ dosen.jabatan }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPUP DETAIL -->
+  @if (selectedDosen) {
+    <app-detail-dosen
+      [dosen]="selectedDosen"
+      (close)="closeDetail()"
+    ></app-detail-dosen>
+  }
+</div>

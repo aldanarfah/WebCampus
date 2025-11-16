@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-akademik',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, RouterModule],
   templateUrl: './akademik.component.html',
-  styleUrl: './akademik.component.css'
+  styleUrls: ['./akademik.component.css']
 })
-export class AkademikComponent {
-
-}
+export class AkademikComponent {}

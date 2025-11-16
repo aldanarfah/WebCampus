@@ -1,0 +1,51 @@
+<!-- BACKDROP BLUR -->
+<div class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+
+  <!-- POPUP CARD -->
+  <div class="bg-white rounded-2xl shadow-2xl p-6 w-[90%] max-w-3xl relative">
+
+    <!-- TOMBOL CLOSE -->
+    <button
+      (click)="closePopup()"
+      class="absolute right-4 top-4 text-gray-500 hover:text-gray-700 text-2xl"
+    >
+      ✕
+    </button>
+
+    <!-- FOTO DAN NAMA -->
+    <div class="text-center">
+      <img
+        [src]="dosen.foto"
+        class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-blue-200"
+      />
+      <h2 class="text-2xl font-bold mt-4 text-[#002D72]">{{ dosen.nama }}</h2>
+      <p class="text-gray-600">{{ dosen.jabatan }} — {{ dosen.prodi }}</p>
+      <p class="text-gray-600">NIDN: {{ dosen.nidn }}</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+
+      <!-- DATA KIRI -->
+      <div class="space-y-3">
+        <h3 class="text-lg font-semibold text-[#002D72]">Informasi Dosen</h3>
+
+        <p><span class="font-semibold">Email:</span> {{ dosen.email }}</p>
+        <p><span class="font-semibold">LinkedIn:</span> linkedin.com/{{ dosen.nama | lowercase }}</p>
+
+        <p class="font-semibold">Pendidikan:</p>
+        <ul class="list-disc ml-6">
+          <li>S1 Teknologi Informasi</li>
+          <li>S2 Ilmu Komputer</li>
+          <li>S3 Sistem Informasi</li>
+        </ul>
+      </div>
+
+      <!-- CHART KANAN -->
+      <div>
+        <h3 class="text-lg font-semibold text-[#002D72] mb-3">Grafik Kehadiran</h3>
+        <canvas #lineChart class="w-full h-64"></canvas>
+      </div>
+
+    </div>
+  </div>
+</div>

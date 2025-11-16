@@ -10,3 +10,4 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./aktivitas.component.css']
 })
 export class AktivitasComponent {}
+ 

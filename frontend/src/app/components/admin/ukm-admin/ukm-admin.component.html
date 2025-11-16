@@ -1,0 +1,32 @@
+<h2 class="text-xl font-bold mb-4">Kelola UKM</h2>
+
+<form (ngSubmit)="save()" class="space-y-3 mb-6">
+  <input [(ngModel)]="form.nama" name="nama" class="border p-2 w-full" placeholder="Nama UKM" required>
+
+  <textarea [(ngModel)]="form.deskripsi" name="deskripsi"
+    class="border p-2 w-full" placeholder="Deskripsi"></textarea>
+
+  <button type="submit"
+    class="px-4 py-2 rounded text-white"
+    [class.bg-blue-600]="mode==='create'"
+    [class.bg-yellow-500]="mode==='edit'">
+    {{ mode === 'create' ? 'Tambah UKM' : 'Update UKM' }}
+  </button>
+</form>
+
+<table class="w-full border">
+  <tr class="bg-gray-200">
+    <th class="p-2 border">Nama</th>
+    <th class="p-2 border">Deskripsi</th>
+    <th class="p-2 border">Aksi</th>
+  </tr>
+
+  <tr *ngFor="let ukm of ukmList">
+    <td class="p-2 border">{{ ukm.nama }}</td>
+    <td class="p-2 border">{{ ukm.deskripsi }}</td>
+    <td class="p-2 border space-x-2">
+      <button (click)="edit(ukm)" class="px-2 py-1 bg-yellow-500 text-white rounded">Edit</button>
+      <button (click)="delete(ukm.id)" class="px-2 py-1 bg-red-600 text-white rounded">Delete</button>
+    </td>
+  </tr>
+</table>

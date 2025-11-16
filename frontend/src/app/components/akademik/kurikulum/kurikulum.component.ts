@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-kurikulum',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './kurikulum.component.html',
-  styleUrl: './kurikulum.component.css'
+  styleUrls: ['./kurikulum.component.css']
 })
-export class KurikulumComponent {
-
-}
+export class KurikulumComponent {}
