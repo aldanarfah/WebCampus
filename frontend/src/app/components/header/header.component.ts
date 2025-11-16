@@ -24,7 +24,7 @@ export class HeaderComponent {
         { name: 'Sejarah', path: '/profil/sejarah' },
         { name: 'Visi Misi', path: '/profil/visi-misi' },
         { name: 'Pimpinan', path: '/profil/pimpinan' },
-        { name: 'Struktur Organisasi', path: '/profil/struktur' },
+        { name: 'Struktur Organisasi', path: '/profil/struktur-organisasi' },
         { name: 'Sarana & Prasarana', path: '/profil/sarana' }
       ]
     },
@@ -56,7 +56,6 @@ export class HeaderComponent {
         { name: 'Data Alumni', path: '/alumni/data-alumni' }
       ]
     },
-    { name: 'Karier', path: '/karier' },
-    { name: 'Kontak', path: '/contact' }
+    { name: 'Karier', path: '/karier' }
   ];
 }

@@ -37,8 +37,10 @@ import { AktivitasDefaultComponent } from './components/aktivitas/aktivitas-defa
 import { AlumniComponent } from './components/alumni/alumni/alumni.component';
 import { DataAlumniComponent } from './components/alumni/data-alumni/data-alumni.component';
 
-// Karier & Contact 
+// Karier 
 import { KarierComponent } from './components/karier/karier.component'; 
+
+//Kontak
 import { ContactComponent } from './components/contact/contact.component';
 
 // Login
