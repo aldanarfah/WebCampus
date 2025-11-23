@@ -27,7 +27,7 @@ export class DataDosenComponent {
       prodi: 'D3 Teknologi Informasi',
       jabatan: 'Dosen',
       email: 'budi@kampus.ac.id',
-      foto: 'assets/img/dosen1.jpg'
+      foto: 'https://randomuser.me/api/portraits/men/35.jpg'
     },
     {
       nama: 'Prof. Siti Rahmawati',
@@ -35,7 +35,7 @@ export class DataDosenComponent {
       prodi: 'D3 Akuntansi',
       jabatan: 'Rektor',
       email: 'siti@kampus.ac.id',
-      foto: 'assets/img/dosen2.jpg'
+      foto: 'https://randomuser.me/api/portraits/women/35.jpg'
     },
     {
       nama: 'M. Andi Prasetyo, S.Kom',
@@ -43,7 +43,7 @@ export class DataDosenComponent {
       prodi: 'D4 Rekayasa Otomotif',
       jabatan: 'Tata Usaha',
       email: 'andi@kampus.ac.id',
-      foto: 'assets/img/dosen3.jpg'
+      foto: 'https://randomuser.me/api/portraits/men/37.jpg'
     },
   ];
 

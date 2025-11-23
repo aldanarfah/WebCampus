@@ -36,12 +36,23 @@ import { AktivitasDefaultComponent } from './components/aktivitas/aktivitas-defa
 // Alumni
 import { AlumniComponent } from './components/alumni/alumni/alumni.component';
 import { DataAlumniComponent } from './components/alumni/data-alumni/data-alumni.component';
+import { KegiatanAlumniComponent } from './components/alumni/kegiatan-alumni/kegiatan-alumni.component';
+
+// Alumni Default
+import { AlumniDefaultComponent } from './components/alumni/alumni-default/alumni-default.component';
 
 // Karier 
-import { KarierComponent } from './components/karier/karier.component'; 
+import { KarierComponent } from './components/karier/karier.component';
+
+// PMB 
+import { PmbComponent } from './components/pmb/pmb/pmb.component';
+import { BeasiswaComponent } from './components/pmb/beasiswa/beasiswa.component';
+
+// PMB Default
+import { PmbDefaultComponent } from './components/pmb/pmb-default/pmb-default.component';
 
 //Kontak
-import { ContactComponent } from './components/contact/contact.component';
+import { KontakComponent } from './components/kontak/kontak.component';
 
 // Login
 import { LoginComponent } from './components/login/login.component';
@@ -129,10 +140,29 @@ export const routes: Routes = [
 },
 
   // Alumni
-  { path: 'alumni', component: AlumniComponent },
-  { path: 'alumni/data-alumni', component: DataAlumniComponent },
+  {
+  path: 'alumni',
+  component: AlumniComponent,
+  children: [
+    { path: '', component: AlumniDefaultComponent }, // default
+    { path: 'data-alumni', component: DataAlumniComponent },
+    { path: 'kegiatan-alumni', component: KegiatanAlumniComponent },
+  ]
+},
 
-  // Karier dan Kontak
+  // Karier
   { path: 'karier', component: KarierComponent },
-  { path: 'contact', component: ContactComponent },
+
+  //PMB
+  {
+  path: 'pmb',
+  component: PmbComponent,
+  children: [
+    { path: '', component: PmbDefaultComponent }, // default
+    { path: 'beasiswa', component: BeasiswaComponent },
+  ]
+}, 
+
+  //Kontak
+  { path: 'kontak', component: KontakComponent },
 ];

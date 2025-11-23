@@ -1,0 +1,22 @@
+<h1 class="text-3xl font-bold mb-6">Galeri Kegiatan Alumni</h1>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+  <mat-card *ngFor="let item of kegiatan"
+    class="rounded-xl shadow-lg overflow-hidden kegiatan-card">
+
+    <!-- FOTO -->
+    <div class="relative h-48 overflow-hidden">
+      <img [src]="item.foto"
+           class="w-full h-full object-cover transform transition duration-300 hover:scale-110" />
+    </div>
+
+    <div class="p-4">
+      <h2 class="text-xl font-semibold mb-1">{{ item.judul }}</h2>
+      <p class="text-sm text-gray-500 mb-3">{{ item.tanggal }}</p>
+      <p class="text-gray-700 text-sm">{{ item.deskripsi }}</p>
+    </div>
+
+  </mat-card>
+
+</div>

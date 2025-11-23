@@ -17,7 +17,7 @@ export class KarierComponent {
       perusahaan: 'PT Teknologi Cerdas',
       lokasi: 'Jakarta',
       tanggal: '2025-12-01',
-      poster: 'assets/images/loker-frontend.jpg',
+      poster: 'https://picsum.photos/seed/karier1/600/350',
       deskripsi: 'Frontend Developer untuk membangun aplikasi web menggunakan Angular dan Tailwind.'
     },
     {
@@ -25,7 +25,7 @@ export class KarierComponent {
       perusahaan: 'PT Inovasi Digital',
       lokasi: 'Surabaya',
       tanggal: '2025-11-20',
-      poster: 'assets/images/loker-backend.jpg',
+      poster: 'https://picsum.photos/seed/karier2/600/350',
       deskripsi: 'Backend Developer dengan pengalaman Spring Boot dan REST API.'
     },
     {
@@ -33,7 +33,7 @@ export class KarierComponent {
       perusahaan: 'PT Kreatif Inovasi',
       lokasi: 'Bandung',
       tanggal: '2025-12-10',
-      poster: 'assets/images/loker-uiux.jpg',
+      poster: 'https://picsum.photos/seed/karier3/600/350',
       deskripsi: 'Desainer UI/UX untuk membuat antarmuka aplikasi yang intuitif.'
     },
     {
@@ -41,7 +41,7 @@ export class KarierComponent {
       perusahaan: 'PT Data Solusi',
       lokasi: 'Jakarta',
       tanggal: '2025-12-15',
-      poster: 'assets/images/loker-data.jpg',
+      poster: 'https://picsum.photos/seed/karier4/600/350',
       deskripsi: 'Analisis data untuk mendukung pengambilan keputusan bisnis.'
     }
   ];

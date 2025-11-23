@@ -53,9 +53,17 @@ export class HeaderComponent {
       name: 'Alumni',
       path: '/alumni',
       children: [
-        { name: 'Data Alumni', path: '/alumni/data-alumni' }
+        { name: 'Kata Alumni', path: '/alumni/data-alumni' },
+        { name: 'Kegiatan Alumni', path: '/alumni/kegiatan-alumni' }
       ]
     },
-    { name: 'Karier', path: '/karier' }
+    { name: 'Karier', path: '/karier' },
+    {
+      name: 'PMB',
+      path: '/pmb',
+      children: [
+        { name: 'Beasiswa', path: '/pmb/beasiswa' }
+      ]
+    }
   ];
 }

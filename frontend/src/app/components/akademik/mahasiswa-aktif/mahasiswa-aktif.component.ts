@@ -14,10 +14,10 @@ export class MahasiswaAktifComponent {
   filterProdi: string = 'ti';
 
   mahasiswaList = [
-    { nim: '12345', nama: 'Ahmad', prodi: 'ti', semester: 4, status: 'Aktif', foto: 'assets/foto1.jpg' },
-    { nim: '23456', nama: 'Budi', prodi: 'sipil', semester: 6, status: 'Aktif', foto: 'assets/foto2.jpg' },
-    { nim: '34567', nama: 'Citra', prodi: 'tro', semester: 2, status: 'Aktif', foto: 'assets/foto3.jpg' },
-    { nim: '45678', nama: 'Dina', prodi: 'akuntansi', semester: 4, status: 'Aktif', foto: 'assets/foto4.jpg' }
+    { nim: '12345', nama: 'Ahmad', prodi: 'ti', semester: 4, status: 'Aktif', foto: 'https://randomuser.me/api/portraits/men/3.jpg' },
+    { nim: '23456', nama: 'Budi', prodi: 'sipil', semester: 6, status: 'Aktif', foto: 'https://randomuser.me/api/portraits/men/5.jpg' },
+    { nim: '34567', nama: 'Citra', prodi: 'tro', semester: 2, status: 'Aktif', foto: 'https://randomuser.me/api/portraits/women/5.jpg' },
+    { nim: '45678', nama: 'Dina', prodi: 'akuntansi', semester: 4, status: 'Aktif', foto: 'https://randomuser.me/api/portraits/women/3.jpg' }
   ];
 
   // Statistik
