@@ -1,0 +1,186 @@
+/* =====================================
+   GLASS EFFECT (untuk topbar + navbar)
+===================================== */
+.glass-header {
+  position: fixed; /* BIAR NEMPEL DI ATAS DAN TERAWANG */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+/* semua bar jadi kaca */
+.glass-bar {
+  background: rgba(255, 255, 255, 0.15);  /* kaca putih transparan */
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+/* ================================
+   TOP BAR (RAPII & KOMPAK)
+================================ */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 24px; /* DULU 12px 30px */
+  height: 64px;      /* BIAR FIX GA TERLALU TINGGI */
+}
+
+/* LOGO */
+.logo {
+  height: 36px;  /* DULU 48px */
+}
+
+/* TEXT TITLE */
+.top-title {
+  color: #004a99;
+  font-weight: 700;
+  font-size: 18px;   /* DULU ukuran H1 default (besar banget) */
+  margin: 0;
+  line-height: 1.2;
+}
+
+.top-sub {
+  color: #004a99;
+  margin: 0;
+  opacity: .8;
+  font-size: 13px; /* biar proporsional */
+  line-height: 1.2;
+}
+
+/* LEFT WRAPPER */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* RIGHT WRAPPER */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* SEARCH BOX */
+.search-box {
+  position: relative;
+}
+
+.search-box input {
+  padding: 6px 12px 6px 32px; /* lebih kecil */
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  height: 32px;
+}
+
+.s-icon {
+  position: absolute;
+  top: 7px;
+  left: 8px;
+  color: #004a99;
+}
+
+/* KONTAK BUTTON */
+.btn-kontak {
+  background: #004a99;
+  color: white;
+  padding: 6px 14px; /* lebih kecil */
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+
+/* ================================
+   NAVBAR AREA
+================================ */
+.navbar-area {
+  padding: 10px 0;
+  position: relative;
+  z-index: 9999;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  position: relative;
+}
+
+.menu-link {
+  text-decoration: none;
+  color: #003a7d !important;
+  font-weight: 600;
+  padding: 8px 4px;
+  display: inline-block;
+}
+
+.menu-link:hover {
+  color: #001f4d !important;
+}
+
+/* ACTIVE MENU */
+.active {
+  border-bottom: 2px solid #003a7d !important;
+}
+
+/* ================================
+   DROPDOWN MENU
+================================ */
+.dropdown {
+  position: absolute;
+  top: 100%; /* MENEMPEL DI BAWAH MENU */
+  left: 0;
+
+  display: none;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  padding: 8px 0;
+  min-width: 180px;
+
+  z-index: 9999;
+}
+
+/* BIAR PERILAKUNYA KAYAK TAILWIND GROUP-HOVER */
+.menu-item:hover > .dropdown,
+.dropdown:hover {
+  display: block;
+}
+
+/* ITEM DALAM DROPDOWN */
+.dropdown li {
+  list-style: none;
+}
+
+.dropdown a {
+  padding: 10px 16px;
+  display: block;
+  color: #003a7d !important;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.dropdown a:hover {
+  background: #f0f4ff;
+  color: #001f4d !important;
+}

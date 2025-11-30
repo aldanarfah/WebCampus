@@ -11,12 +11,10 @@ import { LucideAngularModule, Search } from 'lucide-angular';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  // ✅ supaya [img]="Search" dikenali
   Search = Search;
 
-  // ✅ menu navbar kamu
   navigation = [
-    { name: 'Home', path: '/' }, // ✅ tambahkan ini di urutan pertama
+    { name: 'Home', path: '/' },
     {
       name: 'Profil',
       path: '/profil',
