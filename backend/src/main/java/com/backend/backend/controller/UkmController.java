@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/ukm") // URL: /api/ukm
+@RequestMapping("/api/ukm")
 public class UkmController {
 
     @Autowired

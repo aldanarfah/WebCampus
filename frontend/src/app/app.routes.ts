@@ -41,10 +41,10 @@ import { KegiatanAlumniComponent } from './components/alumni/kegiatan-alumni/keg
 // Alumni Default
 import { AlumniDefaultComponent } from './components/alumni/alumni-default/alumni-default.component';
 
-// Karier 
+// Karier
 import { KarierComponent } from './components/karier/karier.component';
 
-// PMB 
+// PMB
 import { PmbComponent } from './components/pmb/pmb/pmb.component';
 import { BeasiswaComponent } from './components/pmb/beasiswa/beasiswa.component';
 
@@ -60,10 +60,21 @@ import { LoginComponent } from './components/login/login.component';
 // Admin Dashboard
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
+
 import { OrganisasiAdminComponent } from './components/admin/organisasi-admin/organisasi-admin.component';
+import { OrganisasiTambahComponent } from './components/admin/organisasi-admin/organisasi-tambah/organisasi-tambah.component';
+import { OrganisasiEditComponent } from './components/admin/organisasi-admin/organisasi-edit/organisasi-edit.component';
+
 import { UkmAdminComponent } from './components/admin/ukm-admin/ukm-admin.component';
+import { UkmTambahComponent } from './components/admin/ukm-admin/ukm-tambah/ukm-tambah.component';
+import { UkmEditComponent } from './components/admin/ukm-admin/ukm-edit/ukm-edit.component';
 import { BeritaAdminComponent } from './components/admin/berita-admin/berita-admin.component';
+import { BeritaTambahComponent } from './components/admin/berita-admin/berita-tambah/berita-tambah.component';
+import { BeritaEditComponent } from './components/admin/berita-admin/berita-edit/berita-edit.component';
+
 import { EventAdminComponent } from './components/admin/event-admin/event-admin.component';
+import { EventTambahComponent } from './components/admin/event-admin/event-tambah/event-tambah.component';
+import { EventEditComponent } from './components/admin/event-admin/event-edit/event-edit.component';
 
 // Data Prodi (sub halaman)
 import { ProdiLayoutComponent } from './components/akademik/data-prodi/prodi-layout/prodi-layout.component';
@@ -91,7 +102,7 @@ export const routes: Routes = [
 },
 
   // Akademik
-  { 
+  {
   path: 'akademik',
   component: AkademikComponent,
   children: [
@@ -131,11 +142,23 @@ export const routes: Routes = [
   path: 'dashboard',
   component: DashboardComponent,
   children: [
-    { path: '', component: HomeAdminComponent },  // ⬅ INI DASHBOARD
+    { path: '', component: HomeAdminComponent },
+
     { path: 'organisasi', component: OrganisasiAdminComponent },
+    { path: 'organisasi/tambah', component: OrganisasiTambahComponent },
+    { path: 'organisasi/edit/:id', component: OrganisasiEditComponent },
+
     { path: 'ukm', component: UkmAdminComponent },
+    { path: 'ukm/tambah', component: UkmTambahComponent },
+    { path: 'ukm/edit/:id', component: UkmEditComponent },
+
     { path: 'berita', component: BeritaAdminComponent },
+    { path: 'berita/tambah', component: BeritaTambahComponent },
+    { path: 'berita/edit/:id', component: BeritaEditComponent },
+
     { path: 'event', component: EventAdminComponent },
+    { path: 'event/tambah', component: EventTambahComponent },
+    { path: 'event/edit/:id', component: EventEditComponent },
   ],
 },
 
@@ -161,7 +184,7 @@ export const routes: Routes = [
     { path: '', component: PmbDefaultComponent }, // default
     { path: 'beasiswa', component: BeasiswaComponent },
   ]
-}, 
+},
 
   //Kontak
   { path: 'kontak', component: KontakComponent },

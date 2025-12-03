@@ -1,32 +1,42 @@
-<h2 class="text-xl font-bold mb-4">Kelola UKM</h2>
+<div class="p-6 bg-gray-50 min-h-screen">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-800">Manajemen UKM</h1>
 
-<form (ngSubmit)="save()" class="space-y-3 mb-6">
-  <input [(ngModel)]="form.nama" name="nama" class="border p-2 w-full" placeholder="Nama UKM" required>
+    <button routerLink="/dashboard/ukm/tambah"
+      class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition">
+      + Tambah UKM
+    </button>
+  </div>
 
-  <textarea [(ngModel)]="form.deskripsi" name="deskripsi"
-    class="border p-2 w-full" placeholder="Deskripsi"></textarea>
-
-  <button type="submit"
-    class="px-4 py-2 rounded text-white"
-    [class.bg-blue-600]="mode==='create'"
-    [class.bg-yellow-500]="mode==='edit'">
-    {{ mode === 'create' ? 'Tambah UKM' : 'Update UKM' }}
-  </button>
-</form>
-
-<table class="w-full border">
-  <tr class="bg-gray-200">
-    <th class="p-2 border">Nama</th>
-    <th class="p-2 border">Deskripsi</th>
-    <th class="p-2 border">Aksi</th>
-  </tr>
-
-  <tr *ngFor="let ukm of ukmList">
-    <td class="p-2 border">{{ ukm.nama }}</td>
-    <td class="p-2 border">{{ ukm.deskripsi }}</td>
-    <td class="p-2 border space-x-2">
-      <button (click)="edit(ukm)" class="px-2 py-1 bg-yellow-500 text-white rounded">Edit</button>
-      <button (click)="delete(ukm.id)" class="px-2 py-1 bg-red-600 text-white rounded">Delete</button>
-    </td>
-  </tr>
-</table>
+  <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <table class="w-full border-collapse">
+      <thead class="bg-gray-100 border-b">
+        <tr>
+          <th class="p-4 text-left font-semibold text-gray-600">No</th>
+          <th class="p-4 text-left font-semibold text-gray-600">Nama UKM</th>
+          <th class="p-4 text-left font-semibold text-gray-600">Ketua</th>
+          <th class="p-4 text-left font-semibold text-gray-600">Periode</th>
+          <th class="p-4 text-left font-semibold text-gray-600">Status</th>
+          <th class="p-4 text-center font-semibold text-gray-600">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of ukmList; let i = index" class="hover:bg-gray-50">
+          <td class="p-4">{{ i + 1 }}</td>
+          <td class="p-4 font-medium">{{ item.namaUkm }}</td> <td class="p-4">{{ item.ketua }}</td>
+          <td class="p-4">{{ item.periode }}</td>
+          <td class="p-4">
+            <span [class]="item.status === 'aktif' ? 'text-green-700 bg-green-100' : 'text-gray-700 bg-gray-200'"
+                  class="px-2 py-1 text-xs font-semibold rounded-full">
+              {{ item.status | titlecase }}
+            </span>
+          </td>
+          <td class="p-4 text-center space-x-2">
+            <button class="text-yellow-600" [routerLink]="['/dashboard/ukm/edit', item.idUkm]">Edit</button> |
+            <button class="text-red-600" (click)="hapusData(item.idUkm!)">Hapus</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

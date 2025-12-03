@@ -4,6 +4,8 @@ import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { routes } from './app/app.routes';
 import { importProvidersFrom } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { provideHttpClient, withFetch } from '@angular/common/http'; // <--- 1. TAMBAHKAN IMPORT INI
+
 import {
   LucideAngularModule,
   Search,
@@ -19,6 +21,9 @@ import {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    // 👇 2. TAMBAHKAN BARIS INI (Obat Error NullInjector)
+    provideHttpClient(withFetch()),
+
     provideRouter(
       routes,
       withInMemoryScrolling({

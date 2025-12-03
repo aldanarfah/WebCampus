@@ -1,44 +1,41 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { EventService } from '../../../services/event.service';
+import { Event } from '../../../models/event.model';
 
 @Component({
   selector: 'app-event-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './event-admin.component.html',
+  styleUrl: './event-admin.component.css'
 })
-export class EventAdminComponent {
+export class EventAdminComponent implements OnInit {
+  eventList: Event[] = [];
 
-  eventList = [
-    { id: 1, nama: 'Seminar AI', tanggal: '2025-01-20' },
-    { id: 2, nama: 'Expo Kampus', tanggal: '2025-02-10' }
-  ];
+  constructor(private eventService: EventService) {}
 
-  form = { id: 0, nama: '', tanggal: '' };
-  mode: 'create' | 'edit' = 'create';
+  ngOnInit(): void {
+    this.fetchData();
+  }
 
-  save() {
-    if (this.mode === 'create') {
-      this.eventList.push({ ...this.form, id: Date.now() });
-    } else {
-      const idx = this.eventList.findIndex(e => e.id === this.form.id);
-      this.eventList[idx] = { ...this.form };
+  fetchData(): void {
+    this.eventService.getAll().subscribe({
+      next: (data) => this.eventList = data,
+      error: (e) => console.error('Gagal ambil data:', e)
+    });
+  }
+
+  hapusData(id: number): void {
+    if (confirm('Yakin ingin menghapus event ini?')) {
+      this.eventService.delete(id).subscribe({
+        next: () => {
+          alert('Event berhasil dihapus!');
+          this.fetchData(); // Refresh tabel
+        },
+        error: (e) => console.error('Gagal hapus:', e)
+      });
     }
-    this.reset();
-  }
-
-  edit(e: any) {
-    this.form = { ...e };
-    this.mode = 'edit';
-  }
-
-  delete(id: number) {
-    this.eventList = this.eventList.filter(e => e.id !== id);
-  }
-
-  reset() {
-    this.form = { id: 0, nama: '', tanggal: '' };
-    this.mode = 'create';
   }
 }

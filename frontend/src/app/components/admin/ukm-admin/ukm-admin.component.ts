@@ -1,46 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { UkmService } from '../../../services/ukm.service';
+import { Ukm } from '../../../models/ukm.model';
 
 @Component({
   selector: 'app-ukm-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './ukm-admin.component.html',
-  styleUrls: ['./ukm-admin.component.css']
+  styleUrl: './ukm-admin.component.css'
 })
-export class UkmAdminComponent {
+export class UkmAdminComponent implements OnInit {
 
-  ukmList = [
-    { id: 1, nama: 'UKM Musik', deskripsi: 'Unit kegiatan seni musik' },
-    { id: 2, nama: 'UKM Olahraga', deskripsi: 'Unit kegiatan olahraga mahasiswa' }
-  ];
+  ukmList: Ukm[] = [];
 
-  form = { id: 0, nama: '', deskripsi: '' };
-  mode: 'create' | 'edit' = 'create';
+  constructor(private ukmService: UkmService) {}
 
-  save() {
-    if (this.mode === 'create') {
-      this.ukmList.push({ ...this.form, id: Date.now() });
-    } else {
-      const idx = this.ukmList.findIndex(u => u.id === this.form.id);
-      this.ukmList[idx] = { ...this.form };
+  ngOnInit(): void {
+    this.fetchData();
+  }
+
+  fetchData(): void {
+    this.ukmService.getAll().subscribe({
+      next: (data) => this.ukmList = data,
+      error: (e) => console.error(e)
+    });
+  }
+
+  hapusData(id: number): void {
+    if (confirm('Yakin ingin menghapus UKM ini?')) {
+      this.ukmService.delete(id).subscribe({
+        next: () => {
+          alert('Data berhasil dihapus!');
+          this.fetchData();
+        },
+        error: (e) => console.error(e)
+      });
     }
-
-    this.resetForm();
-  }
-
-  edit(data: any) {
-    this.form = { ...data };
-    this.mode = 'edit';
-  }
-
-  delete(id: number) {
-    this.ukmList = this.ukmList.filter(u => u.id !== id);
-  }
-
-  resetForm() {
-    this.form = { id: 0, nama: '', deskripsi: '' };
-    this.mode = 'create';
   }
 }

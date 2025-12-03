@@ -1,1 +1,51 @@
-<p>berita-admin works!</p>
+<div class="p-6 bg-gray-50 min-h-screen">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-800">Manajemen Berita</h1>
+    <button routerLink="/dashboard/berita/tambah" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+      + Tambah Berita
+    </button>
+  </div>
+
+  <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <table class="w-full border-collapse">
+      <thead class="bg-gray-100 border-b">
+        <tr>
+          <th class="p-4 text-left font-semibold text-gray-600">No</th>
+
+          <th class="p-4 text-left font-semibold text-gray-600">Gambar</th>
+
+          <th class="p-4 text-left font-semibold text-gray-600">Judul Berita</th>
+          <th class="p-4 text-left font-semibold text-gray-600">Tanggal</th>
+          <th class="p-4 text-left font-semibold text-gray-600">Status</th>
+          <th class="p-4 text-center font-semibold text-gray-600">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of beritaList; let i = index" class="hover:bg-gray-50">
+          <td class="p-4">{{ i + 1 }}</td>
+
+          <td class="p-4">
+            <img *ngIf="item.gambarBerita"
+                 [src]="'http://localhost:8080/api/files/download/' + item.gambarBerita"
+                 class="h-12 w-12 object-cover rounded shadow-sm"
+                 alt="Gambar Berita">
+
+            <span *ngIf="!item.gambarBerita" class="text-gray-400 italic text-sm">No Img</span>
+          </td>
+          <td class="p-4 font-medium">{{ item.judul }}</td>
+          <td class="p-4">{{ item.tanggalPublikasi | date:'dd MMM yyyy' }}</td>
+          <td class="p-4">
+            <span [class]="item.status === 'publik' ? 'text-green-700 bg-green-100' : 'text-gray-700 bg-gray-200'"
+                  class="px-2 py-1 text-xs font-semibold rounded-full">
+              {{ item.status | titlecase }}
+            </span>
+          </td>
+          <td class="p-4 text-center space-x-2">
+            <button class="text-yellow-600" [routerLink]="['/dashboard/berita/edit', item.idBerita]">Edit</button> |
+            <button class="text-red-600" (click)="hapusData(item.idBerita!)">Hapus</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

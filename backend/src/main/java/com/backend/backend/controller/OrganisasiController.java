@@ -1,7 +1,7 @@
 package com.backend.backend.controller;
 
-import com.backend.backend.model.Ormawa;
-import com.backend.backend.service.OrmawaService;
+import com.backend.backend.model.Organisasi;
+import com.backend.backend.service.OrganisasiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,32 +10,32 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/organisasi") // Semua endpoint akan diawali dengan /api/organisasi
-public class OrmawaController {
+@RequestMapping("/api/organisasi")
+public class OrganisasiController {
 
     @Autowired
-    private OrmawaService organisasiService;
+    private OrganisasiService organisasiService;
 
     // C. CREATE (POST)
     // URL: POST  
     @PostMapping
-    public ResponseEntity<Ormawa> createOrganisasi(@RequestBody Ormawa organisasi) {
-        Ormawa createdOrg = organisasiService.createOrganisasi(organisasi);
+    public ResponseEntity<Organisasi> createOrganisasi(@RequestBody Organisasi organisasi) {
+        Organisasi createdOrg = organisasiService.createOrganisasi(organisasi);
         return new ResponseEntity<>(createdOrg, HttpStatus.CREATED); // Mengirimkan status 201 Created
     }
 
     // A. READ ALL (GET)
     // URL: GET http://localhost:8080/api/organisasi
     @GetMapping
-    public List<Ormawa> getAllOrganisasi() {
+    public List<Organisasi> getAllOrganisasi() {
         return organisasiService.findAllOrganisasi();
     }
 
     // B. READ BY ID (GET)
     // URL: GET http://localhost:8080/api/organisasi/1
     @GetMapping("/{id}")
-    public ResponseEntity<Ormawa> getOrganisasiById(@PathVariable Long id) {
-        Optional<Ormawa> organisasi = organisasiService.findOrganisasiById(id);
+    public ResponseEntity<Organisasi> getOrganisasiById(@PathVariable Long id) {
+        Optional<Organisasi> organisasi = organisasiService.findOrganisasiById(id);
         
         if (organisasi.isPresent()) {
             return ResponseEntity.ok(organisasi.get()); // Mengirimkan status 200 OK
@@ -47,8 +47,8 @@ public class OrmawaController {
     // D. UPDATE (PUT)
     // URL: PUT http://localhost:8080/api/organisasi/1
     @PutMapping("/{id}")
-    public ResponseEntity<Ormawa> updateOrganisasi(@PathVariable Long id, @RequestBody Ormawa organisasiDetails) {
-        Ormawa updatedOrg = organisasiService.updateOrganisasi(id, organisasiDetails);
+    public ResponseEntity<Organisasi> updateOrganisasi(@PathVariable Long id, @RequestBody Organisasi organisasiDetails) {
+        Organisasi updatedOrg = organisasiService.updateOrganisasi(id, organisasiDetails);
         
         if (updatedOrg != null) {
             return ResponseEntity.ok(updatedOrg); // Mengirimkan status 200 OK

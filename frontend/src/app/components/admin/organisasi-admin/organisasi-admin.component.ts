@@ -1,51 +1,45 @@
-import { Component } from '@angular/core';
-
-interface Organisasi {
-  id: number;
-  nama: string;
-  deskripsi: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { OrganisasiService } from '../../../services/organisasi.service';
+import { Organisasi } from '../../../models/organisasi.model';
 
 @Component({
   selector: 'app-organisasi-admin',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './organisasi-admin.component.html',
   styleUrls: ['./organisasi-admin.component.css']
 })
-export class OrganisasiAdminComponent {
+export class OrganisasiAdminComponent implements OnInit {
 
-  organisasiList: Organisasi[] = [
-    { id: 1, nama: 'BEM', deskripsi: 'Badan Eksekutif Mahasiswa' },
-    { id: 2, nama: 'DPM', deskripsi: 'Dewan Perwakilan Mahasiswa' },
-  ];
+  organisasiList: Organisasi[] = [];
 
-  nextId = 3;
+  constructor(private organisasiService: OrganisasiService) {}
 
-  showAddForm() {
-    const nama = prompt('Masukkan nama organisasi:');
-    const deskripsi = prompt('Masukkan deskripsi:');
+  ngOnInit(): void {
+    this.fetchData();
+  }
 
-    if (nama && deskripsi) {
-      this.organisasiList.push({
-        id: this.nextId++,
-        nama,
-        deskripsi
+  fetchData(): void {
+    this.organisasiService.getAll().subscribe({
+      next: (data) => {
+        this.organisasiList = data;
+        console.log('Data berhasil diambil:', data);
+      },
+      error: (e) => console.error('Error fetching data:', e)
+    });
+  }
+
+  hapusData(id: number): void {
+    if (confirm('Apakah Anda yakin ingin menghapus data organisasi ini?')) {
+      this.organisasiService.delete(id).subscribe({
+        next: (res) => {
+          alert('Data berhasil dihapus!');
+          this.fetchData();
+        },
+        error: (e) => console.error(e)
       });
-    }
-  }
-
-  edit(org: Organisasi) {
-    const nama = prompt('Edit nama:', org.nama);
-    const deskripsi = prompt('Edit deskripsi:', org.deskripsi);
-
-    if (nama && deskripsi) {
-      org.nama = nama;
-      org.deskripsi = deskripsi;
-    }
-  }
-
-  delete(id: number) {
-    if (confirm('Yakin hapus?')) {
-      this.organisasiList = this.organisasiList.filter(o => o.id !== id);
     }
   }
 }

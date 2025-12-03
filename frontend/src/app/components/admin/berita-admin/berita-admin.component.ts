@@ -1,44 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { BeritaService } from '../../../services/berita.service';
+import { Berita } from '../../../models/berita.model';
 
 @Component({
   selector: 'app-berita-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './berita-admin.component.html',
+  styleUrl: './berita-admin.component.css'
 })
-export class BeritaAdminComponent {
-  
-  beritaList = [
-    { id: 1, judul: 'Wisuda 2025', isi: 'Pelaksanaan wisuda dilakukan...' },
-    { id: 2, judul: 'Lomba Inovasi', isi: 'Mahasiswa memenangkan lomba...' }
-  ];
+export class BeritaAdminComponent implements OnInit {
+  beritaList: Berita[] = [];
 
-  form = { id: 0, judul: '', isi: '' };
-  mode: 'create' | 'edit' = 'create';
+  constructor(private beritaService: BeritaService) {}
 
-  save() {
-    if (this.mode === 'create') {
-      this.beritaList.push({ ...this.form, id: Date.now() });
-    } else {
-      const i = this.beritaList.findIndex(b => b.id === this.form.id);
-      this.beritaList[i] = { ...this.form };
+  ngOnInit(): void {
+    this.fetchData();
+  }
+
+  fetchData(): void {
+    this.beritaService.getAll().subscribe({
+      next: (data) => this.beritaList = data,
+      error: (e) => console.error(e)
+    });
+  }
+
+ hapusData(id: number | undefined): void {
+    // 1. CEK ID DI CONSOLE
+    console.log('Tombol hapus diklik. ID yang diterima:', id);
+
+    if (!id) {
+      alert('Error: ID Berita tidak ditemukan (undefined)!');
+      return;
     }
-    this.reset();
-  }
 
-  edit(data: any) {
-    this.form = { ...data };
-    this.mode = 'edit';
-  }
-
-  delete(id: number) {
-    this.beritaList = this.beritaList.filter(b => b.id !== id);
-  }
-
-  reset() {
-    this.form = { id: 0, judul: '', isi: '' };
-    this.mode = 'create';
+    if (confirm('Apakah Anda yakin ingin menghapus berita ini?')) {
+      this.beritaService.delete(id).subscribe({
+        next: () => {
+          console.log('Berhasil hapus di backend.');
+          alert('Berita berhasil dihapus!');
+          this.fetchData(); // Refresh tabel
+        },
+        error: (e) => {
+          console.error('Gagal menghapus:', e);
+          // Tampilkan pesan error detail biar tau kenapa
+          alert('Gagal menghapus! Cek Console Browser (F12) untuk detail error.');
+        }
+      });
+    }
   }
 }
