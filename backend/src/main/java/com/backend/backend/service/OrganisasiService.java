@@ -1,42 +1,42 @@
 package com.backend.backend.service;
 
-import com.backend.backend.model.Ormawa;
-import com.backend.backend.repository.OrmawaRepository;
+import com.backend.backend.model.Organisasi;
+import com.backend.backend.repository.OrganisasiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrmawaService {
+public class OrganisasiService {
     
     // Inject Repository untuk akses database
     @Autowired
-    private OrmawaRepository organisasiRepository;
+    private OrganisasiRepository organisasiRepository;
 
     // A. READ: Ambil semua data Organisasi
-    public List<Ormawa> findAllOrganisasi() {
+    public List<Organisasi> findAllOrganisasi() {
         return organisasiRepository.findAll();
     }
 
     // B. READ: Ambil data Organisasi berdasarkan ID
-    public Optional<Ormawa> findOrganisasiById(Long id) {
+    public Optional<Organisasi> findOrganisasiById(Long id) {
         return organisasiRepository.findById(id);
     }
 
     // C. CREATE: Simpan data Organisasi baru
-    public Ormawa createOrganisasi(Ormawa organisasi) {
+    public Organisasi createOrganisasi(Organisasi organisasi) {
         // Logika bisnis tambahan (misalnya: validasi data sebelum disimpan) bisa diletakkan di sini
         return organisasiRepository.save(organisasi);
     }
 
     // D. UPDATE: Update data Organisasi yang sudah ada
-    public Ormawa updateOrganisasi(Long id, Ormawa organisasiDetails) {
+    public Organisasi updateOrganisasi(Long id, Organisasi organisasiDetails) {
         // 1. Cari Organisasi yang akan diupdate
-        Optional<Ormawa> optionalOrg = organisasiRepository.findById(id);
+        Optional<Organisasi> optionalOrg = organisasiRepository.findById(id);
         
         if (optionalOrg.isPresent()) {
-            Ormawa existingOrg = optionalOrg.get();
+            Organisasi existingOrg = optionalOrg.get();
             
             // 2. Set/ganti nilai dari object lama dengan nilai dari object baru
             existingOrg.setNamaOrganisasi(organisasiDetails.getNamaOrganisasi());

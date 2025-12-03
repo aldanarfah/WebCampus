@@ -1,10 +1,8 @@
 package com.backend.backend.repository;
 
-import com.backend.backend.model.Ormawa;
+import com.backend.backend.model.Berita;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrmawaRepository extends JpaRepository<Ormawa, Long> {
-
-}
+public interface BeritaRepository extends JpaRepository<Berita, Long> {}

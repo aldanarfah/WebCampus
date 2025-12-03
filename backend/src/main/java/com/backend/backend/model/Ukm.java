@@ -2,7 +2,7 @@ package com.backend.backend.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import static com.backend.backend.model.Ormawa.Status; // Menggunakan Enum Status yang sama
+import static com.backend.backend.model.Organisasi.Status; // Menggunakan Enum Status yang sama
 
 @Entity
 @Table(name = "ukm")

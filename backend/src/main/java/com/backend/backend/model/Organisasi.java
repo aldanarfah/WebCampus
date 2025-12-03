@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "organisasi")
-public class Ormawa { 
+public class Organisasi { 
     
     public enum Status {
         aktif, nonaktif
@@ -54,9 +54,9 @@ public class Ormawa {
     private LocalDateTime dihapusPada;
     
     // --- Constructors ---
-    public Ormawa() {}
+    public Organisasi() {}
 
-    public Ormawa(String namaOrganisasi, String logo, String gambarLogo, String deskripsi, String penanggungJawab, String ketua, String periode, String namaProdi, String contactPerson, String strukturOrganisasi, Status status) {
+    public Organisasi(String namaOrganisasi, String logo, String gambarLogo, String deskripsi, String penanggungJawab, String ketua, String periode, String namaProdi, String contactPerson, String strukturOrganisasi, Status status) {
         this.namaOrganisasi = namaOrganisasi;
         this.logo = logo;
         this.gambarLogo = gambarLogo;
