@@ -1,74 +1,139 @@
-<div class="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
+<!-- HERO -->
+<section class="hero relative h-[80vh]">
+  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-full h-full object-cover">
+  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+    <h1 class="text-white text-4xl md:text-6xl font-bold">Kontak</h1>
+  </div>
+</section>
 
-  <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">
-    Ada pertanyaan? Kirim di sini!
-  </h2>
-  <p class="text-gray-600 text-center mb-8">
-    Silakan isi formulir berikut untuk mengirim pesan atau pengaduan.
-  </p>
+<!-- GRID 2 KOLOM -->
+<div class="max-w-6xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-2 gap-10 px-4">
 
-  <form (ngSubmit)="submitForm()" #contactForm="ngForm" class="space-y-5">
+  <!-- =======================
+       KOLOM KIRI (INFO)
+  ======================== -->
+  <div class="bg-white p-8 shadow-lg rounded-xl h-fit">
 
-    <!-- Nama -->
-    <div>
-      <label class="block text-gray-700 font-medium mb-1">Nama</label>
-      <input
-        type="text"
-        name="nama"
-        [(ngModel)]="form.nama"
-        required
-        class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Hubungi Kami</h2>
 
-    <!-- Email -->
-    <div>
-      <label class="block text-gray-700 font-medium mb-1">Email</label>
-      <input
-        type="email"
-        name="email"
-        [(ngModel)]="form.email"
-        required
-        class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      <span class="font-semibold">Jam Kerja</span> <br><br>
 
-    <!-- Subjek -->
-    <div>
-      <label class="block text-gray-700 font-medium mb-1">Subjek</label>
-      <select
-        name="subjek"
-        [(ngModel)]="form.subjek"
-        required
-        class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+      Senin - Kamis: 07.00 - 17.00 WIB <br>
+      Istirahat: 12.00 - 12.50 WIB <br><br>
+
+      Jum’at: 07.00 - 17.00 WIB <br>
+      Istirahat Sholat Jum’at: 11.30 - 13.00 WIB
+    </p>
+
+    <!-- TOMBOL KONTAK -->
+    <!-- TOMBOL KONTAK (HORIZONTAL) -->
+    <div class="flex gap-4">
+
+    <!-- Telpon -->
+    <a href="tel:081234567890"
+      class="flex-1 flex items-center justify-center gap-3 bg-orange-500 text-white px-5 py-3 rounded-lg font-semibold shadow hover:bg-orange-600 transition">
+
+    <!-- Ikon Telpon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2 5.5C2 4.12 3.12 3 4.5 3h1.16c.63 0 1.22.3 1.6.82l2.17 2.99c.43.6.53 1.38.25 2.07l-.72 1.8a1.5 1.5 0 0 0 .33 1.58l3.49 3.49c.42.42 1.04.57 1.6.39l1.93-.64c.73-.24 1.53.02 2.01.62l2.49 3.1c.3.38.47.85.47 1.33V19.5c0 1.38-1.12 2.5-2.5 2.5A19.5 19.5 0 0 1 2 5.5Z"/>
+    </svg>
+
+      <span>0812-3456-7890</span>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/6281234567890"
+      class="flex-1 flex items-center justify-center gap-3 bg-blue-600 text-white px-5 py-3 rounded-lg font-semibold shadow hover:bg-blue-700 transition">
+
+    <!-- Ikon WhatsApp -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="w-6 h-6" viewBox="0 0 448 512">
+      <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 222-99.6 222-222 0-59.3-23.2-115.1-65-157zm-157 341.8c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 361.9l-4.4-7c-18-28.1-27.5-60.5-27.5-94 0-97.5 79.3-176.8 176.8-176.8 47.2 0 91.5 18.4 124.9 51.8 33.4 33.5 51.8 77.8 51.7 125-.1 97.3-79.4 176.2-176.6 176.2zm101.7-138.2c-5.6-2.8-33-16.3-38.1-18.1-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18.1-17.5 21.8-3.2 3.7-6.5 4.2-12.1 1.4-33.1-16.5-54.8-29.5-76.6-66.7-5.8-10 5.8-9.3 16.5-31.1 1.8-3.7.9-6.9-.5-9.7s-12.5-30.2-17.1-41.3c-4.5-10.9-9.1-9.4-12.5-9.6-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 38.9 59.4 94.2 83.3 13.1 5.7 23.3 9.1 31.3 11.6 13.1 4.2 25 3.6 34.4 2.2 10.5-1.6 33-13.5 37.6-26.6 4.6-13 4.6-24.1 3.2-26.6-1.3-2.7-5.1-4.3-10.6-7.1z"/>
+    </svg>
+
+    <span>0812-3456-7890</span>
+  </a>
+
+</div>
+
+  </div>
+
+  <!-- =======================
+       KOLOM KANAN (FORM)
+  ======================== -->
+  <div class="bg-white p-8 shadow-lg rounded-xl">
+
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">
+      Ada pertanyaan? Kirim di sini!
+    </h2>
+    <p class="text-gray-600 text-center mb-8">
+      Silakan isi formulir berikut untuk mengirim pesan atau pengaduan.
+    </p>
+
+    <form (ngSubmit)="submitForm()" #contactForm="ngForm" class="space-y-5">
+
+      <!-- Nama -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Nama</label>
+        <input
+          type="text"
+          name="nama"
+          [(ngModel)]="form.nama"
+          required
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Email</label>
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="form.email"
+          required
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Subjek -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Subjek</label>
+        <select
+          name="subjek"
+          [(ngModel)]="form.subjek"
+          required
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="" disabled selected>Pilih subjek</option>
+          <option value="PMB">PMB</option>
+          <option value="Akademik">Akademik</option>
+          <option value="Beasiswa">Beasiswa</option>
+          <option value="Lainnya">Lainnya</option>
+        </select>
+      </div>
+
+      <!-- Isi Pesan -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Isi Pesan</label>
+        <textarea
+          name="pesan"
+          [(ngModel)]="form.pesan"
+          rows="5"
+          required
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+        ></textarea>
+      </div>
+
+      <!-- Tombol -->
+      <button
+        type="submit"
+        class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
       >
-        <option value="" disabled selected>Pilih subjek</option>
-        <option value="PMB">PMB</option>
-        <option value="Akademik">Akademik</option>
-        <option value="Beasiswa">Beasiswa</option>
-        <option value="Lainnya">Lainnya</option>
-      </select>
-    </div>
+        Kirim Pesan
+      </button>
 
-    <!-- Isi Pesan -->
-    <div>
-      <label class="block text-gray-700 font-medium mb-1">Isi Pesan</label>
-      <textarea
-        name="pesan"
-        [(ngModel)]="form.pesan"
-        rows="5"
-        required
-        class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-      ></textarea>
-    </div>
+    </form>
+  </div>
 
-    <!-- Tombol -->
-    <button
-      type="submit"
-      class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
-    >
-      Kirim Pesan
-    </button>
-
-  </form>
 </div>

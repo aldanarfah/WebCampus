@@ -1,0 +1,27 @@
+.hero h1 {
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+}
+
+.menu-alumni-karir .menu-link {
+  text-decoration: none;
+  color: #6c757d; /* abu-abu Bootstrap */
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.menu-alumni-karir .menu-link:hover {
+  color: #0d6efd; /* biru Bootstrap */
+}
+
+.menu-alumni-karir .menu-active {
+  color: #000;      /* hitam */
+  font-weight: 600; 
+  cursor: default;
+  text-decoration: none; 
+}

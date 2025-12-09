@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -13,19 +14,19 @@ export class HomeComponent {
   // ================= PROFIL =================
   profileCards = [
     {
-      title: 'Judul Card 1',
+      title: '4 Program Studi',
       img: 'https://plus.unsplash.com/premium_photo-1683887034146-c79058dbdcb1?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
-      title: 'Judul Card 2',
+      title: '500+ Mahasiswa Aktif',
       img: 'https://plus.unsplash.com/premium_photo-1723651236713-47f93bc78e98?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
-      title: 'Judul Card 3',
+      title: '50+ Dosen dan Staff',
       img: 'https://plus.unsplash.com/premium_photo-1683121910205-adafd6b80e3d?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
-      title: 'Judul Card 4',
+      title: '5+ Organisasi Mahasiswa dan UKM',
       img: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
   ];
@@ -55,9 +56,11 @@ export class HomeComponent {
     { title: 'Nama Event 3', img: 'https://images.unsplash.com/photo-1525921429624-479b6a26d84d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNvbGxlZ2V8ZW58MHx8MHx8fDA%3D' },
     { title: 'Nama Event 4', img: 'https://images.unsplash.com/photo-1554752191-343d87d6c28f?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGNvbGxlZ2V8ZW58MHx8MHx8fDA%3D' },
     { title: 'Nama Event 5', img: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzR8fGNvbGxlZ2V8ZW58MHx8MHx8fDA%3D' },
+    { title: 'Nama Event 6', img: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzR8fGNvbGxlZ2V8ZW58MHx8MHx8fDA%3D' },
   ];
 
-  // untuk *ngFor pada slide
-  eventSlide1 = this.events.slice(0, 3);
-  eventSlide2 = this.events.slice(3, 5);
+  // untuk *ngFor pada slide 
+  eventSlide1 = this.events.slice(0, 2);
+  eventSlide2 = this.events.slice(2, 4);
+  eventSlide3 = this.events.slice(4, 6);
 }

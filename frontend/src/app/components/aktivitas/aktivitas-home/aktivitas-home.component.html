@@ -1,0 +1,98 @@
+<!-- HERO -->
+<section class="hero relative h-[80vh]">
+  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-full h-full object-cover">
+  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+    <h1 class="text-white text-4xl md:text-6xl font-bold">Kehidupan Kampus</h1>
+  </div>
+</section>
+
+<!-- KURIKULUM -->
+<section class="container my-5">
+  <div class="row align-items-center">
+    <div class="col-md-6 ormawa-image-wrapper">
+      <!-- Judul di atas gambar -->
+      <h2 class="fw-bold mb-3">Organisasi Mahasiswa dan UKM</h2>
+
+      <img 
+        src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780"
+        class="img-fluid rounded-3 shadow"
+        alt="Kurikulum">
+
+      <!-- Tombol overlay di bawah kiri -->
+      <a routerLink="/aktivitas/ormawa-ukm" class="btn ormawa-btn d-flex align-items-center gap-2 px-4">
+        Lihat Organisasi & UKM
+        <span class="arrow">➜</span>
+      </a>
+    </div>
+
+    <div class="col-md-6">
+      <p>
+        Kampus ini menerapkan kurikulum dengan pendekatan Outcome Based Education (OBE)
+        — yaitu menekankan capaian pembelajaran (learning outcomes) yang jelas dan relevan
+        dengan kebutuhan dunia kerja.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION BERITA KAMPUS
+============================ -->
+<section class="w-full py-20">
+  <div class="flex flex-col md:flex-row items-center">
+
+    <!-- Foto (KIRI) -->
+    <div class="md:w-1/2 rounded-r-[200px] overflow-hidden shadow-md">
+      <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b"
+           class="w-full h-96 object-cover rounded-r-[200px]" />
+    </div>
+
+    <!-- Text (KANAN) -->
+    <div class="md:w-1/2 flex flex-col justify-center text-right px-6">
+      <h2 class="text-2xl font-bold text-[#002E73] mb-3">Berita Kampus</h2>
+      <p class="text-gray-600 mb-6">Berita seputar kegiatan dan informasi terbaru di Polinema</p>
+      
+      <!-- Bungkus tombol supaya selebar teks -->
+      <div class="self-end">
+        <a routerLink="/aktivitas/berita"
+           class="inline-block bg-white text-[#FF914D] px-4 py-2 rounded-full
+                  font-semibold text-sm border border-[#FF914D]
+                  hover:bg-[#FF914D] hover:text-white transition">
+          Lihat
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================
+     SECTION EVENT KAMPUS
+============================ -->
+<section class="w-full py-20">
+  <div class="flex flex-col md:flex-row items-center">
+
+    <!-- Text (KIRI) -->
+    <div class="md:w-1/2 flex flex-col justify-center text-left px-6">
+      <h2 class="text-2xl font-bold text-[#002E73] mb-3">Event Kampus</h2>
+      <p class="text-gray-600 mb-6">Mari lihat event–event yang akan datang</p>
+
+      <!-- Bungkus tombol supaya selebar teks -->
+      <div class="self-start">
+        <a routerLink="/aktivitas/event"
+           class="inline-block bg-white text-[#FF914D] px-4 py-2 rounded-full
+                  font-semibold text-sm border border-[#FF914D]
+                  hover:bg-[#FF914D] hover:text-white transition">
+          Lihat
+        </a>
+      </div>
+    </div>
+
+    <!-- Foto (KANAN) -->
+    <div class="md:w-1/2 rounded-l-[200px] overflow-hidden shadow-md">
+      <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d"
+           class="w-full h-96 object-cover rounded-l-[200px]" />
+    </div>
+
+  </div>
+</section>

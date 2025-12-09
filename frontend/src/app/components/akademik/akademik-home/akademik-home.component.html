@@ -1,0 +1,118 @@
+<!-- HERO -->
+<section class="hero relative h-[80vh]">
+  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-full h-full object-cover">
+  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+    <h1 class="text-white text-4xl md:text-6xl font-bold">Akademik</h1>
+  </div>
+</section>
+
+<!-- KURIKULUM -->
+<section class="container my-5">
+  <div class="row align-items-center">
+    <div class="col-md-6 kurikulum-image-wrapper">
+      <!-- Judul di atas gambar -->
+      <h2 class="fw-bold mb-3">Kurikulum</h2>
+
+      <img 
+        src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780"
+        class="img-fluid rounded-3 shadow"
+        alt="Kurikulum">
+
+      <!-- Tombol overlay di bawah kiri -->
+      <a routerLink="/akademik/kurikulum" class="btn kurikulum-btn d-flex align-items-center gap-2 px-4">
+        Lihat Kurikulum
+        <span class="arrow">➜</span>
+      </a>
+    </div>
+
+    <div class="col-md-6">
+      <p>
+        Kampus ini menerapkan kurikulum dengan pendekatan Outcome Based Education (OBE)
+        — yaitu menekankan capaian pembelajaran (learning outcomes) yang jelas dan relevan
+        dengan kebutuhan dunia kerja.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- PROGRAM STUDI -->
+<section class="container my-5">
+  <h2 class="fw-bold text-center mb-4">Program Studi</h2>
+
+  <div class="row g-4">
+    <!-- Card 1 -->
+    <div class="col-md-6">
+      <div class="ps-card" routerLink="/akademik/data-prodi/ti">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600"
+             class="ps-img" alt="">
+        <div class="ps-text">
+          Teknologi Informasi <span>➜</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="col-md-6">
+      <div class="ps-card" routerLink="/akademik/data-prodi/sipil">
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600"
+             class="ps-img" alt="">
+        <div class="ps-text">
+          Teknologi Sipil <span>➜</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col-md-6">
+      <div class="ps-card" routerLink="/akademik/data-prodi/tro">
+        <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=600"
+             class="ps-img" alt="">
+        <div class="ps-text">
+          Teknologi Rekayasa Otomotif <span>➜</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="col-md-6">
+      <div class="ps-card" routerLink="/akademik/data-prodi/akuntansi">
+        <img src="https://images.unsplash.com/photo-1554224154-22dec7ec8818?w=600"
+             class="ps-img" alt="">
+        <div class="ps-text">
+          Akuntansi <span>➜</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU AKADEMIK -->
+<section class="mt-5 py-5" style="background:#022B72;">
+  <div class="container">
+
+    <h2 class="text-white fw-bold mb-4">Menu</h2>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="menu-card" routerLink="/akademik/data-dosen">
+          Dosen & Kehadiran <span>➜</span>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="menu-card" routerLink="/akademik/mahasiswa-aktif">
+          Mahasiswa Aktif <span>➜</span>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="menu-card" routerLink="/akademik/jadwal">
+          Jadwal <span>➜</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

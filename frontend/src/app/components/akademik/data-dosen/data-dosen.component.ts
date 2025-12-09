@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 // Import popup detail
 import { DetailDosenComponent } from './detail-dosen/detail-dosen.component';
@@ -8,8 +9,9 @@ import { DetailDosenComponent } from './detail-dosen/detail-dosen.component';
 @Component({
   selector: 'app-data-dosen',
   standalone: true,
-  imports: [CommonModule, DetailDosenComponent, FormsModule],
-  templateUrl: './data-dosen.component.html'
+  imports: [CommonModule, DetailDosenComponent, FormsModule, RouterModule],
+  templateUrl: './data-dosen.component.html',
+  styleUrl: './data-dosen.component.css'
 })
 export class DataDosenComponent {
 

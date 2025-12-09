@@ -1,7 +1,24 @@
+<!-- HERO -->
+<section class="hero relative h-[80vh]">
+  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-full h-full object-cover">
+  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+    <h1 class="text-white text-4xl md:text-6xl font-bold">Dosen</h1>
+  </div>
+</section>
+
+<!-- MENU NAVIGASI -->
+<div class="container mt-4">
+  <nav class="d-flex gap-4 menu-sejarah">
+    <a routerLink="/" class="menu-link">Home</a>
+    <a routerLink="/akademik" class="menu-link">Akademik</a>
+    <span class="menu-active">Dosen dan Staff</span>
+  </nav>
+</div>
+
 <div class="p-6 max-w-5xl mx-auto">
 
   <!-- TITLE -->
-  <h1 class="text-3xl font-bold mb-4 text-[#002D72]">Data Dosen</h1>
+  <h1 class="text-3xl font-bold mb-4 text-[#002D72]"></h1>
 
   <!-- SEARCH + FILTER -->
   <div class="bg-white p-4 shadow rounded-lg flex flex-col md:flex-row gap-4 mb-6">
@@ -34,7 +51,7 @@
   </div>
 
   <!-- CARD DOSEN LIST -->
-  <div class="grid gap-4">
+  <div class="grid gap-4 mb-24">
     <div
       class="flex gap-4 bg-white shadow rounded-xl p-4 cursor-pointer hover:shadow-lg transition"
       *ngFor="let dosen of filteredDosen"

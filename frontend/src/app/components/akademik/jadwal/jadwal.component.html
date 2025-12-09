@@ -1,6 +1,24 @@
-<div class="flex flex-col">
+<!-- HERO -->
+<section class="hero relative h-[80vh]">
+  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-full h-full object-cover">
+  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+    <h1 class="text-white text-4xl md:text-6xl font-bold">Jadwal</h1>
+  </div>
+</section>
+
+<!-- MENU NAVIGASI -->
+<div class="container mt-4">
+  <nav class="d-flex gap-4 menu-sejarah">
+    <a routerLink="/" class="menu-link">Home</a>
+    <a routerLink="/akademik" class="menu-link">Akademik</a>
+    <span class="menu-active">Jadwal</span>
+  </nav>
+</div>
+
+<div class="flex flex-col mt-5">
 
   <!-- FILTER PRODI -->
+  <div class="max-w-6xl px-24 mb-6">
   <div class="flex gap-2 mb-4">
     <button *ngFor="let p of prodiList"
             (click)="filterProdi=p.value"
@@ -10,8 +28,10 @@
       {{ p.label }}
     </button>
   </div>
+  </div>
 
   <!-- PILLS TINGKAT KELAS -->
+  <div class="max-w-6xl px-24 mb-12">
   <div class="flex gap-2 mb-6">
     <button *ngFor="let t of [1,2,3]"
             (click)="filterTingkat=t"
@@ -21,8 +41,10 @@
       Tingkat {{ t }}
     </button>
   </div>
+  </div>
 
   <!-- TABEL JADWAL -->
+  <div class="max-w-6xl px-24 mb-12 mx-auto">
   <div *ngFor="let kelas of getKelasTampil()">
     <h3 class="text-xl font-semibold text-[#002D72] mt-4 mb-2">{{ kelas }} ({{ filterProdi.toUpperCase() }})</h3>
     <div class="overflow-x-auto">
@@ -45,6 +67,7 @@
         </tbody>
       </table>
     </div>
+  </div>
   </div>
 
 </div>

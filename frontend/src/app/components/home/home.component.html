@@ -7,17 +7,17 @@
 
     <div class="carousel-item active position-relative">
       <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=780&auto=format&fit=crop&q=60" class="hero-img w-100" />
-      <div class="hero-caption">Judul Slide 1</div>
+      <div class="hero-caption">POLINEMA</div>
     </div>
 
     <div class="carousel-item position-relative">
       <img src="https://images.unsplash.com/photo-1592280771190-3e2e4d571952?w=780&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fGNvbGxlZ2V8ZW58MHx8MHx8fDA%3D" class="hero-img w-100" />
-      <div class="hero-caption">Judul Slide 2</div>
+      <div class="hero-caption">Berintegritas</div>
     </div>
 
     <div class="carousel-item position-relative">
       <img src="https://images.unsplash.com/photo-1592930954854-7d00c87d0cf4?w=780&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fGNvbGxlZ2V8ZW58MHx8MHx8fDA%3D" class="hero-img w-100" />
-      <div class="hero-caption">Judul Slide 3</div>
+      <div class="hero-caption">Lulusan Terpadu</div>
     </div>
 
   </div>
@@ -26,7 +26,7 @@
 </div>
 
 <!-- PROFIL SECTION -->
-<div class="container my-5">
+<div class="container my-5 profil-section">
   <div class="row">
 
     <!-- 4 Cards -->
@@ -44,8 +44,10 @@
     <!-- Text di kanan -->
     <div class="col-lg-4 d-flex flex-column justify-content-center ps-lg-4 mt-4 mt-lg-0">
       <h3 class="fw-bold">Profil</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Profil singkat kampus.</p>
-      <button class="btn btn-primary mt-2">Lihat Profil</button>
+      <p>Politeknik Negeri Malang (Polinema) PSDKU Lumajang merupakan salah satu Program Studi di Luar Kampus Utama (PSDKU) yang dikelola langsung oleh Politeknik Negeri Malang, sebuah perguruan tinggi vokasi negeri unggulan di Jawa Timur.</p>
+      <button 
+      [routerLink]="['/profil']"
+      class="btn btn-primary mt-2">Lihat Profil</button>
     </div>
 
   </div>
@@ -56,24 +58,30 @@
 
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>Berita</h3>
-    <button class="btn btn-outline-primary">Lihat Semua</button>
+    <button 
+    [routerLink]="['/aktivitas/berita']"
+    class="btn btn-outline-primary">Lihat Semua</button>
   </div>
 
   <div class="row g-4">
 
     <!-- Berita Besar -->
-    <div class="col-lg-6 position-relative">
-      <img [src]="beritaBig.img" class="berita-big-img" />
-      <div class="berita-title-overlay">{{ beritaBig.title }}</div>
+    <div class="col-lg-6">
+      <div class="berita-img-wrapper position-relative">
+        <img [src]="beritaBig.img" class="berita-big-img" />
+        <div class="berita-title-overlay">{{ beritaBig.title }}</div>
+      </div>
     </div>
 
     <!-- Berita Kecil -->
     <div class="col-lg-6">
       <div class="row g-3">
 
-        <div class="col-12 position-relative" *ngFor="let b of beritaSmall">
-          <img [src]="b.img" class="berita-small-img" />
-          <div class="berita-title-overlay">{{ b.title }}</div>
+        <div class="col-12" *ngFor="let b of beritaSmall">
+          <div class="berita-img-wrapper position-relative">
+            <img [src]="b.img" class="berita-small-img" />
+            <div class="berita-title-overlay">{{ b.title }}</div>
+          </div>
         </div>
 
       </div>
@@ -83,14 +91,13 @@
 </div>
 
 <!-- EVENT SECTION -->
-<!-- EVENT SECTION -->
-<div class="container my-5">
+<div class="container my-5"> 
   <div class="row">
 
     <!-- Deskripsi -->
     <div class="col-lg-4">
       <h3>Event</h3>
-      <p>Daftar event kampus terbaru yang akan datang.</p>
+      <p> Daftar event kampus terbaru yang akan datang.</p>
     </div>
 
     <!-- Carousel -->
@@ -102,7 +109,7 @@
           <!-- Slide 1 -->
           <div class="carousel-item active">
             <div class="row g-3">
-              <div class="col-md-4" *ngFor="let e of eventSlide1">
+              <div class="col-6" *ngFor="let e of eventSlide1">
                 <div class="event-card text-center">
                   <img [src]="e.img" />
                   <p>{{ e.title }}</p>
@@ -114,7 +121,19 @@
           <!-- Slide 2 -->
           <div class="carousel-item">
             <div class="row g-3">
-              <div class="col-md-4" *ngFor="let e of eventSlide2">
+              <div class="col-6" *ngFor="let e of eventSlide2">
+                <div class="event-card text-center">
+                  <img [src]="e.img" />
+                  <p>{{ e.title }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-item">
+            <div class="row g-3">
+              <div class="col-6" *ngFor="let e of eventSlide3">
                 <div class="event-card text-center">
                   <img [src]="e.img" />
                   <p>{{ e.title }}</p>
@@ -141,5 +160,3 @@
 
   </div>
 </div>
-
-

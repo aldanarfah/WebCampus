@@ -1,0 +1,14 @@
+.hero h1 {
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+}
+
+/* Supaya transisi seamless saat reset */
+.flex {
+  will-change: transform;
+}

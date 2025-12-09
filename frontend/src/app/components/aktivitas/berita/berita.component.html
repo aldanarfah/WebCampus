@@ -1,42 +1,59 @@
-<div class="berita-container p-6 bg-gray-50 min-h-screen">
-  <h2 class="text-2xl font-bold mb-6 text-[#002D72] text-center">
-    Berita Kampus Terkini
-  </h2>
+<!-- HERO -->
+<section class="hero relative h-[80vh]">
+  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-full h-full object-cover">
+  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+    <h1 class="text-white text-4xl md:text-6xl font-bold">Berita Kampus</h1>
+  </div>
+</section>
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-    <!-- Berita Utama -->
-    <div class="lg:col-span-2 bg-white rounded-2xl shadow-md overflow-hidden">
-      <img
-        [src]="beritaUtama.gambar"
-        alt="berita utama"
-        class="h-80 w-full object-cover"
-      />
-      <div class="p-5">
-        <h3
-          class="text-2xl font-bold text-[#002D72] hover:underline cursor-pointer"
-          [routerLink]="beritaUtama.path"
-        >
-          {{ beritaUtama.judul }}
-        </h3>
-        <p class="text-gray-600 mt-3">{{ beritaUtama.ringkasan }}</p>
-      </div>
-    </div>
+<!-- MENU NAVIGASI -->
+<div class="container mt-4">
+  <nav class="d-flex gap-4 menu-akademik">
+    <a routerLink="/" class="menu-link">Home</a>
+    <a routerLink="/aktivitas" class="menu-link">Kehidupan Kampus</a>
+    <span class="menu-active">Berita</span>
+  </nav>
+</div>
 
-    <!-- Berita Lain -->
-    <div class="space-y-6 border-l-2 border-gray-300 pl-4">
-      <div
-        *ngFor="let b of beritaLain"
-        class="flex items-center space-x-4 cursor-pointer hover:bg-gray-100 p-2 rounded-lg transition"
-        [routerLink]="b.path"
-      >
+<!--menu utama-->
+<div class="berita-container bg-gray-50 min-h-screen mt-10">
+  <div class="container mx-auto px-6 py-6">
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Berita Utama -->
+      <div class="lg:col-span-2 bg-white rounded-2xl shadow-md overflow-hidden">
         <img
-          [src]="b.gambar"
-          alt="{{ b.judul }}"
-          class="w-20 h-20 rounded-lg object-cover"
+          [src]="beritaUtama.gambar"
+          alt="berita utama"
+          class="h-80 w-full object-cover"
         />
-        <p class="text-sm font-semibold text-[#002D72] hover:underline">
-          {{ b.judul }}
-        </p>
+        <div class="p-5">
+          <h3
+            class="text-2xl font-bold text-[#002D72] hover:underline cursor-pointer"
+            [routerLink]="beritaUtama.path"
+          >
+            {{ beritaUtama.judul }}
+          </h3>
+          <p class="text-gray-600 mt-3">{{ beritaUtama.ringkasan }}</p>
+        </div>
+      </div>
+
+      <!-- Berita Lain -->
+      <div class="space-y-6 border-l-2 border-gray-300 pl-4">
+        <div
+          *ngFor="let b of beritaLain"
+          class="flex items-center space-x-4 cursor-pointer hover:bg-gray-100 p-2 rounded-lg transition"
+          [routerLink]="b.path"
+        >
+          <img
+            [src]="b.gambar"
+            alt="{{ b.judul }}"
+            class="w-20 h-20 rounded-lg object-cover"
+          />
+          <p class="text-sm font-semibold text-[#002D72] hover:underline">
+            {{ b.judul }}
+          </p>
+        </div>
       </div>
     </div>
   </div>

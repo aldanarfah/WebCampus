@@ -1,8 +1,9 @@
-/* =====================================
+ /* =====================================
    GLASS EFFECT (untuk topbar + navbar)
 ===================================== */
+
 .glass-header {
-  position: fixed; /* BIAR NEMPEL DI ATAS DAN TERAWANG */
+  position: absolute; /* BIAR NEMPEL DI ATAS DAN TERAWANG */
   top: 0;
   left: 0;
   width: 100%;
@@ -11,10 +12,8 @@
 
 /* semua bar jadi kaca */
 .glass-bar {
-  background: rgba(255, 255, 255, 0.15);  /* kaca putih transparan */
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(253,253,253,0.7));
+
 }
 
 .sticky-nav {
@@ -41,20 +40,29 @@
 
 /* TEXT TITLE */
 .top-title {
-  color: #004a99;
   font-weight: 700;
-  font-size: 18px;   /* DULU ukuran H1 default (besar banget) */
+  font-size: 28px;   /* sesuai yang kamu pakai */
   margin: 0;
   line-height: 1.2;
 }
 
+.blue-text {
+  color: #002D72;  /* biru, sama seperti sebelumnya */
+}
+
+.orange-text {
+  color: #ff7f00;  /* oranye */
+}
+
 .top-sub {
-  color: #004a99;
+  color: #002D72;
+  font-weight: 800;
   margin: 0;
   opacity: .8;
-  font-size: 13px; /* biar proporsional */
+  font-size: 20px; /* biar proporsional */
   line-height: 1.2;
 }
+
 
 /* LEFT WRAPPER */
 .left {
@@ -102,7 +110,7 @@
   display: flex;
   align-items: center;
 }
-
+ 
 
 /* ================================
    NAVBAR AREA
@@ -111,6 +119,12 @@
   padding: 10px 0;
   position: relative;
   z-index: 9999;
+  background: linear-gradient(
+    to bottom,
+    rgba(253, 253, 253, 0.7),   /* warna ujung bawah topbar */
+    rgba(253, 253, 253, 0)   /* lebih terawang di bawah */
+  );
+ 
 }
 
 .menu {
@@ -128,8 +142,9 @@
 
 .menu-link {
   text-decoration: none;
-  color: #003a7d !important;
-  font-weight: 600;
+  font-size: 20px;
+  color: #002D72 !important;
+  font-weight: 700;
   padding: 8px 4px;
   display: inline-block;
 }
@@ -183,4 +198,4 @@
 .dropdown a:hover {
   background: #f0f4ff;
   color: #001f4d !important;
-}
+}   

@@ -1,34 +1,47 @@
-<div class="flex min-h-screen bg-gray-50">
+<!-- HERO -->
+<section class="hero relative h-[80vh]">
+  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-full h-full object-cover">
+  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+    <h1 class="text-white text-4xl md:text-6xl font-bold">Penerimaan Mahasiswa Baru</h1>
+  </div>
+</section>
 
-  <!-- SIDEBAR -->
-  <aside class="w-64 bg-white shadow-md border-r border-gray-200 p-5">
-    <h2 class="text-lg font-semibold mb-4 text-gray-700">PMB</h2>
+<div class="max-w-4xl mx-auto mt-6 p-6">
 
-    <nav class="flex flex-col space-y-2">
+  <!-- NAV BOX -->
+  <div class="flex justify-center gap-3 mb-6">
+    <a routerLink="/pmb" 
+       class="px-10 py-4 rounded-xl font-bold transition 
+              bg-[#002D72] text-white border border-blue-600">
+      PMB
+    </a>
+    <a routerLink="/pmb/beasiswa" 
+       class="px-10 py-4 rounded-xl font-bold transition 
+              bg-white text-[#002D72] border border-blue-600 cursor-pointer hover:shadow-xl hover:scale-[1.01]">
+      Beasiswa
+    </a>
+  </div>
 
-      <a
-        routerLink="/pmb"
-        routerLinkActive="bg-blue-100 text-blue-700 font-semibold"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="px-3 py-2 rounded-md hover:bg-blue-50 transition-colors"
-      >
-        PMB
-      </a>
+  <!-- CONTENT PMB -->
+  <h1 class="text-2xl font-bold text-[#002D72] mb-4 mt-10">Penerimaan Mahasiswa Baru</h1>
+  <p class="mb-4">
+    Politeknik Negeri Malang menerima penerimaan mahasiswa baru melalui beberapa jalur seleksi yaitu SNBP, SNBT, dan Jalur Mandiri.
+  </p>
 
-      <a
-        routerLink="/pmb/beasiswa"
-        routerLinkActive="bg-blue-100 text-blue-700 font-semibold"
-        class="px-3 py-2 rounded-md hover:bg-blue-50 transition-colors"
-      >
-        Beasiswa
-      </a>
-      
-    </nav>
-  </aside>
+  <h2 class="text-xl font-semibold mt-4">1. Seleksi Nasional Berdasarkan Prestasi (SNBP)</h2>
+  <p class="mb-4">
+    Jalur SNBP merupakan jalur seleksi penerimaan mahasiswa baru Program Diploma III, Sarjana Terapan (Diploma IV) pada Perguruan Tinggi Negeri Vokasi dan Program Sarjana pada Perguruan Tinggi Negeri yang dilaksanakan secara serentak di bawah koordinasi Tim Seleksi Nasional Penerimaan Mahasiswa Baru (SNPMB). Informasi lengkap: <a href="https://snpmb.bppp.kemdikbud.go.id/" target="_blank" class="text-blue-600 underline">snpmb.bppp.kemdikbud.go.id</a>
+  </p>
 
-  <!-- MAIN CONTENT -->
-  <main class="flex-1 p-8">
-    <router-outlet></router-outlet>
-  </main>
+  <h2 class="text-xl font-semibold mt-4">2. Seleksi Nasional Berbasis Tes (SNBT)</h2>
+  <p class="mb-4">
+    Jalur SNBT merupakan jalur seleksi penerimaan mahasiswa baru Program Diploma III, Sarjana Terapan (Diploma IV) pada Perguruan Tinggi Negeri Vokasi dan Program Sarjana pada Perguruan Tinggi Negeri berdasarkan hasil UTBK. Informasi lengkap: <a href="https://snpmb.bppp.kemdikbud.go.id/" target="_blank" class="text-blue-600 underline">snpmb.bppp.kemdikbud.go.id</a>
+  </p>
+
+  <h2 class="text-xl font-semibold mt-4">3. Alur Mandiri</h2>
+  <p class="mb-4">
+    Jalur Mandiri merupakan penerimaan mahasiswa baru POLINEMA berdasarkan ujian akademis. Pendaftar dapat memilih Program Studi Diploma III (D-III) maupun Diploma IV (Sarjana Terapan). Informasi lengkap: <a href="https://spmb.polinema.ac.id/info/" target="_blank" class="text-blue-600 underline">spmb.polinema.ac.id/info</a>
+  </p>
 
 </div>
+

@@ -1,0 +1,79 @@
+/* ----- HERO ----- */
+.hero h1 {
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+}
+
+/* ----- MENU AKADEMIK (atas) ----- */
+.menu-link {
+  text-decoration: none;
+  color: #6c757d;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.menu-link:hover {
+  color: #0d6efd;
+}
+
+.menu-active {
+  font-weight: 700;
+  color: #000;
+}
+
+/* ----- MENU PRODI (tidak sticky) ----- */
+.menu-prodi .prodi-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;            /* semua kotak sama */
+  height: 60px;            /* kotak lebih besar */
+  text-decoration: none;
+  border: 2px solid #002D72;
+  border-radius: 8px;
+  color: #002D72;
+  font-weight: 600;
+  font-size: 1.1rem;
+  background: white;
+  transition: all 0.25s ease;
+}
+
+/* Hover efek */
+.menu-prodi .prodi-link:hover {
+  transform: scale(1.08);
+}
+
+/* Active state */
+.menu-prodi .prodi-link.active {
+  background: #002D72;
+  color: white;
+  transform: scale(1.12);
+}
+
+
+
+/* ----- BLOK KONTEN ----- */
+.judul-blok {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #002D72;
+  margin-bottom: 15px;
+}
+
+.deskripsi-blok {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.7;
+}
+
+/* Spasi antar blok */
+.blok-1, .blok-2, .blok-3 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e5e5e5;
+}

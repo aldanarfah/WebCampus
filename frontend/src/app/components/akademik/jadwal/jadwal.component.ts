@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 interface Jam {
   matkul: string;
@@ -11,8 +12,9 @@ interface Jam {
 @Component({
   selector: 'app-jadwal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './jadwal.component.html'
+  imports: [CommonModule, FormsModule, RouterModule],
+  templateUrl: './jadwal.component.html',
+  styleUrl: './jadwal.component.css'
 })
 export class JadwalComponent {
   searchKelas: string = '';

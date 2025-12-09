@@ -1,0 +1,78 @@
+<!-- HERO -->
+<section class="hero relative h-[80vh]">
+  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-full h-full object-cover">
+  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+    <h1 class="text-white text-4xl md:text-6xl font-bold">Kegiatan Alumni</h1>
+  </div>
+</section>
+
+<!-- MENU NAVIGASI -->
+<div class="container mt-4">
+  <nav class="d-flex gap-4 menu-alumni-karir">
+    <a routerLink="/" class="menu-link">Home</a>
+    <a routerLink="/alumni-karir" class="menu-link">Alumni & Karir</a>
+    <span class="menu-active">Kegiatan Alumni</span>
+  </nav>
+</div>
+
+<!-- CONTENT WRAPPER -->
+<div class="container my-5 w-75">
+
+  <!-- Card 1 -->
+  <div class="card mb-4 shadow-sm overflow-hidden cursor-pointer hover:shadow-xl hover:scale-[1.02]" 
+  [routerLink]="['/alumni-karir/kegiatan-alumni/detail-kegiatan']">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780"
+             class="img-fluid h-100 object-fit-cover" alt="Kegiatan 1">
+      </div>
+      <div class="col-md-8 d-flex align-items-center">
+        <div class="p-4">
+          <h3 class="fw-semibold text-[#002D72]">20 Januari 2025</h3>
+          <p class="text-muted">
+            Alumni Sharing Session.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="card mb-4 shadow-sm overflow-hidden cursor-pointer hover:shadow-xl hover:scale-[1.02]"
+  [routerLink]="['/alumni-karir/kegiatan-alumni/detail-kegiatan']">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780"
+             class="img-fluid h-100 object-fit-cover" alt="Kegiatan 2">
+      </div>
+      <div class="col-md-8 d-flex align-items-center">
+        <div class="p-4">
+          <h3 class="fw-semibold text-[#002D72]">10 Februari 2025</h3>
+          <p class="text-muted">
+            Alumni Gathering & Networking Day.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="card mb-4 shadow-sm overflow-hidden cursor-pointer hover:shadow-xl hover:scale-[1.02]"
+  [routerLink]="['/alumni-karir/kegiatan-alumni/detail-kegiatan']">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780"
+             class="img-fluid h-100 object-fit-cover" alt="Kegiatan 3">
+      </div>
+      <div class="col-md-8 d-flex align-items-center">
+        <div class="p-4">
+          <h3 class="fw-semibold text-[#002D72]">14 Maret 2025</h3>
+          <p class="text-muted">
+           Workshop Alumni Berbagi Karir.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -14,7 +14,7 @@ export class EventComponent {
     {
       judul: 'Seminar Nasional Teknologi dan Inovasi 2025',
       tanggal: '15 Desember 2025',
-      gambar: 'assets/img/event-seminar.jpg',
+      gambar: 'https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780',
       deskripsi:
         'Seminar nasional dengan pembicara dari industri dan akademisi, membahas peran AI dalam dunia pendidikan dan industri 5.0.',
       path: '/aktivitas/event/seminar-nasional'
@@ -22,7 +22,7 @@ export class EventComponent {
     {
       judul: 'Festival Kewirausahaan Mahasiswa',
       tanggal: '5 Januari 2026',
-      gambar: 'assets/img/event-festival.jpg',
+      gambar: 'https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780',
       deskripsi:
         'Ajang tahunan mahasiswa untuk memamerkan produk dan ide bisnis kreatif dari berbagai jurusan di kampus.',
       path: '/aktivitas/event/festival-wirausaha'
@@ -30,7 +30,7 @@ export class EventComponent {
     {
       judul: 'Turnamen Esport Kampus 2025',
       tanggal: '20 Februari 2026',
-      gambar: 'assets/img/event-esport.jpg',
+      gambar: 'https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780',
       deskripsi:
         'Kompetisi e-sport antar jurusan yang diikuti puluhan tim dengan hadiah total puluhan juta rupiah.',
       path: '/aktivitas/event/esport-2025'
