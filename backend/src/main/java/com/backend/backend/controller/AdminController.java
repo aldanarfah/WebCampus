@@ -5,10 +5,14 @@ import com.backend.backend.service.AdminService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+import java.util.Map; // Import wajib untuk menangkap JSON body saat login
 
 @RestController
 @RequestMapping("/api/admin")
+// Izinkan Angular mengakses API ini
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 public class AdminController {
     
     private final AdminService adminService;
@@ -16,6 +20,25 @@ public class AdminController {
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
+
+    // --- ENDPOINT LOGIN (BARU) ---
+    @PostMapping("/login")
+    public ResponseEntity<?> loginAdmin(@RequestBody Map<String, String> loginData) {
+        String username = loginData.get("username");
+        String password = loginData.get("password");
+
+        // Panggil service login
+        Admin admin = adminService.login(username, password);
+
+        if (admin != null) {
+            // Login Berhasil: Kembalikan data admin
+            return ResponseEntity.ok(admin);
+        } else {
+            // Login Gagal: Kembalikan status 401 Unauthorized
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Username atau Password salah!");
+        }
+    }
+    // -----------------------------
 
     // GET ALL
     @GetMapping

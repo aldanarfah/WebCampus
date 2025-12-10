@@ -1,10 +1,17 @@
 package com.backend.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty; // <--- 1. Tambahkan Import ini
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "admin")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Admin {
 
     @Id
@@ -18,6 +25,8 @@ public class Admin {
     @Column(length = 50, unique = true, nullable = false)
     private String username;
 
+    // 👇 2. TAMBAHKAN ANOTASI INI DI ATAS PASSWORD
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(length = 255, nullable = false)
     private String password; 
 
@@ -26,21 +35,4 @@ public class Admin {
 
     @Column(name = "tanggal_dibuat", insertable = false, updatable = false)
     private LocalDateTime tanggalDibuat;
-
-    // --- Constructor ---
-    public Admin() {}
-
-    // --- Getters dan Setters ---
-    public Long getIdAdmin() { return idAdmin; }
-    public void setIdAdmin(Long idAdmin) { this.idAdmin = idAdmin; }
-    public String getNamaAdmin() { return namaAdmin; }
-    public void setNamaAdmin(String namaAdmin) { this.namaAdmin = namaAdmin; }
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public LocalDateTime getTanggalDibuat() { return tanggalDibuat; }
-    // Setter for tanggalDibuat dihindari karena diset oleh DB
 }

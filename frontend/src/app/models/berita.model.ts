@@ -1,13 +1,18 @@
-export interface Berita {
-  idBerita?: number;
-  judul: string;
-  isi: string;
-  gambarBerita?: string;
-  tanggalPublikasi?: string;
-  status: 'publik' | 'draft';
+import { Organisasi } from './organisasi.model';
+import { Ukm } from './ukm.model';
 
-  // Relasi (Kita gunakan 'any' dulu agar simpel, atau sesuaikan dengan model jika ada)
-  organisasi?: any;
-  ukm?: any;
-  dibuatOleh?: any; // Wajib ada karena di database NOT NULL
+export interface Berita {
+    idBerita?: number;
+    judul: string;
+    isi: string;
+    gambarBerita?: string;
+    status: 'publik' | 'draft';
+    tanggalPublikasi?: string;
+
+    // Relasi
+    organisasi?: Organisasi | null;
+    ukm?: Ukm | null;
+
+    // Tambahan agar tidak error
+    dibuatOleh?: number;
 }

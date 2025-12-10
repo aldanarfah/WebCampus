@@ -2,60 +2,119 @@ package com.backend.backend.service;
 
 import com.backend.backend.model.Organisasi;
 import com.backend.backend.repository.OrganisasiRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Value;
 
 @Service
 public class OrganisasiService {
     
     // Inject Repository untuk akses database
-    @Autowired
-    private OrganisasiRepository organisasiRepository;
+    private final OrganisasiRepository organisasiRepository;
+    private final Path fileStorageLocation;
 
-    // A. READ: Ambil semua data Organisasi
-    public List<Organisasi> findAllOrganisasi() {
-        return organisasiRepository.findAll();
+    public OrganisasiService(OrganisasiRepository organisasiRepository, @Value("${file.upload-dir}") String uploadDir) {
+        this.organisasiRepository = organisasiRepository;
+        
+        // Setup lokasi folder
+        this.fileStorageLocation = Paths.get(uploadDir).toAbsolutePath().normalize();
+        try {
+            Files.createDirectories(this.fileStorageLocation);
+        } catch (Exception ex) {
+            throw new RuntimeException("Tidak bisa membuat folder upload!", ex);
+        }
     }
 
-    // B. READ: Ambil data Organisasi berdasarkan ID
+    // --- HELPER: Fungsi Simpan File ---
+    public String simpanFile(MultipartFile file) {
+        if (file == null || file.isEmpty()) return null;
+
+        // Bersihkan nama file
+        String fileName = org.springframework.util.StringUtils.cleanPath(file.getOriginalFilename());
+        
+        try {
+            // Tambahkan UUID agar nama file unik (mencegah bentrok nama)
+            String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
+            
+            // Simpan file ke folder target
+            Path targetLocation = this.fileStorageLocation.resolve(uniqueFileName);
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+            
+            return uniqueFileName; // Kembalikan nama file untuk disimpan di DB
+        } catch (IOException ex) {
+            throw new RuntimeException("Gagal menyimpan file " + fileName, ex);
+        }
+    }
+
+    // --- CRUD METHODS ---
+    public List<Organisasi> findAllOrganisasi() {
+        // Filter out entities with a non-null dihapusPada without requiring a custom repository method
+        return organisasiRepository.findAll().stream()
+                .filter(org -> org.getDihapusPada() == null)
+                .collect(Collectors.toList());
+    }
+    
+
     public Optional<Organisasi> findOrganisasiById(Long id) {
         return organisasiRepository.findById(id);
     }
 
-    // C. CREATE: Simpan data Organisasi baru
-    public Organisasi createOrganisasi(Organisasi organisasi) {
-        // Logika bisnis tambahan (misalnya: validasi data sebelum disimpan) bisa diletakkan di sini
+    // UPDATE: Create dengan File Upload
+    public Organisasi createOrganisasi(Organisasi organisasi, MultipartFile fileLogo, MultipartFile fileStruktur) {
+        // Simpan file jika ada
+        if (fileLogo != null) organisasi.setGambarLogo(simpanFile(fileLogo));
+        if (fileStruktur != null) organisasi.setStrukturOrganisasi(simpanFile(fileStruktur));
+        
         return organisasiRepository.save(organisasi);
     }
 
-    // D. UPDATE: Update data Organisasi yang sudah ada
-    public Organisasi updateOrganisasi(Long id, Organisasi organisasiDetails) {
-        // 1. Cari Organisasi yang akan diupdate
+    // UPDATE: Edit dengan File Upload
+    public Organisasi updateOrganisasi(Long id, Organisasi details, MultipartFile fileLogo, MultipartFile fileStruktur) {
         Optional<Organisasi> optionalOrg = organisasiRepository.findById(id);
         
         if (optionalOrg.isPresent()) {
-            Organisasi existingOrg = optionalOrg.get();
+            Organisasi existing = optionalOrg.get();
             
-            // 2. Set/ganti nilai dari object lama dengan nilai dari object baru
-            existingOrg.setNamaOrganisasi(organisasiDetails.getNamaOrganisasi());
-            existingOrg.setDeskripsi(organisasiDetails.getDeskripsi());
-            existingOrg.setKetua(organisasiDetails.getKetua());
-            // TODO: Tambahkan semua setter untuk atribut lain yang perlu diupdate
+            // Update Data Text
+            existing.setNamaOrganisasi(details.getNamaOrganisasi());
+            existing.setDeskripsi(details.getDeskripsi());
+            existing.setKetua(details.getKetua());
+            existing.setPeriode(details.getPeriode());
+            existing.setStatus(details.getStatus());
+            existing.setPenanggungJawab(details.getPenanggungJawab());
+            existing.setNamaProdi(details.getNamaProdi());
+            existing.setContactPerson(details.getContactPerson());
+
+            // Update File HANYA JIKA ada file baru diupload
+            if (fileLogo != null && !fileLogo.isEmpty()) {
+                existing.setGambarLogo(simpanFile(fileLogo));
+            }
+            if (fileStruktur != null && !fileStruktur.isEmpty()) {
+                existing.setStrukturOrganisasi(simpanFile(fileStruktur));
+            }
             
-            // 3. Simpan perubahan ke database
-            return organisasiRepository.save(existingOrg);
-        } else {
-            // Jika ID tidak ditemukan, kembalikan null atau throw Exception
-            return null; 
+            return organisasiRepository.save(existing);
         }
+        return null;
     }
 
-    // E. DELETE: Hapus data Organisasi berdasarkan ID
     public boolean deleteOrganisasi(Long id) {
-        if (organisasiRepository.existsById(id)) {
-            organisasiRepository.deleteById(id);
+        Optional<Organisasi> org = organisasiRepository.findById(id);
+        if (org.isPresent()) {
+            Organisasi existingOrg = org.get();
+            existingOrg.setDihapusPada(LocalDateTime.now());
+            organisasiRepository.save(existingOrg);
             return true;
         }
         return false;

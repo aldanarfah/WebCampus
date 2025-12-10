@@ -9,46 +9,48 @@ import { Berita } from '../../../models/berita.model';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './berita-admin.component.html',
-  styleUrl: './berita-admin.component.css'
+  styleUrls: ['./berita-admin.component.css']
 })
 export class BeritaAdminComponent implements OnInit {
-  beritaList: Berita[] = [];
 
-  constructor(private beritaService: BeritaService) {}
+  beritaList: Berita[] = [];
+  isLoading: boolean = true;
+  imageBaseUrl = 'http://localhost:8080/uploads/';
+
+  constructor(private beritaService: BeritaService) { }
 
   ngOnInit(): void {
-    this.fetchData();
+    this.loadData();
   }
 
-  fetchData(): void {
+  loadData(): void {
+    this.isLoading = true;
     this.beritaService.getAll().subscribe({
-      next: (data) => this.beritaList = data,
-      error: (e) => console.error(e)
+      next: (data) => {
+        this.beritaList = data;
+        this.isLoading = false;
+      },
+      error: (e) => {
+        console.error(e);
+        this.isLoading = false;
+      }
     });
   }
 
- hapusData(id: number | undefined): void {
-    // 1. CEK ID DI CONSOLE
-    console.log('Tombol hapus diklik. ID yang diterima:', id);
-
-    if (!id) {
-      alert('Error: ID Berita tidak ditemukan (undefined)!');
-      return;
-    }
-
-    if (confirm('Apakah Anda yakin ingin menghapus berita ini?')) {
+  hapusBerita(id: number | undefined): void {
+    if (!id) return;
+    if (confirm('Yakin ingin menghapus berita ini?')) {
       this.beritaService.delete(id).subscribe({
-        next: () => {
-          console.log('Berhasil hapus di backend.');
-          alert('Berita berhasil dihapus!');
-          this.fetchData(); // Refresh tabel
-        },
-        error: (e) => {
-          console.error('Gagal menghapus:', e);
-          // Tampilkan pesan error detail biar tau kenapa
-          alert('Gagal menghapus! Cek Console Browser (F12) untuk detail error.');
-        }
+        next: () => this.loadData(),
+        error: (e) => console.error(e)
       });
     }
+  }
+
+  // Helper untuk menampilkan nama pemilik berita
+  getPemilik(berita: Berita): string {
+    if (berita.organisasi) return 'Organisasi: ' + berita.organisasi.namaOrganisasi;
+    if (berita.ukm) return 'UKM: ' + berita.ukm.namaUkm;
+    return 'Umum (Kampus)';
   }
 }

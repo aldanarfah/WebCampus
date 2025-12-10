@@ -1,15 +1,45 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
-  <div class="bg-white p-10 shadow-lg rounded-lg w-96">
-    <h2 class="text-xl font-bold mb-5 text-center">Login Admin</h2>
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-bold text-gray-800">Login Admin</h2>
+      <p class="text-gray-500 text-sm">Silakan masuk untuk mengelola data</p>
+    </div>
 
-    <form (ngSubmit)="login()" class="space-y-3">
-  <input [(ngModel)]="username" name="username" class="border p-2 w-full" placeholder="Username">
+    <div *ngIf="errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 text-sm">
+      {{ errorMessage }}
+    </div>
 
-  <input [(ngModel)]="password" name="password" type="password" class="border p-2 w-full" placeholder="Password">
+    <form (ngSubmit)="onLogin()">
 
-  <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Login</button>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+        <input
+          type="text"
+          [(ngModel)]="loginData.username"
+          name="username"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Masukkan username"
+          required>
+      </div>
 
-  <p *ngIf="error" class="text-red-500 text-sm mt-2">{{ error }}</p>
-</form>
+      <div class="mb-6">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+        <input
+          type="password"
+          [(ngModel)]="loginData.password"
+          name="password"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Masukkan password"
+          required>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="isLoading"
+        class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 disabled:bg-gray-400">
+        {{ isLoading ? 'Memproses...' : 'Login' }}
+      </button>
+
+    </form>
   </div>
 </div>

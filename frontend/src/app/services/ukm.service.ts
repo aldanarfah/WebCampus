@@ -7,28 +7,29 @@ import { Ukm } from '../models/ukm.model';
   providedIn: 'root'
 })
 export class UkmService {
-  // Arahkan ke endpoint UKM di Spring Boot
-  private baseUrl = 'http://localhost:8080/api/ukm';
+  private baseUrl = 'http://localhost:8080/api/ukm'; // Pastikan port 8080
 
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Ukm[]> {
-    return this.http.get<Ukm[]>(this.baseUrl, { withCredentials: true });
+    return this.http.get<Ukm[]>(this.baseUrl);
   }
 
   get(id: number): Observable<Ukm> {
-    return this.http.get<Ukm>(`${this.baseUrl}/${id}`, { withCredentials: true });
+    return this.http.get<Ukm>(`${this.baseUrl}/${id}`);
   }
 
-  create(data: Ukm): Observable<any> {
-    return this.http.post(this.baseUrl, data, { withCredentials: true });
+  // UBAH JADI FormData
+  create(data: FormData): Observable<any> {
+    return this.http.post(this.baseUrl, data);
   }
 
-  update(id: number, data: Ukm): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, data, { withCredentials: true });
+  // UBAH JADI FormData
+  update(id: number, data: FormData): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}`, data);
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, { withCredentials: true });
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 }

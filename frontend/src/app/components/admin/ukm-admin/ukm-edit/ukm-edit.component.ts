@@ -10,19 +10,30 @@ import { Ukm } from '../../../../models/ukm.model';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './ukm-edit.component.html',
-  styleUrl: './ukm-edit.component.css'
+  styleUrls: ['./ukm-edit.component.css'] // Pastikan nama file CSS benar (styleUrls pakai 's')
 })
 export class UkmEditComponent implements OnInit {
 
+  // Inisialisasi LENGKAP agar HTML tidak error
   ukm: Ukm = {
     namaUkm: '',
     deskripsi: '',
     ketua: '',
     periode: '',
-    status: 'aktif'
+    penanggungJawab: '',
+    contactPerson: '',
+    namaProdi: '',
+    status: 'aktif',
+    gambarLogo: '',
+    strukturOrganisasi: ''
   };
 
   id!: number;
+  selectedFileLogo: File | null = null;
+  selectedFileStruktur: File | null = null;
+
+  // ✨ INI VARIABEL YANG DICARI HTML (imageBaseUrl) ✨
+  imageBaseUrl = 'http://localhost:8080/uploads/';
 
   constructor(
     private ukmService: UkmService,
@@ -31,33 +42,54 @@ export class UkmEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // 1. Ambil ID dari URL
     this.id = this.route.snapshot.params['id'];
-
-    // 2. Ambil data lama dari database
     this.ukmService.get(this.id).subscribe({
       next: (data) => {
         this.ukm = data;
       },
-      error: (e) => console.error('Gagal mengambil data:', e)
+      error: (e) => console.error(e)
     });
   }
 
-  updateUkm(): void {
-    if (!this.ukm.namaUkm.trim() ||
-        !this.ukm.ketua.trim() ||
-        !this.ukm.deskripsi.trim()) {
+  // ✨ INI FUNGSI YANG DICARI HTML (onFileSelected) ✨
+  onFileSelected(event: any, type: 'logo' | 'struktur') {
+    const file: File = event.target.files[0];
+    if (file) {
+      if (type === 'logo') {
+        this.selectedFileLogo = file;
+      } else {
+        this.selectedFileStruktur = file;
+      }
+    }
+  }
 
-      alert('Data tidak boleh kosong atau hanya berisi spasi!');
+  updateUkm(): void {
+    // Validasi input
+    if (!(this.ukm.namaUkm || '').trim()) {
+      alert('Nama UKM tidak boleh kosong!');
       return;
     }
 
-    this.ukmService.update(this.id, this.ukm).subscribe({
+    // --- LOGIC FORMDATA UNTUK UPLOAD ---
+    const formData = new FormData();
+    formData.append('ukm', JSON.stringify(this.ukm));
+
+    if (this.selectedFileLogo) {
+      formData.append('fileLogo', this.selectedFileLogo);
+    }
+    if (this.selectedFileStruktur) {
+      formData.append('fileStruktur', this.selectedFileStruktur);
+    }
+
+    this.ukmService.update(this.id, formData).subscribe({
       next: (res) => {
         alert('Data UKM berhasil diperbarui!');
         this.router.navigate(['/dashboard/ukm']);
       },
-      error: (e) => console.error('Gagal update:', e)
+      error: (e) => {
+        console.error('Error update UKM:', e);
+        alert('Gagal memperbarui data.');
+      }
     });
   }
 }

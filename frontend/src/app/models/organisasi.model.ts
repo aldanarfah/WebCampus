@@ -1,12 +1,18 @@
 export interface Organisasi {
-  idOrganisasi?: number;
-  namaOrganisasi: string;
-  gambarLogo?: string; // Sesuai entity backend
-  deskripsi: string;
-  penanggungJawab?: string;
-  ketua: string;
-  periode: string;
-  namaProdi?: string;
-  contactPerson?: string;
-  status: 'aktif' | 'nonaktif';
+    idOrganisasi?: number; // Optional karena saat create belum ada ID
+    namaOrganisasi: string;
+    deskripsi: string;
+    ketua: string;
+    periode: string;
+    penanggungJawab: string;
+    contactPerson: string;
+    namaProdi: string;
+    status: string;
+    
+    // TAMBAHKAN DUA BARIS INI:
+    gambarLogo?: string; 
+    strukturOrganisasi?: string;
+    
+    tanggalDibuat?: string;
+    dihapusPada?: string;
 }

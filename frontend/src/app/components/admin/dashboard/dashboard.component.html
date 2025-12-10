@@ -1,20 +1,62 @@
 <div class="flex min-h-screen bg-gray-100">
 
-  <!-- SIDEBAR -->
-  <aside class="w-64 bg-white shadow-md border-r p-5">
-    <h2 class="text-xl font-bold mb-6">ADMIN PANEL</h2>
+  <aside class="w-64 bg-white shadow-md border-r p-5 flex flex-col fixed h-full">
 
-    <nav class="flex flex-col space-y-2">
-      <a routerLink="/dashboard" class="p-2 rounded hover:bg-gray-200">Dashboard</a>
-      <a routerLink="/dashboard/organisasi" class="p-2 rounded hover:bg-gray-200">Organisasi</a>
-      <a routerLink="/dashboard/ukm" class="p-2 rounded hover:bg-gray-200">UKM</a>
-      <a routerLink="/dashboard/berita" class="p-2 rounded hover:bg-gray-200">Berita</a>
-      <a routerLink="/dashboard/event" class="p-2 rounded hover:bg-gray-200">Event</a>
-    </nav>
+    <div class="flex-grow">
+      <h2 class="text-xl font-bold mb-6 text-gray-800 border-b pb-4">ADMIN PANEL</h2>
+
+      <nav class="flex flex-col space-y-2">
+        <a routerLink="/dashboard"
+           routerLinkActive="bg-gray-200 text-blue-600"
+           [routerLinkActiveOptions]="{exact: true}"
+           class="p-2 rounded hover:bg-gray-100 text-gray-700 font-medium transition cursor-pointer">
+           Dashboard
+        </a>
+
+        <a routerLink="/dashboard/organisasi"
+           routerLinkActive="bg-gray-200 text-blue-600"
+           class="p-2 rounded hover:bg-gray-100 text-gray-700 font-medium transition cursor-pointer">
+           Organisasi
+        </a>
+
+        <a routerLink="/dashboard/ukm"
+           routerLinkActive="bg-gray-200 text-blue-600"
+           class="p-2 rounded hover:bg-gray-100 text-gray-700 font-medium transition cursor-pointer">
+           UKM
+        </a>
+
+        <a routerLink="/dashboard/berita"
+           routerLinkActive="bg-gray-200 text-blue-600"
+           class="p-2 rounded hover:bg-gray-100 text-gray-700 font-medium transition cursor-pointer">
+           Berita
+        </a>
+
+        <a routerLink="/dashboard/event"
+           routerLinkActive="bg-gray-200 text-blue-600"
+           class="p-2 rounded hover:bg-gray-100 text-gray-700 font-medium transition cursor-pointer">
+           Event
+        </a>
+        <a  routerLink="/dashboard/users"
+            routerLinkActive="bg-gray-200 text-blue-600"
+            class="p-2 rounded hover:bg-gray-100 text-gray-700 font-medium transition cursor-pointer">
+            Manajemen Admin
+        </a>
+      </nav>
+    </div>
+
+    <div class="mt-auto border-t border-gray-200 pt-4">
+      <button (click)="onLogout()"
+        class="flex items-center w-full px-2 py-2 text-red-600 hover:bg-red-50 rounded transition-colors duration-200 font-medium">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        </svg>
+        Logout
+      </button>
+    </div>
+
   </aside>
 
-  <!-- MAIN CONTENT -->
-  <main class="flex-1 p-8">
+  <main class="flex-1 p-8 ml-64">
     <router-outlet></router-outlet>
   </main>
 

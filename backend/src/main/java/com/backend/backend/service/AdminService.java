@@ -15,10 +15,29 @@ public class AdminService {
         this.adminRepository = adminRepository;
     }
 
+    // --- FITUR LOGIN (BARU) ---
+    public Admin login(String username, String password) {
+        // 1. Cari admin berdasarkan username di database
+        // Pastikan Anda sudah menambahkan findByUsername di AdminRepository!
+        Optional<Admin> adminOptional = adminRepository.findByUsername(username);
+
+        // 2. Jika username ditemukan, cek apakah passwordnya cocok
+        if (adminOptional.isPresent()) {
+            Admin admin = adminOptional.get();
+            // Cek kesamaan password (ini untuk plain text, jika pakai hash gunakan passwordEncoder.matches)
+            if (admin.getPassword().equals(password)) {
+                return admin; // Password benar, kembalikan data admin
+            }
+        }
+        
+        // 3. Jika username tidak ada ATAU password salah
+        return null; 
+    }
+    // --------------------------
+
     // CREATE
+
     public Admin createAdmin(Admin admin) {
-        // Catatan: Di sini adalah tempat Anda me-hash password sebelum menyimpan!
-        // Contoh: admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         return adminRepository.save(admin);
     }
 
@@ -32,24 +51,23 @@ public class AdminService {
         return adminRepository.findById(id);
     }
     
-    // UPDATE (Logika Aman)
+    // UPDATE
     public Admin updateAdmin(Long id, Admin adminDetails) {
         return adminRepository.findById(id)
             .map(existingAdmin -> {
-                // Update kolom
                 existingAdmin.setNamaAdmin(adminDetails.getNamaAdmin());
                 existingAdmin.setUsername(adminDetails.getUsername());
                 existingAdmin.setEmail(adminDetails.getEmail());
-                
-                // HINDARI update password di endpoint PUT ini; buat endpoint khusus jika perlu
-                // Jika password dikirim di body, Anda harus me-hash-nya di sini
-                
                 return adminRepository.save(existingAdmin);
             }).orElse(null);
     }
     
     // DELETE
     public void deleteAdmin(Long id) {
+        // Proteksi: ID 1 tidak boleh dihapus
+        if (id == 1L) {
+            throw new RuntimeException("TIDAK BOLEH MENGHAPUS SUPER ADMIN!");
+        }
         adminRepository.deleteById(id);
     }
 }

@@ -6,5 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrganisasiRepository extends JpaRepository<Organisasi, Long> {
+    
+    // PERBAIKAN: Parameter diganti dari String menjadi Organisasi.Status
+    long countByStatusAndDihapusPadaIsNull(Organisasi.Status status);
 
+    long countByDihapusPadaIsNotNull();
 }

@@ -14,30 +14,36 @@ import { Organisasi } from '../../../models/organisasi.model';
 export class OrganisasiAdminComponent implements OnInit {
 
   organisasiList: Organisasi[] = [];
+  isLoading: boolean = true;
 
-  constructor(private organisasiService: OrganisasiService) {}
+  // ✨ TAMBAHKAN BARIS INI (PENTING) ✨
+  imageBaseUrl = 'http://localhost:8080/uploads/';
+
+  constructor(private organisasiService: OrganisasiService) { }
 
   ngOnInit(): void {
-    this.fetchData();
+    this.loadData();
   }
 
-  fetchData(): void {
+  loadData(): void {
+    this.isLoading = true;
     this.organisasiService.getAll().subscribe({
       next: (data) => {
         this.organisasiList = data;
-        console.log('Data berhasil diambil:', data);
+        this.isLoading = false;
       },
-      error: (e) => console.error('Error fetching data:', e)
+      error: (e) => {
+        console.error(e);
+        this.isLoading = false;
+      }
     });
   }
 
-  hapusData(id: number): void {
-    if (confirm('Apakah Anda yakin ingin menghapus data organisasi ini?')) {
+  hapusOrganisasi(id: number | undefined): void {
+    if (!id) return;
+    if (confirm('Yakin ingin menghapus?')) {
       this.organisasiService.delete(id).subscribe({
-        next: (res) => {
-          alert('Data berhasil dihapus!');
-          this.fetchData();
-        },
+        next: () => this.loadData(),
         error: (e) => console.error(e)
       });
     }

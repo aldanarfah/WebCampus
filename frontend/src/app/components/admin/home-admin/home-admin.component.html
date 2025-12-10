@@ -1,12 +1,96 @@
-<div class="container">
-<h2>Dashboard Admin</h2>
-<p class="welcome">Selamat datang, {{ adminName }}!</p>
-
-
-<div class="cards">
-<div class="card" *ngFor="let s of stats">
-<h3>{{ s.title }}</h3>
-<p>{{ s.value }}</p>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard Admin</h1>
+    <p class="mb-4">Selamat datang kembali, Administrator!</p>
 </div>
-</div>
+
+<div class="row">
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Organisasi (Aktif)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ stats?.organisasiAktif || 0 }}
+                        </div>
+                        <div class="mt-2 text-xs text-muted" *ngIf="stats?.organisasiTerhapus">
+                            <i class="fas fa-exclamation-circle"></i> +{{ stats?.organisasiTerhapus }} Nonaktif/Hapus
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-sitemap fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            UKM (Aktif)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ stats?.ukmAktif || 0 }}
+                        </div>
+                        <div class="mt-2 text-xs text-muted" *ngIf="stats?.ukmTerhapus">
+                            <i class="fas fa-exclamation-circle"></i> +{{ stats?.ukmTerhapus }} Nonaktif/Hapus
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Berita (Tayang)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ stats?.beritaAktif || 0 }}
+                        </div>
+                        <div class="mt-2 text-xs text-muted" *ngIf="stats?.beritaTerhapus">
+                            <i class="fas fa-trash-alt"></i> +{{ stats?.beritaTerhapus }} Terhapus
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-newspaper fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Event (Tayang)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ stats?.eventAktif || 0 }}
+                        </div>
+                        <div class="mt-2 text-xs text-muted" *ngIf="stats?.eventTerhapus">
+                            <i class="fas fa-trash-alt"></i> +{{ stats?.eventTerhapus }} Terhapus
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar-alt fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

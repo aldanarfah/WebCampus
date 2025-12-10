@@ -1,29 +1,28 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    CommonModule,      // jaga-jaga biar *ngIf, *ngFor, dll tetap jalan
-    RouterOutlet,      // Angular 18 sudah support langsung
-    HeaderComponent, 
-    FooterComponent
-  ],
-  template: `
-    <div class="min-h-screen bg-white">
-      <app-header></app-header>
-      <main>
-        <router-outlet></router-outlet>
-      </main>
-      <app-footer></app-footer>
-    </div>
-  `,
-  styles: []
+  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'university-website';
+  showPublicLayout = true;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Sembunyikan Header/Footer jika URL mengandung 'dashboard' atau 'login'
+        const isDashboard = event.url.includes('/dashboard');
+        const isLogin = event.url.includes('/login');
+
+        this.showPublicLayout = !isDashboard && !isLogin;
+      }
+    });
+  }
 }

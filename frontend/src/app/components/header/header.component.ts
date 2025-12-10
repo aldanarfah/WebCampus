@@ -38,13 +38,14 @@ export class HeaderComponent {
       ]
     },
     {
-      name: 'Aktivitas Kampus',
-      path: '/aktivitas',
+      name: 'Kemahasiswaan', // Ganti labelnya
+      path: '/kemahasiswaan',
       children: [
-        { name: 'Organisasi', path: '/aktivitas/organisasi' },
-        { name: 'UKM', path: '/aktivitas/ukm' },
-        { name: 'Berita', path: '/aktivitas/berita' },
-        { name: 'Event', path: '/aktivitas/event' }
+        // Pastikan path-nya sesuai routing baru
+        { name: 'Organisasi', path: '/kemahasiswaan/organisasi' },
+        { name: 'UKM', path: '/kemahasiswaan/ukm' },
+        { name: 'Berita', path: '/kemahasiswaan/berita' },
+        { name: 'Event', path: '/kemahasiswaan/event' }
       ]
     },
     {

@@ -7,29 +7,30 @@ import { Organisasi } from '../models/organisasi.model';
   providedIn: 'root'
 })
 export class OrganisasiService {
-  // Pastikan port benar
+  // Pastikan port sesuai backend kamu
   private baseUrl = 'http://localhost:8080/api/organisasi';
 
-  // HANYA inject HttpClient. JANGAN inject OrganisasiService disini.
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Organisasi[]> {
-    return this.http.get<Organisasi[]>(this.baseUrl, { withCredentials: true });
+    return this.http.get<Organisasi[]>(this.baseUrl);
   }
 
   get(id: number): Observable<Organisasi> {
-    return this.http.get<Organisasi>(`${this.baseUrl}/${id}`, { withCredentials: true });
+    return this.http.get<Organisasi>(`${this.baseUrl}/${id}`);
   }
 
-  create(data: Organisasi): Observable<any> {
-    return this.http.post(this.baseUrl, data, { withCredentials: true });
+  // UBAH DISINI: Parameter sekarang FormData
+  create(data: FormData): Observable<any> {
+    return this.http.post(this.baseUrl, data);
   }
 
-  update(id: number, data: Organisasi): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, data, { withCredentials: true });
+  // UBAH DISINI: Parameter sekarang FormData
+  update(id: number, data: FormData): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}`, data);
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, { withCredentials: true });
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 }

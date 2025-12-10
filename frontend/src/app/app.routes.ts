@@ -23,15 +23,15 @@ import { JadwalComponent } from './components/akademik/jadwal/jadwal.component';
 // Akademik Default
 import { AkademikDefaultComponent } from './components/akademik/akademik-default/akademik-default.component';
 
-// Aktivitas Kampus
-import { AktivitasComponent } from './components/aktivitas/aktivitas/aktivitas.component';
-import { OrganisasiComponent } from './components/aktivitas/organisasi/organisasi.component';
-import { UkmComponent } from './components/aktivitas/ukm/ukm.component';
-import { BeritaComponent } from './components/aktivitas/berita/berita.component';
-import { EventComponent } from './components/aktivitas/event/event.component';
+// Kemahasiswaan
+import { AktivitasComponent } from './components/kemahasiswaan/aktivitas/aktivitas.component';
+import { OrganisasiComponent } from './components/kemahasiswaan/organisasi/organisasi.component';
+import { UkmComponent } from './components/kemahasiswaan/ukm/ukm.component';
+import { BeritaComponent } from './components/kemahasiswaan/berita/berita.component';
+import { EventComponent } from './components/kemahasiswaan/event/event.component';
 
 // Aktivitas Default
-import { AktivitasDefaultComponent } from './components/aktivitas/aktivitas-default/aktivitas-default.component';
+import { AktivitasDefaultComponent } from './components/kemahasiswaan/aktivitas-default/aktivitas-default.component';
 
 // Alumni
 import { AlumniComponent } from './components/alumni/alumni/alumni.component';
@@ -60,6 +60,9 @@ import { LoginComponent } from './components/login/login.component';
 // Admin Dashboard
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
+import { adminGuard } from './guards/admin.guard';
+import { AdminListComponent } from './components/admin/admin-list/admin-list.component';
+import { AdminTambahComponent } from './components/admin/admin-tambah/admin-tambah.component';
 
 import { OrganisasiAdminComponent } from './components/admin/organisasi-admin/organisasi-admin.component';
 import { OrganisasiTambahComponent } from './components/admin/organisasi-admin/organisasi-tambah/organisasi-tambah.component';
@@ -121,9 +124,8 @@ export const routes: Routes = [
   ]
 },
 
-  // Aktivitas Kampus
   {
-    path: 'aktivitas',
+    path: 'kemahasiswaan', // Ganti 'aktivitas' jadi 'kemahasiswaan' di URL
     component: AktivitasComponent,
     children: [
       { path: '', component: AktivitasDefaultComponent, pathMatch: 'full' },
@@ -141,8 +143,12 @@ export const routes: Routes = [
   {
   path: 'dashboard',
   component: DashboardComponent,
+  canActivate: [adminGuard],
   children: [
     { path: '', component: HomeAdminComponent },
+    { path: '', component: HomeAdminComponent },
+    { path: 'users', component: AdminListComponent },
+    { path: 'users/tambah', component: AdminTambahComponent },
 
     { path: 'organisasi', component: OrganisasiAdminComponent },
     { path: 'organisasi/tambah', component: OrganisasiTambahComponent },
