@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-detail-kegiatan',
+  selector: 'app-aktivitas',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './detail-kegiatan.component.html',
-  styleUrl: './detail-kegiatan.component.css'
+  templateUrl: './aktivitas.component.html',
+  styleUrls: ['./aktivitas.component.css']
 })
-export class DetailKegiatanComponent {
-
-}
+export class AktivitasComponent {}
+ 

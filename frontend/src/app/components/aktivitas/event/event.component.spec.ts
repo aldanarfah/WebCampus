@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetailLokerComponent } from './detail-loker.component';
+import { EventComponent } from './event.component';
 
-describe('DetailLokerComponent', () => {
-  let component: DetailLokerComponent;
-  let fixture: ComponentFixture<DetailLokerComponent>;
+describe('EventComponent', () => {
+  let component: EventComponent;
+  let fixture: ComponentFixture<EventComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DetailLokerComponent]
+      imports: [EventComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DetailLokerComponent);
+    fixture = TestBed.createComponent(EventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

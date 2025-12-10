@@ -1,3 +1,4 @@
+import { AlumniKarirComponent } from './components/alumni-karir/alumni-karir.component';
 import { Routes } from '@angular/router';
 
 // Home
@@ -10,6 +11,8 @@ import { SejarahComponent } from './components/profil/sejarah/sejarah.component'
 import { VisiMisiComponent } from './components/profil/visi-misi/visi-misi.component';
 import { StrukturOrganisasiComponent } from './components/profil/struktur-organisasi/struktur-organisasi.component';
 import { SaranaComponent } from './components/profil/sarana/sarana.component';
+
+
 
 // Akademik
 import { AkademikComponent } from './components/akademik/akademik/akademik.component';
@@ -24,20 +27,12 @@ import { SipilComponent } from './components/akademik/data-prodi/sipil/sipil.com
 import { TROComponent } from './components/akademik/data-prodi/tro/tro.component';
 import { AkuntansiComponent } from './components/akademik/data-prodi/akuntansi/akuntansi.component';
 
-// Kemahasiswaan
-import { AktivitasComponent } from './components/kemahasiswaan/aktivitas/aktivitas.component';
-import { OrganisasiComponent } from './components/kemahasiswaan/organisasi/organisasi.component';
-import { UkmComponent } from './components/kemahasiswaan/ukm/ukm.component';
-import { BeritaComponent } from './components/kemahasiswaan/berita/berita.component';
-import { EventComponent } from './components/kemahasiswaan/event/event.component';
-
-// Aktivitas Default
-import { AktivitasDefaultComponent } from './components/kemahasiswaan/aktivitas-default/aktivitas-default.component';
 
 // Alumni
-import { AlumniComponent } from './components/alumni/alumni/alumni.component';
-import { DataAlumniComponent } from './components/alumni/data-alumni/data-alumni.component';
-import { KegiatanAlumniComponent } from './components/alumni/kegiatan-alumni/kegiatan-alumni.component';
+import { AlumniKarirComponent as AlumniKarirHomeComponent } from './components/alumni-karir/alumni-karir.component';
+import { KegiatanAlumniComponent } from './components/alumni-karir/kegiatan-alumni/kegiatan-alumni.component';
+import { DetailKegiatanComponent } from './components/alumni-karir/kegiatan-alumni/detail-kegiatan/detail-kegiatan.component';
+
 
 import { KataAlumniComponent } from './components/alumni-karir/kata-alumni/kata-alumni.component';
 import { DetailKataComponent } from './components/alumni-karir/kata-alumni/detail-kata/detail-kata.component';
@@ -46,7 +41,7 @@ import { LokerComponent } from './components/alumni-karir/loker/loker.component'
 import { DetailLokerComponent } from './components/alumni-karir/loker/detail-loker/detail-loker.component';
 
 
-// PMB 
+// PMB
 import { PmbComponent } from './components/pmb/pmb/pmb.component';
 import { BeasiswaComponent } from './components/pmb/beasiswa/beasiswa.component';
 
@@ -56,14 +51,37 @@ import { KontakComponent } from './components/kontak/kontak.component';
 // Login
 import { LoginComponent } from './components/login/login.component';
 
-// Admin Dashboard
+// --- IMPORT DASHBOARD & ADMIN (INI YANG HILANG) ---
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
+import { adminGuard } from './guards/admin.guard';
 
+// Manajemen User (Admin)
+import { AdminListComponent } from './components/admin/admin-list/admin-list.component';
+import { AdminTambahComponent } from './components/admin/admin-tambah/admin-tambah.component';
+
+// Organisasi
 import { OrganisasiAdminComponent } from './components/admin/organisasi-admin/organisasi-admin.component';
+import { OrganisasiTambahComponent } from './components/admin/organisasi-admin/organisasi-tambah/organisasi-tambah.component';
+import { OrganisasiEditComponent } from './components/admin/organisasi-admin/organisasi-edit/organisasi-edit.component';
+
+// UKM
 import { UkmAdminComponent } from './components/admin/ukm-admin/ukm-admin.component';
+import { UkmTambahComponent } from './components/admin/ukm-admin/ukm-tambah/ukm-tambah.component';
+import { UkmEditComponent } from './components/admin/ukm-admin/ukm-edit/ukm-edit.component';
+
+// Berita
 import { BeritaAdminComponent } from './components/admin/berita-admin/berita-admin.component';
+import { BeritaTambahComponent } from './components/admin/berita-admin/berita-tambah/berita-tambah.component';
+import { BeritaEditComponent } from './components/admin/berita-admin/berita-edit/berita-edit.component';
+
+// Event
 import { EventAdminComponent } from './components/admin/event-admin/event-admin.component';
+import { EventTambahComponent } from './components/admin/event-admin/event-tambah/event-tambah.component';
+import { EventEditComponent } from './components/admin/event-admin/event-edit/event-edit.component';
+// ----------------------------------------------------
+
+// ... (Biarkan import lainnya seperti Home, Profil, dll tetap ada) ...
 
 
 export const routes: Routes = [
@@ -105,17 +123,6 @@ export const routes: Routes = [
   ]
 },
 
-  {
-    path: 'kemahasiswaan', // Ganti 'aktivitas' jadi 'kemahasiswaan' di URL
-    component: AktivitasComponent,
-    children: [
-      { path: '', component: AktivitasDefaultComponent, pathMatch: 'full' },
-      { path: 'organisasi', component: OrganisasiComponent },
-      { path: 'ukm', component: UkmComponent },
-      { path: 'berita', component: BeritaComponent },
-      { path: 'event', component: EventComponent },
-    ],
-  },
 
   // Login Admin
   { path: 'login', component: LoginComponent },
