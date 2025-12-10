@@ -22,7 +22,7 @@ import {
 
         <!-- KIRI: logo + alamat -->
         <div>
-          <img src="assets/logo.png" alt="Logo Kampus" class="w-24 mb-4" />
+          <img src="assets/img/logo_polinema-removebg.png" alt="Logo Kampus" class="w-24 mb-4" />
           <ul class="space-y-3 text-sm">
             <li class="flex items-start">
               <lucide-icon [img]="MapPin" [size]="16" class="mr-2 mt-0.5"></lucide-icon>

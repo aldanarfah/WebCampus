@@ -1,0 +1,164 @@
+<!-- HERO -->
+<section class="hero relative h-[80vh]">
+  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-full h-full object-cover">
+  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+    <h1 class="text-white text-4xl md:text-6xl font-bold">Alumni dan Karir</h1>
+  </div>
+</section>
+
+<!-- ======================
+   STATISTIK
+====================== -->
+<section class="py-12 mt-5">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+    
+    <div class="bg-white p-8 rounded-xl shadow">
+      <h3 class="text-3xl font-bold">1.000</h3>
+      <p class="text-gray-600 mt-2">Total Alumni</p>
+    </div>
+
+    <div class="bg-white p-8 rounded-xl shadow">
+      <h3 class="text-3xl font-bold">700</h3>
+      <p class="text-gray-600 mt-2">Alumni yang Bekerja</p>
+    </div>
+
+    <div class="bg-white p-8 rounded-xl shadow">
+      <h3 class="text-3xl font-bold">250</h3>
+      <p class="text-gray-600 mt-2">Alumni yang Melanjutkan Studi</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ======================
+   KEGIATAN ALUMNI
+====================== -->
+<section class="py-16 bg-white">
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- Judul + tombol -->
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-2xl font-bold">Kegiatan Alumni</h2>
+      <button 
+      routerLink="/alumni-karir/kegiatan-alumni"
+      class="px-5 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50">
+        Lihat Kegiatan
+      </button>
+    </div>
+
+    <!-- 3 Card -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <div class="bg-white rounded-xl shadow p-4 cursor-pointer hover:shadow-xl hover:scale-[1.02]"
+      [routerLink]="['/alumni-karir/kegiatan-alumni/detail-kegiatan']">
+        <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" class="rounded-lg mb-4">
+        <p class="text-sm text-gray-500 mb-2">20 Januari 2025</p>
+        <h3 class="font-semibold">Alumni Sharing Session</h3>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-4 cursor-pointer hover:shadow-xl hover:scale-[1.02]"
+      [routerLink]="['/alumni-karir/kegiatan-alumni/detail-kegiatan']">
+        <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" class="rounded-lg mb-4">
+        <p class="text-sm text-gray-500 mb-2">10 Februari 2025</p>
+        <h3 class="font-semibold">Alumni Gathering & Networking Day</h3>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-4 cursor-pointer hover:shadow-xl hover:scale-[1.02]"
+      [routerLink]="['/alumni-karir/kegiatan-alumni/detail-kegiatan']">
+        <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" class="rounded-lg mb-4">
+        <p class="text-sm text-gray-500 mb-2">14 Maret 2025</p>
+        <h3 class="font-semibold">Workshop Alumni Berbagi Karir</h3>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================
+   KATA ALUMNI
+====================== -->
+<section class="py-16 bg-gray-50 overflow-hidden">
+
+  <div class="max-w-6xl mx-auto flex items-center justify-between mb-10">
+    <h2 class="text-2xl font-bold">Kata Alumni Hebat</h2>
+    <button 
+      routerLink="/alumni-karir/kata-alumni"
+      class="px-5 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+      Lihat Semua
+    </button>
+  </div>
+
+  <!-- Carousel Full Width -->
+  <div class="relative w-screen overflow-hidden py-10 px-6">
+
+    <div 
+      class="flex gap-14"
+      [ngClass]="{'transition-transform duration-[2000ms] ease-linear': !resetting, 'gap-10': true}"
+      [style.transform]="'translateX(-' + currentIndex * itemWidth + 'px)'"
+    >
+      <ng-container *ngFor="let alumni of duplicatedList; let i = index">
+        <!-- Card -->
+        <div 
+            class="min-w-[330px] transition-all duration-500"
+            [ngClass]="{
+            'translate-y-[-20px] mb-10': i % 2 === 0,
+            'translate-y-[20px] mt-10': i % 2 !== 0
+            }">
+            <div class="flex items-start gap-4">
+            <img 
+                [src]="alumni.img"
+                    class="w-20 h-20 rounded-full object-cover"/>
+             <div>
+      <!-- Textbox clickable -->
+         <div class="text-white p-3 rounded-xl mb-3 w-[300px] h-[90px] overflow-hidden cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-colors duration-300"
+           [routerLink]="['/alumni-karir/kata-alumni/detail']" style="background-color: #002D72;">
+             {{ alumni.text }}
+        </div>
+        <p class="font-semibold">{{ alumni.name }}</p>
+        </div>
+     </div>
+    </div>
+
+      </ng-container>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ======================
+     LOWONGAN KERJA
+====================== -->
+<section class="py-16 bg-white">
+  <div class="max-w-6xl mx-auto text-center">
+    <!-- Judul -->
+    <h2 class="text-2xl font-bold mb-10">Lowongan Kerja</h2>
+
+    <!-- Grid card -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+      <!-- Loop jobList -->
+      <div *ngFor="let job of jobList"
+           class="bg-gray-100 p-3 rounded-xl shadow flex gap-4 items-start 
+                  cursor-pointer hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
+           [routerLink]="[job.link]">
+        
+        <img [src]="job.img" class="w-14 h-14 rounded-lg object-cover">
+        
+        <div class="text-left">
+          <p class="text-xs text-gray-600">{{ job.date }}</p>
+          <h3 class="font-semibold text-sm mt-1">{{ job.title }}</h3>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tombol -->
+    <button routerLink="/alumni-karir/loker"
+            class="px-6 py-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition">
+      Lihat Lebih Banyak
+    </button>
+  </div>
+</section>

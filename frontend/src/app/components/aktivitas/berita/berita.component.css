@@ -1,0 +1,38 @@
+.hero h1 {
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+}
+
+.menu-link {
+  text-decoration: none;
+  color: #6c757d;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.menu-link:hover {
+  color: #0d6efd;
+}
+
+.menu-active {
+  font-weight: 700;
+  color: #000;
+}
+
+.berita-container {
+  font-family: 'Inter', sans-serif;
+}
+
+img {
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.02);
+}
+

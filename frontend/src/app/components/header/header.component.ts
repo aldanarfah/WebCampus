@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule, Search } from 'lucide-angular';
@@ -10,7 +10,8 @@ import { LucideAngularModule, Search } from 'lucide-angular';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+
   Search = Search;
 
   navigation = [
@@ -21,7 +22,6 @@ export class HeaderComponent {
       children: [
         { name: 'Sejarah', path: '/profil/sejarah' },
         { name: 'Visi Misi', path: '/profil/visi-misi' },
-        { name: 'Pimpinan', path: '/profil/pimpinan' },
         { name: 'Struktur Organisasi', path: '/profil/struktur-organisasi' },
         { name: 'Sarana & Prasarana', path: '/profil/sarana' }
       ]
@@ -37,26 +37,25 @@ export class HeaderComponent {
         { name: 'Jadwal', path: '/akademik/jadwal' }
       ]
     },
-    {
-      name: 'Kemahasiswaan', // Ganti labelnya
-      path: '/kemahasiswaan',
-      children: [
-        // Pastikan path-nya sesuai routing baru
-        { name: 'Organisasi', path: '/kemahasiswaan/organisasi' },
-        { name: 'UKM', path: '/kemahasiswaan/ukm' },
-        { name: 'Berita', path: '/kemahasiswaan/berita' },
-        { name: 'Event', path: '/kemahasiswaan/event' }
-      ]
-    },
-    {
-      name: 'Alumni',
-      path: '/alumni',
-      children: [
-        { name: 'Kata Alumni', path: '/alumni/data-alumni' },
-        { name: 'Kegiatan Alumni', path: '/alumni/kegiatan-alumni' }
-      ]
-    },
-    { name: 'Karier', path: '/karier' },
+
+      {
+  name: 'Aktivitas Kampus',
+  path: '/aktivitas',
+  children: [
+    { name: 'Ormawa & UKM', path: '/aktivitas/ormawa-ukm' },
+    { name: 'Berita', path: '/aktivitas/berita' },
+    { name: 'Event', path: '/aktivitas/event' }
+  ]
+},
+     {
+    name: 'Alumni & Karir',
+    path: '/alumni-karir',
+    children: [
+      { name: 'Kegiatan Alumni', path: '/alumni-karir/kegiatan-alumni' },
+      { name: 'Kata Alumni', path: '/alumni-karir/kata-alumni' },
+      { name: 'Lowongan Kerja', path: '/alumni-karir/loker' }
+    ]
+  },
     {
       name: 'PMB',
       path: '/pmb',
@@ -65,4 +64,8 @@ export class HeaderComponent {
       ]
     }
   ];
+
+  ngOnInit(): void {
+    // sticky scroll handler sudah dihapus
+  }
 }

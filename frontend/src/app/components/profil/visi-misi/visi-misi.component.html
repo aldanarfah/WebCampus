@@ -1,54 +1,83 @@
-<div class="bg-white p-8 rounded-lg shadow-md border">
+<!-- HERO -->
+<section class="hero position-relative" style="height:80vh; overflow:hidden;">
+  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-100 h-100 object-fit-cover">
+  <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background:rgba(0,0,0,0.4);">
+    <h1 class="text-white fw-bold hero-title">Visi dan Misi</h1>
+  </div>
+</section>
 
-  <!-- TITLE -->
-  <h1 class="text-3xl font-bold mb-4 text-gray-800">
-    Visi & Misi
-  </h1>
+<!-- MENU NAVIGASI -->
+<div class="container mt-4">
+  <nav class="d-flex gap-4 menu-profil">
+    <a routerLink="/" class="menu-link">Home</a>
+    <a routerLink="/profil" class="menu-link">Profil</a>
+    <span class="menu-active">Visi dan Misi</span>
+  </nav>
+</div>
 
-  <!-- Visi -->
-  <div>
-    <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">Visi</h2>
-    <div class="bg-gray-100 p-6 rounded-md shadow-inner">
-      <p class="text-gray-800 text-lg">
-        Menjadi institusi pendidikan tinggi yang unggul, inovatif, dan berkontribusi positif bagi masyarakat dan dunia industri.
-      </p>
+<div class="container my-5">
+
+<!-- ======= Bagian 1: Visi & Misi ======= -->
+<div class="row align-items-center mb-5">
+    
+  <!-- Gambar -->
+  <div class="col-md-5">
+    <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" 
+         alt="Visi & Misi" 
+         class="custom-img">
+  </div>
+
+  <!-- Teks -->
+  <div class="col-md-7 mt-4 mt-md-0">
+    <h1 class="mb-4">Visi & Misi</h1>
+
+    <h3>Visi</h3>
+    <div class="bg-light p-3 rounded mb-3">
+      <p>Menjadi Lembaga Pendidikan Tinggi Vokasi yang Unggul dalam Persaingan Global.</p>
+    </div>
+
+    <h3>Misi</h3>
+    <div class="bg-light p-3 rounded mb-3">
+      <ul>
+        <li>Menyelenggarakan dan mengembangkan pendidikan tinggi vokasi yang unggul, inovatif, dan berdaya saing global.</li>
+        <li>Menyelenggarakan penelitian terapan dan pengabdian kepada masyarakat yang bermanfaat bagi pengembangan ilmu pengetahuan dan teknologi serta kesejahteraan masyarakat.</li>
+        <li>Menyelenggarakan sistem pengelolaan pendidikan dengan berdasar pada prinsip-prinsip tata kelola yang baik.</li>
+        <li>Mengembangkan kerja sama yang saling menguntungkan dengan berbagai pihak baik di dalam maupun di luar negeri pada bidang-bidang yang relevan.</li>
+      </ul>
     </div>
   </div>
 
-  <!-- Misi -->
-  <div>
-    <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">Misi</h2>
-    <div class="bg-gray-100 p-6 rounded-md shadow-inner"> 
-    <ul class="list-disc list-inside space-y-2 text-gray-700 text-lg">
-      <li>Menyelenggarakan pendidikan yang berkualitas dan relevan dengan kebutuhan industri.</li>
-      <li>Mengembangkan penelitian yang inovatif dan aplikatif.</li>
-      <li>Mendorong pengabdian masyarakat melalui program-program unggulan.</li>
-    </ul>
+</div> <!-- ⬅ SEHARUSNYA ADA PENUTUP INI -->
+
+
+  <!-- ======= Bagian 2: Tujuan (gambar + overlay) ======= -->
+  <div class="mb-5">
+    <h2 class="mb-4">Tujuan</h2>
+
+    <div class="img-text-overlay">
+      <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Sasaran">
+
+      <div class="overlay-text">
+        <ul class="mb-0">
+          <li>1. Menghasilkan lulusan dengan hardskill dan softskill yang unggul dan berdaya saing tinggi yang selaras dengan dunia kerja untuk mendorong pembelajaran seumur hidup.
+          <li>2. Menghasilkan penelitian terapan dan pengabdian kepada masyarakat untuk meningkatkan kemajuan ilmu pengetahuan dan teknologi serta mendorong hilirisasi agar bermanfaat bagi dunia usaha dan industri, serta meningkatkan kesejahteraan masyarakat.</li>
+          <li>3. Mewujudkan sistem pengelolaan pendidikan yang efektif dan akuntabel dengan menerapkan prinsip-prinsip tata kelola yang baik agar dapat memberikan layanan yang maksimal bagi pemangku kepentingan.</li>
+          <li>4. Menghasilkan dan menguatkan kerja sama yang produktif dengan berbagai mitra di tingkat nasional maupun internasional.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <!-- Tujuan -->
+  <!-- ======= Bagian 3: Tujuan ======= -->
   <div>
-    <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">Tujuan</h2>
-    <div class="bg-gray-100 p-6 rounded-md shadow-inner">
-      <ul class="list-disc list-inside space-y-2 text-gray-700 text-lg">
-      <li>Mencetak lulusan yang kompeten dan profesional.</li>
-      <li>Meningkatkan kualitas penelitian dan publikasi ilmiah.</li>
-      <li>Mendukung pembangunan masyarakat melalui inovasi dan kolaborasi.</li>
-    </ul>
+    <h2>Sasaran</h2>
+    <div class="bg-light p-3 rounded">
+      <ul>
+        <li>1. Peningkatan kualitas dan akses perguruan tinggi vokasi berstandar internasional untuk mencetak lulusan berdaya saing global.</li>
+        <li>2. Penguatan kualitas pendidik dan tenaga kependidikan perguruan tinggi vokasi yang sesuai dengan kebutuhan dunia kerja.</li>
+        <li>3. Perwujudan pusat teknologi terdepan yang berfokus pada penelitian dan inovasi untuk mendorong kemajuan ilmu pengetahuan dan teknologi, integrasi pembelajaran, serta implementasi praktis.</li>
+      </ul>
     </div>
   </div>
 
-  <!-- Sasaran -->
-  <div>
-    <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">Visi</h2>
-    <div class="bg-gray-100 p-6 rounded-md shadow-inner">
-      <ul class="list-disc list-inside space-y-2 text-gray-700 text-lg">
-      <li>Lulusan yang memiliki kompetensi akademik dan soft skill unggul.</li>
-      <li>Dosen dan tenaga kependidikan yang profesional dan berdedikasi.</li>
-      <li>Kolaborasi aktif dengan industri, pemerintah, dan masyarakat.</li>
-    </ul>
-    </div>
-  </div>
-
-  </div>
+</div>

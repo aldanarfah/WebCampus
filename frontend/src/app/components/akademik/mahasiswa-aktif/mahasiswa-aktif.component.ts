@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DetailMahasiswaComponent } from './detail-mahasiswa/detail-mahasiswa.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-mahasiswa-aktif',
   standalone: true,
-  imports: [CommonModule, FormsModule, DetailMahasiswaComponent],
+  imports: [CommonModule, FormsModule, DetailMahasiswaComponent, RouterModule],
   templateUrl: './mahasiswa-aktif.component.html',
+  styleUrl: './mahasiswa-aktif.component.css'
 })
 export class MahasiswaAktifComponent {
   searchNim: string = '';
@@ -27,7 +29,7 @@ export class MahasiswaAktifComponent {
   get jumlahTRO() { return this.mahasiswaList.filter(m => m.prodi==='tro').length; }
   get jumlahAkuntansi() { return this.mahasiswaList.filter(m => m.prodi==='akuntansi').length; }
 
-  selectedMahasiswa: any = null;
+  selectedMahasiswa: any = null; 
 
   search() {
     const result = this.mahasiswaList.find(m => m.nim === this.searchNim && m.prodi === this.filterProdi);

@@ -1,0 +1,33 @@
+<!-- HERO -->
+<section class="hero relative h-[80vh]">
+  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-full h-full object-cover">
+  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+    <h1 class="text-white text-4xl md:text-6xl font-bold">Kata Alumni</h1>
+  </div>
+</section>
+
+<!-- MENU NAVIGASI -->
+<div class="container mt-4">
+  <nav class="d-flex gap-4 menu-alumni-karir">
+    <a routerLink="/" class="menu-link">Home</a>
+    <a routerLink="/alumni-karir" class="menu-link">Alumni & Karir</a>
+    <span class="menu-active">Kata Alumni</span>
+  </nav>
+</div>
+
+<div class="min-h-screen p-8 mt-5">
+  <div class="grid grid-cols-4 justify-center gap-8 mx-auto max-w-6xl">
+    <div *ngFor="let alumni of alumniList"
+         class="bg-[#002D72] text-white rounded-lg flex flex-col items-center p-4 w-60 h-72 cursor-pointer hover:shadow-xl hover:scale-[1.02]"
+         [routerLink]="['/alumni-karir/kata-alumni/detail-kata']">
+      <img [src]="alumni.photo" alt="Profile" class="w-44 h-44 rounded-full mb-2 object-cover">
+      <h2 class="text-sm font-bold text-center">{{ alumni.name }}</h2>
+      <p class="text-xs text-center">{{ alumni.year }}</p>
+      <p class="text-xs text-center">{{ alumni.major }}</p>
+    </div>
+  </div>
+</div>
+
+
+
+

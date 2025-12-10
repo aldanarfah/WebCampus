@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-profil',
@@ -9,4 +10,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './profil.component.html',
   styleUrls: ['./profil.component.css']
 })
-export class ProfilComponent {}
+
+export class ProfilComponent {
+
+}

@@ -1,0 +1,54 @@
+.hero h1 {
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+}
+
+.ormawa-image-wrapper h2 {
+  font-size: 2.5rem;      /* ukuran font, bisa disesuaikan */
+  color: #022B72;         /* warna biru gelap */
+  font-weight: 700;       /* tebal */
+  margin-bottom: 1rem;    /* jarak bawah dari gambar */
+}
+
+
+.ormawa-image-wrapper img {
+  width: 100%;        /* Lebar mengikuti container */
+  height: 250px;      /* Tinggi tetap */
+  object-fit: cover;  /* Memotong gambar supaya tidak melebar */
+  border-radius: 1rem; /* Rounded sesuai sebelumnya */
+}
+
+
+.ormawa-image-wrapper {
+  position: relative; /* patokan tombol overlay */
+}
+
+.ormawa-btn {
+  position: absolute;
+  padding: 20px 200px; /* lebih besar */
+  width: 60%;
+  bottom: -22px;
+  right: -90px;
+  top: auto;
+  left: auto;
+  background: #022B72;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.ormawa-btn:hover {
+  background: #001f4d; /* warna lebih gelap saat hover */
+}
+
+.ormawa-btn .arrow {
+  font-size: 20px;
+}

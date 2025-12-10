@@ -1,35 +1,80 @@
-<div class="space-y-6">
+<!-- HERO -->
+<section class="hero relative h-[80vh]">
+  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-full h-full object-cover">
+  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+    <h1 class="text-white text-4xl md:text-6xl font-bold">Mahasiswa Aktif</h1>
+  </div>
+</section>
 
-  <!-- STATISTIK KOTAK MAHASISWA -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
-    <div class="bg-blue-600 text-white p-6 rounded-2xl text-center">
-      <h3 class="text-lg font-semibold">Total Mahasiswa Aktif</h3>
-      <p class="text-2xl mt-2 font-bold">{{ totalMahasiswa }}</p>
+<!-- MENU NAVIGASI -->
+<div class="container mt-4">
+  <nav class="d-flex gap-4 menu-sejarah">
+    <a routerLink="/" class="menu-link">Home</a>
+    <a routerLink="/akademik" class="menu-link">Akademik</a>
+    <span class="menu-active">Mahasiswa Aktif</span>
+  </nav>
+</div>
+
+<div class="mt-5 mb-24">
+
+  <!-- ================= BARIS 1 — TITLE FULL LEFT ================ -->
+  <div class="relative w-fit">
+    <div class="bg-[#003B8E] text-white py-4 pl-10 pr-16 
+                rounded-l-none rounded-r-full inline-block text-2xl font-semibold"
+         style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
+      Statistik Mahasiswa Aktif
     </div>
-    <div class="bg-blue-400 text-white p-6 rounded-2xl text-center">
-      <h3 class="text-lg font-semibold">TI</h3>
-      <p class="text-2xl mt-2 font-bold">{{ jumlahTI }}</p>
-    </div>
-    <div class="bg-blue-400 text-white p-6 rounded-2xl text-center">
-      <h3 class="text-lg font-semibold">Sipil</h3>
-      <p class="text-2xl mt-2 font-bold">{{ jumlahSipil }}</p>
-    </div>
-    <div class="bg-blue-400 text-white p-6 rounded-2xl text-center">
-      <h3 class="text-lg font-semibold">TRO</h3>
-      <p class="text-2xl mt-2 font-bold">{{ jumlahTRO }}</p>
-    </div>
-    <div class="bg-blue-400 text-white p-6 rounded-2xl text-center">
-      <h3 class="text-lg font-semibold">Akuntansi</h3>
-      <p class="text-2xl mt-2 font-bold">{{ jumlahAkuntansi }}</p>
-    </div>
+
+    <!-- efek crop kiri -->
+    <div class="absolute left-0 top-0 bottom-0 w-[20px] bg-white -z-10"></div>
   </div>
 
+  <!-- Mulai container sesudah judul -->
+  <div class="max-w-6xl mx-auto px-4">
+
+    <!-- ================= BARIS 2 — 2 KAPSUL ================= -->
+    <div class="mt-10 flex gap-6 justify-start pl-4">
+      <div class="bg-[#003B8E] text-white px-8 py-4 rounded-full text-center">
+        <span class="text-xl font-bold">1230</span>
+        <span class="ml-2">Total Mahasiswa Aktif</span>
+      </div>
+
+      <div class="bg-[#003B8E] text-white px-8 py-4 rounded-full text-center">
+        <span class="text-xl font-bold">300</span>
+        <span class="ml-2">Teknologi Rekayasa Otomotif</span>
+      </div>
+    </div>
+
+    <!-- ================= BARIS 3 — 3 KAPSUL ================= -->
+    <div class="mt-6 flex gap-6 justify-start pl-32">
+      <div class="bg-[#003B8E] text-white px-8 py-4 rounded-full text-center">
+        <span class="text-xl font-bold">310</span>
+        <span class="ml-2">Akuntansi</span>
+      </div>
+
+      <div class="bg-[#003B8E] text-white px-8 py-4 rounded-full text-center">
+        <span class="text-xl font-bold">320</span>
+        <span class="ml-2">Teknologi Sipil</span>
+      </div>
+
+      <div class="bg-[#003B8E] text-white px-8 py-4 rounded-full text-center">
+        <span class="text-xl font-bold">350</span>
+        <span class="ml-2">Teknologi Informasi</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
   <!-- FORM PENCARIAN -->
+<div class="max-w-6xl mx-auto px-4 mb-24">   <!-- PEMBUNGKUS BARU -->
   <div class="bg-white p-6 rounded-2xl shadow-md flex flex-col md:flex-row md:items-end gap-4">
+    
     <div class="flex-1">
       <label class="block font-semibold text-gray-700">NIM</label>
       <input type="text" [(ngModel)]="searchNim" class="w-full border border-gray-300 p-2 rounded-md">
     </div>
+
     <div class="flex-1">
       <label class="block font-semibold text-gray-700">Program Studi</label>
       <select [(ngModel)]="filterProdi" class="w-full border border-gray-300 p-2 rounded-md">
@@ -39,9 +84,12 @@
         <option value="akuntansi">D3 Akuntansi</option>
       </select>
     </div>
-    <button (click)="search()" class="px-6 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors">Cari</button>
-  </div>
 
+    <button (click)="search()" class="px-6 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+      Cari
+    </button>
+
+  </div>
 </div>
 
 <!-- POPUP DETAIL MAHASISWA -->
