@@ -9,32 +9,41 @@ import { Ukm } from '../../../models/ukm.model';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './ukm-admin.component.html',
-  styleUrl: './ukm-admin.component.css'
+  styleUrls: ['./ukm-admin.component.css']
 })
 export class UkmAdminComponent implements OnInit {
 
   ukmList: Ukm[] = [];
+  isLoading: boolean = true;
 
-  constructor(private ukmService: UkmService) {}
+  // URL untuk gambar
+  imageBaseUrl = 'http://localhost:8080/uploads/';
+
+  constructor(private ukmService: UkmService) { }
 
   ngOnInit(): void {
-    this.fetchData();
+    this.loadData();
   }
 
-  fetchData(): void {
+  loadData(): void {
+    this.isLoading = true;
     this.ukmService.getAll().subscribe({
-      next: (data) => this.ukmList = data,
-      error: (e) => console.error(e)
+      next: (data) => {
+        this.ukmList = data;
+        this.isLoading = false;
+      },
+      error: (e) => {
+        console.error(e);
+        this.isLoading = false;
+      }
     });
   }
 
-  hapusData(id: number): void {
+  hapusUkm(id: number | undefined): void {
+    if (!id) return;
     if (confirm('Yakin ingin menghapus UKM ini?')) {
       this.ukmService.delete(id).subscribe({
-        next: () => {
-          alert('Data berhasil dihapus!');
-          this.fetchData();
-        },
+        next: () => this.loadData(),
         error: (e) => console.error(e)
       });
     }

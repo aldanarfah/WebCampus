@@ -2,10 +2,15 @@ package com.backend.backend.controller;
 
 import com.backend.backend.model.Organisasi;
 import com.backend.backend.service.OrganisasiService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.databind.DeserializationFeature; // Import Penting
+import com.fasterxml.jackson.databind.ObjectMapper; // Import Jackson
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule; // Import untuk handle Tanggal
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,60 +18,88 @@ import java.util.Optional;
 @RequestMapping("/api/organisasi")
 public class OrganisasiController {
 
-    @Autowired
-    private OrganisasiService organisasiService;
+    private final OrganisasiService organisasiService;
 
-    // C. CREATE (POST)
-    // URL: POST  
-    @PostMapping
-    public ResponseEntity<Organisasi> createOrganisasi(@RequestBody Organisasi organisasi) {
-        Organisasi createdOrg = organisasiService.createOrganisasi(organisasi);
-        return new ResponseEntity<>(createdOrg, HttpStatus.CREATED); // Mengirimkan status 201 Created
+    public OrganisasiController(OrganisasiService organisasiService) {
+        this.organisasiService = organisasiService;
     }
 
-    // A. READ ALL (GET)
-    // URL: GET http://localhost:8080/api/organisasi
+    // CREATE (POST) dengan Upload File
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Organisasi> createOrganisasi(
+            @RequestPart("organisasi") String organisasiJson, // Data teks dikirim sebagai JSON String
+            @RequestPart(value = "fileLogo", required = false) MultipartFile fileLogo,
+            @RequestPart(value = "fileStruktur", required = false) MultipartFile fileStruktur
+    ) {
+        try {
+            // Ubah String JSON menjadi Object Organisasi Java
+            ObjectMapper objectMapper = new ObjectMapper();
+            
+            // KONFIGURASI PENTING (Agar tidak error saat baca tanggal atau field asing)
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+            Organisasi organisasi = objectMapper.readValue(organisasiJson, Organisasi.class);
+
+            Organisasi createdOrg = organisasiService.createOrganisasi(organisasi, fileLogo, fileStruktur);
+            return new ResponseEntity<>(createdOrg, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace(); // Cek log error di terminal jika gagal
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // READ ALL
     @GetMapping
     public List<Organisasi> getAllOrganisasi() {
         return organisasiService.findAllOrganisasi();
     }
 
-    // B. READ BY ID (GET)
-    // URL: GET http://localhost:8080/api/organisasi/1
+    // READ BY ID
     @GetMapping("/{id}")
     public ResponseEntity<Organisasi> getOrganisasiById(@PathVariable Long id) {
         Optional<Organisasi> organisasi = organisasiService.findOrganisasiById(id);
-        
-        if (organisasi.isPresent()) {
-            return ResponseEntity.ok(organisasi.get()); // Mengirimkan status 200 OK
-        } else {
-            return ResponseEntity.notFound().build(); // Mengirimkan status 404 Not Found
+        return organisasi.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // UPDATE (PUT) dengan Upload File
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Organisasi> updateOrganisasi(
+            @PathVariable Long id,
+            @RequestPart("organisasi") String organisasiJson,
+            @RequestPart(value = "fileLogo", required = false) MultipartFile fileLogo,
+            @RequestPart(value = "fileStruktur", required = false) MultipartFile fileStruktur
+    ) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            
+            // KONFIGURASI PENTING (Agar tidak error 500 saat edit)
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+            Organisasi organisasiDetails = objectMapper.readValue(organisasiJson, Organisasi.class);
+
+            Organisasi updatedOrg = organisasiService.updateOrganisasi(id, organisasiDetails, fileLogo, fileStruktur);
+            
+            if (updatedOrg != null) {
+                return ResponseEntity.ok(updatedOrg);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Cek log error di terminal jika gagal
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    // D. UPDATE (PUT)
-    // URL: PUT http://localhost:8080/api/organisasi/1
-    @PutMapping("/{id}")
-    public ResponseEntity<Organisasi> updateOrganisasi(@PathVariable Long id, @RequestBody Organisasi organisasiDetails) {
-        Organisasi updatedOrg = organisasiService.updateOrganisasi(id, organisasiDetails);
-        
-        if (updatedOrg != null) {
-            return ResponseEntity.ok(updatedOrg); // Mengirimkan status 200 OK
-        } else {
-            return ResponseEntity.notFound().build(); // Mengirimkan status 404 Not Found
-        }
-    }
-
-    // E. DELETE (DELETE)
-    // URL: DELETE http://localhost:8080/api/organisasi/1
+    // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteOrganisasi(@PathVariable Long id) {
         boolean isDeleted = organisasiService.deleteOrganisasi(id);
-        
         if (isDeleted) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Mengirimkan status 204 No Content (Sukses hapus)
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Mengirimkan status 404 Not Found
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

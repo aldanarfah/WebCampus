@@ -1,81 +1,88 @@
 package com.backend.backend.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat; 
+import java.time.LocalDateTime; 
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "event")
 public class Event {
+
+    public enum Status {
+        publik, draft
+    }
+    @Column(name = "harga")
+    private BigDecimal harga;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_event")
     private Long idEvent;
 
-    @ManyToOne
-    @JoinColumn(name = "id_organisasi")
-    private Organisasi organisasi;
-
-    @ManyToOne
-    @JoinColumn(name = "id_ukm")
-    private Ukm ukm;
-
-    @Column(name = "nama_event", nullable = false, length = 150)
+    @Column(name = "nama_event", nullable = false)
     private String namaEvent;
 
     @Lob
     @Column(columnDefinition = "TEXT")
     private String deskripsi;
 
-    @Column(name = "tanggal_mulai", nullable = false)
-    private LocalDate tanggalMulai;
-
-    @Column(name = "tanggal_selesai")
-    private LocalDate tanggalSelesai;
-
-    @Column(length = 150)
     private String lokasi;
 
-    @Column(name = "gambar_event", length = 255)
+    @Column(name = "gambar_event")
     private String gambarEvent;
 
-    @ManyToOne
-    @JoinColumn(name = "dibuat_oleh", nullable = false)
-    private Admin dibuatOleh;
+    @Column(name = "link_pendaftaran")
+    private String linkPendaftaran;
+
+    // ✨ VERSI BENAR: PAKAI DETIK (:ss) ✨
+    // Agar cocok dengan data "2025-12-09T11:11:00" yang dikirim Angular
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") 
+    @Column(name = "tanggal_mulai")
+    private LocalDateTime tanggalMulai;
+
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @Column(name = "tanggal_selesai")
+    private LocalDateTime tanggalSelesai;
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "enum('publik','draft')")
+    private Status status;
 
     @Column(name = "dihapus_pada")
     private LocalDateTime dihapusPada;
 
-    // --- LOGIKA STATUS OTOMATIS (Transient = Tidak disimpan di DB) ---
-    // Spring Boot akan menghitung ini setiap kali data diambil
-    @Transient
-    public String getStatus() {
-        LocalDate today = LocalDate.now();
+    // --- RELASI PEMILIK ---
+    @ManyToOne
+    @JoinColumn(name = "id_organisasi", nullable = true)
+    private Organisasi organisasi;
 
-        if (this.tanggalMulai == null) return "Unknown";
+    @ManyToOne
+    @JoinColumn(name = "id_ukm", nullable = true)
+    private Ukm ukm;
 
-        if (today.isBefore(this.tanggalMulai)) {
-            return "akan datang";
-        } else if (this.tanggalSelesai != null && today.isAfter(this.tanggalSelesai)) {
-            return "selesai";
-        } else {
-            return "berlangsung";
-        }
-    }
 
-    // --- Constructor ---
+    // --- RELASI ADMIN PEMBUAT ---
+    @ManyToOne
+    @JoinColumn(name = "dibuat_oleh", nullable = true)
+    private Admin dibuatOleh;
+
     public Event() {}
+    public Admin getDibuatOleh() { return dibuatOleh; }
+    public void setDibuatOleh(Admin dibuatOleh) { this.dibuatOleh = dibuatOleh; }
 
-    // --- Getters dan Setters ---
+    // --- GETTERS & SETTERS ---
+
     public Long getIdEvent() { return idEvent; }
     public void setIdEvent(Long idEvent) { this.idEvent = idEvent; }
 
-    public Organisasi getOrganisasi() { return organisasi; }
-    public void setOrganisasi(Organisasi organisasi) { this.organisasi = organisasi; }
+    public BigDecimal getHarga() {
+        return harga;
+    }
 
-    public Ukm getUkm() { return ukm; }
-    public void setUkm(Ukm ukm) { this.ukm = ukm; }
+    public void setHarga(BigDecimal harga) {
+        this.harga = harga;
+    }
 
     public String getNamaEvent() { return namaEvent; }
     public void setNamaEvent(String namaEvent) { this.namaEvent = namaEvent; }
@@ -83,23 +90,39 @@ public class Event {
     public String getDeskripsi() { return deskripsi; }
     public void setDeskripsi(String deskripsi) { this.deskripsi = deskripsi; }
 
-    public LocalDate getTanggalMulai() { return tanggalMulai; }
-    public void setTanggalMulai(LocalDate tanggalMulai) { this.tanggalMulai = tanggalMulai; }
-
-    public LocalDate getTanggalSelesai() { return tanggalSelesai; }
-    public void setTanggalSelesai(LocalDate tanggalSelesai) { this.tanggalSelesai = tanggalSelesai; }
-
     public String getLokasi() { return lokasi; }
     public void setLokasi(String lokasi) { this.lokasi = lokasi; }
 
     public String getGambarEvent() { return gambarEvent; }
     public void setGambarEvent(String gambarEvent) { this.gambarEvent = gambarEvent; }
 
-    public Admin getDibuatOleh() { return dibuatOleh; }
-    public void setDibuatOleh(Admin dibuatOleh) { this.dibuatOleh = dibuatOleh; }
+    public String getLinkPendaftaran() { return linkPendaftaran; }
+    public void setLinkPendaftaran(String linkPendaftaran) { this.linkPendaftaran = linkPendaftaran; }
+
+    public LocalDateTime getTanggalMulai() { return tanggalMulai; }
+    public void setTanggalMulai(LocalDateTime tanggalMulai) { this.tanggalMulai = tanggalMulai; }
+
+    public LocalDateTime getTanggalSelesai() { return tanggalSelesai; }
+    public void setTanggalSelesai(LocalDateTime tanggalSelesai) { this.tanggalSelesai = tanggalSelesai; }
+
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
 
     public LocalDateTime getDihapusPada() { return dihapusPada; }
     public void setDihapusPada(LocalDateTime dihapusPada) { this.dihapusPada = dihapusPada; }
-    
-    // Setter 'status' DIHAPUS karena otomatis dihitung
+
+    public Organisasi getOrganisasi() { return organisasi; }
+    public void setOrganisasi(Organisasi organisasi) { this.organisasi = organisasi; }
+
+    public Ukm getUkm() { return ukm; }
+    public void setUkm(Ukm ukm) { this.ukm = ukm; }
+
+    @Transient
+    public String getStatusWaktu() {
+        if (tanggalMulai == null || tanggalSelesai == null) return "Belum Dijadwalkan";
+        LocalDateTime now = LocalDateTime.now();
+        if (now.isBefore(tanggalMulai)) return "Akan Datang";
+        else if (now.isAfter(tanggalSelesai)) return "Selesai";
+        else return "Berlangsung";
+    }
 }

@@ -10,38 +10,72 @@ import { Ukm } from '../../../../models/ukm.model';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './ukm-tambah.component.html',
-  styleUrl: './ukm-tambah.component.css'
+  styleUrls: ['./ukm-tambah.component.css']
 })
 export class UkmTambahComponent {
 
+  // Inisialisasi model dengan field lengkap
   ukm: Ukm = {
     namaUkm: '',
     deskripsi: '',
     ketua: '',
     periode: '',
-    status: 'aktif'
+    penanggungJawab: '', // Field Baru
+    contactPerson: '',
+    namaProdi: '',
+    status: 'aktif',
+    gambarLogo: '',
+    strukturOrganisasi: ''
   };
 
-  constructor(
-    private ukmService: UkmService,
-    private router: Router
-  ) {}
+  // Variabel penampung file
+  selectedFileLogo: File | null = null;
+  selectedFileStruktur: File | null = null;
 
-  saveUkm(): void {
-    // 🔥 VALIDASI ANTI SPASI
-    if (!this.ukm.namaUkm.trim() || !this.ukm.ketua.trim() || !this.ukm.deskripsi.trim()) {
-      alert('Data tidak boleh kosong atau hanya berisi spasi!');
+  constructor(private ukmService: UkmService, private router: Router) {}
+
+  // Handle pemilihan file
+  onFileSelected(event: any, type: 'logo' | 'struktur') {
+    const file: File = event.target.files[0];
+    if (file) {
+      if (type === 'logo') {
+        this.selectedFileLogo = file;
+      } else {
+        this.selectedFileStruktur = file;
+      }
+    }
+  }
+
+  simpanUkm(): void {
+    // Validasi sederhana
+    if (!(this.ukm.namaUkm || '').trim()) {
+      alert('Nama UKM wajib diisi!');
       return;
     }
 
-    this.ukmService.create(this.ukm).subscribe({
+    // --- SIAPKAN FORMDATA ---
+    const formData = new FormData();
+
+    // 1. Append data teks sebagai JSON string. Key harus "ukm" sesuai backend.
+    formData.append('ukm', JSON.stringify(this.ukm));
+
+    // 2. Append file jika ada yang dipilih
+    if (this.selectedFileLogo) {
+      formData.append('fileLogo', this.selectedFileLogo);
+    }
+    if (this.selectedFileStruktur) {
+      formData.append('fileStruktur', this.selectedFileStruktur);
+    }
+
+    // Kirim ke service
+    this.ukmService.create(formData).subscribe({
       next: (res) => {
-        alert('Data UKM berhasil ditambahkan!');
+        alert('Data UKM berhasil disimpan!');
         this.router.navigate(['/dashboard/ukm']);
       },
       error: (e) => {
-        console.error(e);
-        alert('Gagal menyimpan data.');
+        console.error('Error saat simpan UKM:', e);
+        alert('Gagal menyimpan data. Cek console.');
       }
     });
   }

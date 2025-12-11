@@ -19,11 +19,6 @@ public class Organisasi {
     @Column(name = "nama_organisasi", nullable = false, length = 100)
     private String namaOrganisasi;
 
-    private String logo;
-
-    @Column(name = "gambar_logo", length = 255)
-    private String gambarLogo;
-
     @Lob 
     private String deskripsi;
 
@@ -40,8 +35,8 @@ public class Organisasi {
     @Column(name = "contact_person", length = 100)
     private String contactPerson;
 
-    @Column(name = "struktur_organisasi", columnDefinition = "JSON")
-    private String strukturOrganisasi; 
+    @Column(name = "struktur_organisasi", length = 255)
+    private String strukturOrganisasi;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "enum('aktif','nonaktif')")
@@ -52,13 +47,16 @@ public class Organisasi {
 
     @Column(name = "dihapus_pada")
     private LocalDateTime dihapusPada;
+
+    @Column(name = "gambar_logo", length = 255)
+    private String gambarLogo;
+
     
     // --- Constructors ---
     public Organisasi() {}
 
-    public Organisasi(String namaOrganisasi, String logo, String gambarLogo, String deskripsi, String penanggungJawab, String ketua, String periode, String namaProdi, String contactPerson, String strukturOrganisasi, Status status) {
+    public Organisasi(String namaOrganisasi, String gambarLogo, String deskripsi, String penanggungJawab, String ketua, String periode, String namaProdi, String contactPerson, String strukturOrganisasi, Status status) {
         this.namaOrganisasi = namaOrganisasi;
-        this.logo = logo;
         this.gambarLogo = gambarLogo;
         this.deskripsi = deskripsi;
         this.penanggungJawab = penanggungJawab;
@@ -86,14 +84,6 @@ public class Organisasi {
 
     public void setNamaOrganisasi(String namaOrganisasi) {
         this.namaOrganisasi = namaOrganisasi;
-    }
-
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
     }
 
     public String getGambarLogo() {

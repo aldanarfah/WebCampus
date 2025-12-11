@@ -3,14 +3,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { EventService } from '../../../../services/event.service';
+import { OrganisasiService } from '../../../../services/organisasi.service';
+import { UkmService } from '../../../../services/ukm.service';
+
 import { Event } from '../../../../models/event.model';
+import { Organisasi } from '../../../../models/organisasi.model';
+import { Ukm } from '../../../../models/ukm.model';
 
 @Component({
   selector: 'app-event-edit',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './event-edit.component.html',
-  styleUrl: './event-edit.component.css'
+  styleUrls: ['./event-edit.component.css']
 })
 export class EventEditComponent implements OnInit {
 
@@ -18,85 +23,108 @@ export class EventEditComponent implements OnInit {
     namaEvent: '',
     deskripsi: '',
     lokasi: '',
+    harga: 0,
     tanggalMulai: '',
     tanggalSelesai: '',
-    status: 'akan datang',
-    dibuatOleh: { idAdmin: 1 }
+    status: 'publik',
+    organisasi: null,
+    ukm: null,
+    linkPendaftaran: ''
   };
 
   id!: number;
   selectedFile: File | null = null;
-  previewUrl: any = null;
+  imageBaseUrl = 'http://localhost:8080/uploads/';
+
+  // Logic Dropdown
+  kategoriPemilik: 'umum' | 'organisasi' | 'ukm' = 'umum';
+  listOrganisasi: Organisasi[] = [];
+  listUkm: Ukm[] = [];
+  tempIdOrganisasi: number | null = null;
+  tempIdUkm: number | null = null;
 
   constructor(
     private eventService: EventService,
+    private organisasiService: OrganisasiService,
+    private ukmService: UkmService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    // 1. Ambil ID dari URL
-    this.id = this.route.snapshot.params['id'];
+    this.organisasiService.getAll().subscribe(data => this.listOrganisasi = data);
+    this.ukmService.getAll().subscribe(data => this.listUkm = data);
 
-    // 2. Ambil data lama dari database
+    this.id = this.route.snapshot.params['id'];
     this.eventService.get(this.id).subscribe({
       next: (data) => {
         this.event = data;
-        // Tampilkan gambar lama jika ada
-        if (data.gambarEvent) {
-          this.previewUrl = 'http://localhost:8080/api/files/download/' + data.gambarEvent;
-        }
+
+        // FIX FORMAT TANGGAL: Potong detik (:00) agar terbaca di input HTML
+        if (this.event.tanggalMulai) this.event.tanggalMulai = this.event.tanggalMulai.slice(0, 16);
+        if (this.event.tanggalSelesai) this.event.tanggalSelesai = this.event.tanggalSelesai.slice(0, 16);
+
+        this.setInitialDropdownState();
       },
-      error: (e) => console.error('Gagal ambil data:', e)
+      error: (e) => console.error(e)
     });
   }
 
-  // Handle saat user pilih file baru
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      this.selectedFile = file;
-      const reader = new FileReader();
-      reader.onload = (e) => this.previewUrl = e.target?.result;
-      reader.readAsDataURL(file);
-    }
-  }
-
-  // Fungsi Update Utama
-  updateEvent(): void {
-    // 1. Validasi Anti Spasi
-    if (!this.event.namaEvent.trim() || !this.event.lokasi.trim() || !this.event.deskripsi.trim()) {
-      alert('Data tidak boleh kosong atau hanya spasi!');
-      return;
-    }
-
-    // 2. Cek apakah user mengganti gambar?
-    if (this.selectedFile) {
-      // Jika Ada file baru -> Upload dulu
-      this.eventService.uploadImage(this.selectedFile).subscribe({
-        next: (res) => {
-          this.event.gambarEvent = res.fileName; // Update nama file
-          this.executeSave(); // Lanjut simpan data
-        },
-        error: () => alert('Gagal upload gambar!')
-      });
+  setInitialDropdownState() {
+    if (this.event.organisasi) {
+      this.kategoriPemilik = 'organisasi';
+      this.tempIdOrganisasi = this.event.organisasi.idOrganisasi || null;
+    } else if (this.event.ukm) {
+      this.kategoriPemilik = 'ukm';
+      this.tempIdUkm = this.event.ukm.idUkm || null;
     } else {
-      // Jika Tidak ganti gambar -> Langsung simpan data
-      this.executeSave();
+      this.kategoriPemilik = 'umum';
     }
   }
 
-  // Helper Simpan ke Database
-  executeSave(): void {
-    this.eventService.update(this.id, this.event).subscribe({
-      next: () => {
-        alert('Event berhasil diperbarui!');
-        this.router.navigate(['/dashboard/event']);
-      },
-      error: (e) => {
-        console.error(e);
-        alert('Gagal update event.');
-      }
-    });
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+ updateEvent(): void {
+    // 1. --- FIX HARGA ---
+    this.event.harga = Number(this.event.harga);
+    if (isNaN(this.event.harga)) {
+        this.event.harga = 0;
+    }
+
+    // 2. --- FIX TANGGAL (MASALAH UTAMA ANDA) ---
+    // Cek apakah tanggal ada isinya, lalu cek panjang stringnya.
+    // Format "yyyy-MM-ddTHH:mm" panjangnya 16 karakter.
+
+    if (this.event.tanggalMulai && this.event.tanggalMulai.length === 16) {
+        this.event.tanggalMulai += ':00'; // Tambahkan detik manual
+    }
+
+    if (this.event.tanggalSelesai && this.event.tanggalSelesai.length === 16) {
+        this.event.tanggalSelesai += ':00'; // Tambahkan detik manual
+    }
+
+    // 3. Bungkus ke FormData
+    const formData = new FormData();
+    formData.append('event', JSON.stringify(this.event));
+
+    if (this.selectedFile) {
+      formData.append('filePoster', this.selectedFile);
+    }
+
+    // 4. Kirim
+    if (this.event.idEvent) {
+        this.eventService.update(this.event.idEvent, formData).subscribe({
+            next: () => {
+                alert('Berhasil update!');
+                this.router.navigate(['/dashboard/event']);
+            },
+            error: (e) => {
+                console.error(e);
+                alert('Gagal update. Cek console.');
+            }
+        });
+    }
   }
 }

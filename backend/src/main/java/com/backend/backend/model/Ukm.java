@@ -2,12 +2,15 @@ package com.backend.backend.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import static com.backend.backend.model.Organisasi.Status; // Menggunakan Enum Status yang sama
 
 @Entity
 @Table(name = "ukm")
-public class Ukm { 
-    
+public class Ukm {
+
+    public enum Status {
+        aktif, nonaktif
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_ukm")
@@ -16,16 +19,22 @@ public class Ukm {
     @Column(name = "nama_ukm", nullable = false, length = 100)
     private String namaUkm;
 
-    private String logo;
-
     @Column(name = "gambar_logo", length = 255)
     private String gambarLogo;
 
+    // ✨ KOLOM BARU SESUAI DISKUSI
+    @Column(name = "struktur_organisasi", length = 255)
+    private String strukturOrganisasi;
+
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String deskripsi;
 
-    private String ketua;
+    // ✨ KOLOM BARU SESUAI DISKUSI
+    @Column(name = "penanggung_jawab", length = 100)
+    private String penanggungJawab;
 
+    private String ketua;
     private String periode;
 
     @Column(name = "nama_prodi", length = 100)
@@ -43,115 +52,46 @@ public class Ukm {
 
     @Column(name = "dihapus_pada")
     private LocalDateTime dihapusPada;
-    
-    // --- Constructors ---
+
+    // --- Constructor Kosong ---
     public Ukm() {}
-    
-    public Ukm(String namaUkm, String logo, String gambarLogo, String deskripsi, String ketua, String periode, String namaProdi, String contactPerson, Status status) {
-        this.namaUkm = namaUkm;
-        this.logo = logo;
-        this.gambarLogo = gambarLogo;
-        this.deskripsi = deskripsi;
-        this.ketua = ketua;
-        this.periode = periode;
-        this.namaProdi = namaProdi;
-        this.contactPerson = contactPerson;
-        this.status = status;
-    }
 
-    // --- Getters dan Setters ---
-    
-    public Long getIdUkm() {
-        return idUkm;
-    }
+    // --- Getters and Setters ---
+    public Long getIdUkm() { return idUkm; }
+    public void setIdUkm(Long idUkm) { this.idUkm = idUkm; }
 
-    public void setIdUkm(Long idUkm) {
-        this.idUkm = idUkm;
-    }
+    public String getNamaUkm() { return namaUkm; }
+    public void setNamaUkm(String namaUkm) { this.namaUkm = namaUkm; }
 
-    public String getNamaUkm() {
-        return namaUkm;
-    }
+    public String getGambarLogo() { return gambarLogo; }
+    public void setGambarLogo(String gambarLogo) { this.gambarLogo = gambarLogo; }
 
-    public void setNamaUkm(String namaUkm) {
-        this.namaUkm = namaUkm;
-    }
+    public String getStrukturOrganisasi() { return strukturOrganisasi; }
+    public void setStrukturOrganisasi(String strukturOrganisasi) { this.strukturOrganisasi = strukturOrganisasi; }
 
-    public String getLogo() {
-        return logo;
-    }
+    public String getDeskripsi() { return deskripsi; }
+    public void setDeskripsi(String deskripsi) { this.deskripsi = deskripsi; }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
+    public String getPenanggungJawab() { return penanggungJawab; }
+    public void setPenanggungJawab(String penanggungJawab) { this.penanggungJawab = penanggungJawab; }
 
-    public String getGambarLogo() {
-        return gambarLogo;
-    }
+    public String getKetua() { return ketua; }
+    public void setKetua(String ketua) { this.ketua = ketua; }
 
-    public void setGambarLogo(String gambarLogo) {
-        this.gambarLogo = gambarLogo;
-    }
+    public String getPeriode() { return periode; }
+    public void setPeriode(String periode) { this.periode = periode; }
 
-    public String getDeskripsi() {
-        return deskripsi;
-    }
+    public String getNamaProdi() { return namaProdi; }
+    public void setNamaProdi(String namaProdi) { this.namaProdi = namaProdi; }
 
-    public void setDeskripsi(String deskripsi) {
-        this.deskripsi = deskripsi;
-    }
+    public String getContactPerson() { return contactPerson; }
+    public void setContactPerson(String contactPerson) { this.contactPerson = contactPerson; }
 
-    public String getKetua() {
-        return ketua;
-    }
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
 
-    public void setKetua(String ketua) {
-        this.ketua = ketua;
-    }
+    public LocalDateTime getTanggalDibuat() { return tanggalDibuat; }
 
-    public String getPeriode() {
-        return periode;
-    }
-
-    public void setPeriode(String periode) {
-        this.periode = periode;
-    }
-
-    public String getNamaProdi() {
-        return namaProdi;
-    }
-
-    public void setNamaProdi(String namaProdi) {
-        this.namaProdi = namaProdi;
-    }
-
-    public String getContactPerson() {
-        return contactPerson;
-    }
-
-    public void setContactPerson(String contactPerson) {
-        this.contactPerson = contactPerson;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getTanggalDibuat() {
-        return tanggalDibuat;
-    }
-
-    // Tidak perlu setter untuk tanggalDibuat
-
-    public LocalDateTime getDihapusPada() {
-        return dihapusPada;
-    }
-
-    public void setDihapusPada(LocalDateTime dihapusPada) {
-        this.dihapusPada = dihapusPada;
-    }
+    public LocalDateTime getDihapusPada() { return dihapusPada; }
+    public void setDihapusPada(LocalDateTime dihapusPada) { this.dihapusPada = dihapusPada; }
 }

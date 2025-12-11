@@ -10,7 +10,7 @@ import { Organisasi } from '../../../../models/organisasi.model';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './organisasi-tambah.component.html',
-  styleUrl: './organisasi-tambah.component.css'
+  styleUrls: ['./organisasi-tambah.component.css']
 })
 export class OrganisasiTambahComponent {
 
@@ -19,30 +19,57 @@ export class OrganisasiTambahComponent {
     deskripsi: '',
     ketua: '',
     periode: '',
-    status: 'aktif'
+    penanggungJawab: '',
+    contactPerson: '',
+    namaProdi: '',
+    status: 'aktif',
+    gambarLogo: '',
+    strukturOrganisasi: ''
   };
 
-  constructor(
-    private organisasiService: OrganisasiService,
-    private router: Router
-  ) {}
+  selectedFileLogo: File | null = null;
+  selectedFileStruktur: File | null = null;
 
-  saveOrganisasi(): void {
-    // Validasi Ekstra: Mencegah input yang isinya cuma spasi
-    if (!this.organisasi.namaOrganisasi.trim() || !this.organisasi.deskripsi.trim() || !this.organisasi.ketua.trim()) {
-      alert('Data tidak boleh kosong atau hanya spasi!');
+  constructor(private organisasiService: OrganisasiService, private router: Router) {}
+
+  onFileSelected(event: any, type: 'logo' | 'struktur') {
+    const file: File = event.target.files[0];
+    if (file) {
+      if (type === 'logo') {
+        this.selectedFileLogo = file;
+      } else {
+        this.selectedFileStruktur = file;
+      }
+    }
+  }
+
+  simpanOrganisasi(): void {
+    // Validasi input
+    if (!(this.organisasi.namaOrganisasi || '').trim()) {
+      alert('Nama Organisasi wajib diisi!');
       return;
     }
 
-    this.organisasiService.create(this.organisasi).subscribe({
+    // KONVERSI KE FORMDATA
+    const formData = new FormData();
+    formData.append('organisasi', JSON.stringify(this.organisasi));
+
+    if (this.selectedFileLogo) {
+      formData.append('fileLogo', this.selectedFileLogo);
+    }
+    if (this.selectedFileStruktur) {
+      formData.append('fileStruktur', this.selectedFileStruktur);
+    }
+
+    // Kirim FormData
+    this.organisasiService.create(formData).subscribe({
       next: (res) => {
-        alert('Data berhasil ditambahkan!');
-        // Redirect kembali ke tabel
+        alert('Data berhasil disimpan!');
         this.router.navigate(['/dashboard/organisasi']);
       },
       error: (e) => {
         console.error(e);
-        alert('Gagal menyimpan data. Silakan coba lagi.');
+        alert('Gagal menyimpan data.');
       }
     });
   }

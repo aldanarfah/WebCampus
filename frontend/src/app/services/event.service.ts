@@ -7,40 +7,33 @@ import { Event } from '../models/event.model';
   providedIn: 'root'
 })
 export class EventService {
+  // Pastikan port backend benar (8080)
   private baseUrl = 'http://localhost:8080/api/event';
-  private uploadUrl = 'http://localhost:8080/api/files/upload';
 
   constructor(private http: HttpClient) { }
 
   // GET ALL
   getAll(): Observable<Event[]> {
-    return this.http.get<Event[]>(this.baseUrl, { withCredentials: true });
+    return this.http.get<Event[]>(this.baseUrl);
   }
 
   // GET BY ID
   get(id: number): Observable<Event> {
-    return this.http.get<Event>(`${this.baseUrl}/${id}`, { withCredentials: true });
+    return this.http.get<Event>(`${this.baseUrl}/${id}`);
   }
 
-  // CREATE
-  create(data: Event): Observable<any> {
-    return this.http.post(this.baseUrl, data, { withCredentials: true });
+  // CREATE (Menggunakan FormData untuk kirim File + Data)
+  create(data: FormData): Observable<any> {
+    return this.http.post(this.baseUrl, data);
   }
 
-  // UPDATE
-  update(id: number, data: Event): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, data, { withCredentials: true });
+  // UPDATE (Menggunakan FormData untuk kirim File + Data)
+  update(id: number, data: FormData): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}`, data);
   }
 
   // DELETE
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, { withCredentials: true });
-  }
-
-  // UPLOAD GAMBAR
-  uploadImage(file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('file', file);
-    return this.http.post(this.uploadUrl, formData, { withCredentials: true });
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 }

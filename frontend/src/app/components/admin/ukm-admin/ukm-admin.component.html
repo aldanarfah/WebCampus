@@ -1,42 +1,80 @@
-<div class="p-6 bg-gray-50 min-h-screen">
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-bold text-gray-800">Manajemen UKM</h1>
+<div class="p-6 bg-gray-100 min-h-screen">
 
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Manajemen UKM</h1>
     <button routerLink="/dashboard/ukm/tambah"
-      class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition">
+      class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow transition">
       + Tambah UKM
     </button>
   </div>
 
-  <div class="bg-white shadow-md rounded-lg overflow-hidden">
-    <table class="w-full border-collapse">
-      <thead class="bg-gray-100 border-b">
-        <tr>
-          <th class="p-4 text-left font-semibold text-gray-600">No</th>
-          <th class="p-4 text-left font-semibold text-gray-600">Nama UKM</th>
-          <th class="p-4 text-left font-semibold text-gray-600">Ketua</th>
-          <th class="p-4 text-left font-semibold text-gray-600">Periode</th>
-          <th class="p-4 text-left font-semibold text-gray-600">Status</th>
-          <th class="p-4 text-center font-semibold text-gray-600">Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of ukmList; let i = index" class="hover:bg-gray-50">
-          <td class="p-4">{{ i + 1 }}</td>
-          <td class="p-4 font-medium">{{ item.namaUkm }}</td> <td class="p-4">{{ item.ketua }}</td>
-          <td class="p-4">{{ item.periode }}</td>
-          <td class="p-4">
-            <span [class]="item.status === 'aktif' ? 'text-green-700 bg-green-100' : 'text-gray-700 bg-gray-200'"
-                  class="px-2 py-1 text-xs font-semibold rounded-full">
-              {{ item.status | titlecase }}
-            </span>
-          </td>
-          <td class="p-4 text-center space-x-2">
-            <button class="text-yellow-600" [routerLink]="['/dashboard/ukm/edit', item.idUkm]">Edit</button> |
-            <button class="text-red-600" (click)="hapusData(item.idUkm!)">Hapus</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+    <div *ngIf="isLoading" class="p-8 text-center text-gray-500">
+      Sedang memuat data...
+    </div>
+
+    <div *ngIf="!isLoading && ukmList.length === 0" class="p-8 text-center text-gray-500">
+      Belum ada data UKM.
+    </div>
+
+    <div *ngIf="!isLoading && ukmList.length > 0" class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead class="bg-gray-50 border-b">
+          <tr>
+            <th class="p-4 text-sm font-semibold text-gray-600">No</th>
+            <th class="p-4 text-sm font-semibold text-gray-600">Logo</th>
+            <th class="p-4 text-sm font-semibold text-gray-600">Nama UKM</th>
+            <th class="p-4 text-sm font-semibold text-gray-600">Ketua</th>
+            <th class="p-4 text-sm font-semibold text-gray-600">Periode</th>
+            <th class="p-4 text-sm font-semibold text-gray-600">Status</th>
+            <th class="p-4 text-sm font-semibold text-gray-600 text-center">Aksi</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr *ngFor="let ukm of ukmList; let i = index" class="hover:bg-gray-50 transition">
+
+            <td class="p-4 text-gray-600">{{ i + 1 }}</td>
+
+            <td class="p-4">
+              <div *ngIf="ukm.gambarLogo">
+                <img [src]="imageBaseUrl + ukm.gambarLogo"
+                     alt="Logo"
+                     class="w-12 h-12 rounded-full object-cover border border-gray-200 shadow-sm">
+              </div>
+              <div *ngIf="!ukm.gambarLogo" class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">
+                No IMG
+              </div>
+            </td>
+
+            <td class="p-4 font-medium text-gray-800">{{ ukm.namaUkm }}</td>
+            <td class="p-4 text-gray-600">{{ ukm.ketua }}</td>
+            <td class="p-4 text-gray-600">{{ ukm.periode }}</td>
+
+            <td class="p-4">
+              <span [class]="ukm.status === 'aktif' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'"
+                    class="px-3 py-1 rounded-full text-xs font-semibold">
+                {{ ukm.status | titlecase }}
+              </span>
+            </td>
+
+            <td class="p-4 text-center">
+              <div class="flex justify-center gap-2">
+                <button [routerLink]="['/dashboard/ukm/edit', ukm.idUkm]"
+                        class="text-yellow-600 hover:text-yellow-800 font-medium text-sm">
+                  Edit
+                </button>
+                <span class="text-gray-300">|</span>
+                <button (click)="hapusUkm(ukm.idUkm)"
+                        class="text-red-600 hover:text-red-800 font-medium text-sm">
+                  Hapus
+                </button>
+              </div>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-alumni-karir',
   standalone: true,
   imports: [],
-  templateUrl: './alumni-karir.component.html',
-  styleUrl: './alumni-karir.component.css'
+  template: `<p>alumni-karir works!</p>`,
+  styles: []
 })
 export class AlumniKarirComponent {
 

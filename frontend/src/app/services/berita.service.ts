@@ -8,39 +8,28 @@ import { Berita } from '../models/berita.model';
 })
 export class BeritaService {
   private baseUrl = 'http://localhost:8080/api/berita';
-  private uploadUrl = 'http://localhost:8080/api/files/upload';
 
   constructor(private http: HttpClient) { }
 
-
-
   getAll(): Observable<Berita[]> {
-    return this.http.get<Berita[]>(this.baseUrl, { withCredentials: true });
+    return this.http.get<Berita[]>(this.baseUrl);
   }
 
   get(id: number): Observable<Berita> {
-    return this.http.get<Berita>(`${this.baseUrl}/${id}`, { withCredentials: true });
+    return this.http.get<Berita>(`${this.baseUrl}/${id}`);
   }
 
-  create(data: Berita): Observable<any> {
-    return this.http.post(this.baseUrl, data, { withCredentials: true });
+  // Pakai FormData
+  create(data: FormData): Observable<any> {
+    return this.http.post(this.baseUrl, data);
   }
 
-  update(id: number, data: Berita): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, data, { withCredentials: true });
+  // Pakai FormData
+  update(id: number, data: FormData): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}`, data);
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, { withCredentials: true });
-  }
-
-  // Method Khusus Upload
-  uploadImage(file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    // Kirim sebagai FormData (bukan JSON)
-    return this.http.post(this.uploadUrl, formData, { withCredentials: true });
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 }
-

@@ -1,14 +1,25 @@
+import { Organisasi } from './organisasi.model';
+import { Ukm } from './ukm.model';
+
 export interface Event {
-  idEvent?: number; // Penting: idEvent (bukan id)
-  namaEvent: string;
-  deskripsi: string;
-  tanggalMulai: string;
-  tanggalSelesai: string;
-  lokasi: string;
-  gambarEvent?: string; // Menyimpan nama file gambar
-  status?: 'akan datang' | 'berlangsung' | 'selesai';
+    idEvent?: number;
+    namaEvent: string;
+    deskripsi: string;
+    harga: number;
+    lokasi: string;
+    linkPendaftaran?: string;
+    gambarEvent?: string; // Poster
 
+    // Tanggal & Jam (Format String: 'YYYY-MM-DDTHH:mm')
+    tanggalMulai: string;
+    tanggalSelesai: string;
 
-  // Relasi (Sesuaikan dengan backend, minimal kirim ID admin)
-  dibuatOleh?: { idAdmin: number };
+    status: 'publik' | 'draft'; // Status Admin
+
+    // Field dari Backend @Transient (Read Only)
+    statusWaktu?: string; // 'Akan Datang', 'Berlangsung', 'Selesai'
+
+    // Relasi Pemilik
+    organisasi?: Organisasi | null;
+    ukm?: Ukm | null;
 }

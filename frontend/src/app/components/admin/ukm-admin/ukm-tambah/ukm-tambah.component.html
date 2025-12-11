@@ -6,73 +6,76 @@
       <button routerLink="/dashboard/ukm" class="text-gray-500 hover:text-gray-700 transition">✕ Batal</button>
     </div>
 
-    <form #ukmForm="ngForm" (ngSubmit)="saveUkm()">
+    <form (ngSubmit)="simpanUkm()">
+
+      <div class="mb-8 p-4 bg-blue-50 rounded-lg border border-blue-100">
+        <label class="block text-gray-700 font-bold mb-2">Logo UKM</label>
+        <input type="file" (change)="onFileSelected($event, 'logo')" accept="image/*"
+          class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition cursor-pointer" />
+        <small class="text-gray-500">Format: JPG, PNG. Maks 10MB.</small>
+      </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-
         <div>
           <label class="block text-gray-700 font-semibold mb-2">Nama UKM <span class="text-red-500">*</span></label>
-          <input type="text" class="w-full px-4 py-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-blue-500 transition"
-            [(ngModel)]="ukm.namaUkm" name="namaUkm"
-            required minlength="3" pattern=".*\S.*"
-            placeholder="Contoh: UKM Olahraga" #nama="ngModel">
-
-          <div *ngIf="nama.invalid && (nama.dirty || nama.touched)" class="mt-1">
-            <small *ngIf="nama.errors?.['required']" class="text-red-500 block">Nama UKM wajib diisi.</small>
-            <small *ngIf="nama.errors?.['minlength']" class="text-red-500 block">Minimal 3 karakter.</small>
-          </div>
+          <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition"
+            [(ngModel)]="ukm.namaUkm" name="namaUkm" required placeholder="Contoh: UKM Robotika">
         </div>
-
         <div>
           <label class="block text-gray-700 font-semibold mb-2">Ketua <span class="text-red-500">*</span></label>
-          <input type="text" class="w-full px-4 py-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-blue-500 transition"
-            [(ngModel)]="ukm.ketua" name="ketua"
-            required minlength="3" pattern=".*\S.*"
-            placeholder="Nama Ketua UKM" #ketua="ngModel">
-
-          <div *ngIf="ketua.invalid && (ketua.dirty || ketua.touched)" class="mt-1">
-            <small *ngIf="ketua.errors?.['required']" class="text-red-500 block">Ketua wajib diisi.</small>
-            <small *ngIf="ketua.errors?.['minlength']" class="text-red-500 block">Minimal 3 karakter.</small>
-          </div>
+          <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition"
+            [(ngModel)]="ukm.ketua" name="ketua" required>
         </div>
+      </div>
 
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div>
-          <label class="block text-gray-700 font-semibold mb-2">Periode <span class="text-red-500">*</span></label>
-          <input type="text" class="w-full px-4 py-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-blue-500 transition"
-            [(ngModel)]="ukm.periode" name="periode"
-            required pattern="^\d{4}/\d{4}$"
-            placeholder="Format: 2024/2025" #periode="ngModel">
-
-          <div *ngIf="periode.invalid && (periode.dirty || periode.touched)" class="mt-1">
-            <small *ngIf="periode.errors?.['required']" class="text-red-500 block">Periode wajib diisi.</small>
-            <small *ngIf="periode.errors?.['pattern']" class="text-red-500 block font-bold">
-              Format harus TAHUN/TAHUN (Contoh: 2024/2025).
-            </small>
-          </div>
+          <label class="block text-gray-700 font-semibold mb-2">Penanggung Jawab (Pembina)</label>
+          <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition"
+            [(ngModel)]="ukm.penanggungJawab" name="penanggungJawab" placeholder="Contoh: Nama Dosen Pembina">
         </div>
-
         <div>
-          <label class="block text-gray-700 font-semibold mb-2">Status</label>
-          <select class="w-full px-4 py-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-blue-500 transition cursor-pointer"
-            [(ngModel)]="ukm.status" name="status">
-            <option value="aktif">Aktif</option>
-            <option value="nonaktif">Nonaktif</option>
-          </select>
+          <label class="block text-gray-700 font-semibold mb-2">Periode</label>
+          <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition"
+            [(ngModel)]="ukm.periode" name="periode" placeholder="Contoh: 2024/2025">
         </div>
+      </div>
 
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block text-gray-700 font-semibold mb-2">Contact Person (HP/WA)</label>
+          <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition"
+            [(ngModel)]="ukm.contactPerson" name="contactPerson">
+        </div>
+        <div>
+          <label class="block text-gray-700 font-semibold mb-2">Nama Prodi (Opsional)</label>
+          <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition"
+            [(ngModel)]="ukm.namaProdi" name="namaProdi" placeholder="Jika UKM spesifik prodi">
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-gray-700 font-semibold mb-2">Struktur Organisasi (Gambar)</label>
+        <div class="p-4 border border-dashed border-gray-300 rounded-lg bg-gray-50">
+            <input type="file" (change)="onFileSelected($event, 'struktur')" accept="image/*"
+            class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-200 file:text-gray-700 hover:file:bg-gray-100 transition cursor-pointer" />
+            <small class="text-gray-500 block mt-2">Gambar ini akan ditampilkan di halaman detail UKM.</small>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-gray-700 font-semibold mb-2">Status</label>
+        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 cursor-pointer"
+          [(ngModel)]="ukm.status" name="status">
+          <option value="aktif">Aktif</option>
+          <option value="nonaktif">Nonaktif</option>
+        </select>
       </div>
 
       <div class="mb-8">
-        <label class="block text-gray-700 font-semibold mb-2">Deskripsi <span class="text-red-500">*</span></label>
-        <textarea class="w-full px-4 py-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-blue-500 transition h-32"
-          [(ngModel)]="ukm.deskripsi" name="deskripsi"
-          required minlength="10" pattern=".*\S.*"
-          #deskripsi="ngModel" placeholder="Deskripsi singkat UKM..."></textarea>
-
-        <div *ngIf="deskripsi.invalid && (deskripsi.dirty || deskripsi.touched)" class="mt-1">
-          <small *ngIf="deskripsi.errors?.['required']" class="text-red-500 block">Deskripsi wajib diisi.</small>
-          <small *ngIf="deskripsi.errors?.['minlength']" class="text-red-500 block">Deskripsi terlalu pendek (min 10 huruf).</small>
-        </div>
+        <label class="block text-gray-700 font-semibold mb-2">Deskripsi</label>
+        <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 h-32"
+          [(ngModel)]="ukm.deskripsi" name="deskripsi" placeholder="Deskripsi singkat UKM..."></textarea>
       </div>
 
       <div class="flex justify-end gap-4 border-t pt-6">
@@ -80,11 +83,8 @@
           class="px-6 py-2.5 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition">
           Batal
         </button>
-
         <button type="submit"
-          [disabled]="ukmForm.invalid"
-          [class]="ukmForm.invalid ? 'bg-gray-400 cursor-not-allowed opacity-70' : 'bg-blue-600 hover:bg-blue-700 shadow-lg'"
-          class="px-6 py-2.5 text-white font-bold rounded-lg transition">
+          class="px-6 py-2.5 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 shadow-lg transition">
           Simpan Data
         </button>
       </div>

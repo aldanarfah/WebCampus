@@ -9,33 +9,47 @@ import { Event } from '../../../models/event.model';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './event-admin.component.html',
-  styleUrl: './event-admin.component.css'
+  styleUrls: ['./event-admin.component.css']
 })
 export class EventAdminComponent implements OnInit {
-  eventList: Event[] = [];
 
-  constructor(private eventService: EventService) {}
+  eventList: Event[] = [];
+  isLoading: boolean = true;
+  imageBaseUrl = 'http://localhost:8080/uploads/';
+
+  constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
-    this.fetchData();
+    this.loadData();
   }
 
-  fetchData(): void {
+  loadData(): void {
+    this.isLoading = true;
     this.eventService.getAll().subscribe({
-      next: (data) => this.eventList = data,
-      error: (e) => console.error('Gagal ambil data:', e)
+      next: (data) => {
+        this.eventList = data;
+        this.isLoading = false;
+      },
+      error: (e) => {
+        console.error(e);
+        this.isLoading = false;
+      }
     });
   }
 
-  hapusData(id: number): void {
+  hapusEvent(id: number | undefined): void {
+    if (!id) return;
     if (confirm('Yakin ingin menghapus event ini?')) {
       this.eventService.delete(id).subscribe({
-        next: () => {
-          alert('Event berhasil dihapus!');
-          this.fetchData(); // Refresh tabel
-        },
-        error: (e) => console.error('Gagal hapus:', e)
+        next: () => this.loadData(),
+        error: (e) => console.error(e)
       });
     }
+  }
+
+  getPemilik(event: Event): string {
+    if (event.organisasi) return 'Org: ' + event.organisasi.namaOrganisasi;
+    if (event.ukm) return 'UKM: ' + event.ukm.namaUkm;
+    return 'Umum';
   }
 }

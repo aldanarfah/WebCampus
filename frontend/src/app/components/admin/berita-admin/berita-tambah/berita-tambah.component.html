@@ -3,63 +3,66 @@
 
     <div class="flex justify-between items-center mb-8 border-b pb-4">
       <h2 class="text-2xl font-bold text-gray-800">Tambah Berita</h2>
-      <button routerLink="/dashboard/berita" class="text-gray-500 hover:text-gray-700 transition">✕ Batal</button>
+      <button routerLink="/dashboard/berita" class="text-gray-500 hover:text-gray-700">✕ Batal</button>
     </div>
 
-    <form #beritaForm="ngForm" (ngSubmit)="saveBerita()">
+    <form (ngSubmit)="simpanBerita()">
 
       <div class="mb-6">
-        <label class="block text-gray-700 font-semibold mb-2">Judul Berita <span class="text-red-500">*</span></label>
-        <input type="text" class="w-full px-4 py-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-blue-500 transition"
-          [(ngModel)]="berita.judul" name="judul" required pattern=".*\S.*" #judul="ngModel" placeholder="Masukkan judul berita...">
-
-        <div *ngIf="judul.invalid && (judul.dirty || judul.touched)" class="mt-1">
-          <small *ngIf="judul.errors?.['required']" class="text-red-500 block">Judul wajib diisi.</small>
-          <small *ngIf="judul.errors?.['pattern']" class="text-red-500 block font-bold">Jangan hanya spasi kosong!</small>
-        </div>
+        <label class="block text-gray-700 font-bold mb-2">Judul Berita</label>
+        <input type="text" [(ngModel)]="berita.judul" name="judul" required
+               class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div>
-          <label class="block text-gray-700 font-semibold mb-2">Status</label>
-          <select class="w-full px-4 py-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-blue-500 transition cursor-pointer"
-            [(ngModel)]="berita.status" name="status">
-            <option value="publik">Publik</option>
-            <option value="draft">Draft</option>
+          <label class="block text-gray-700 font-bold mb-2">Publikasikan Sebagai</label>
+          <select [(ngModel)]="kategoriPemilik" name="kategori"
+                  class="w-full px-4 py-3 border rounded-lg bg-gray-50">
+            <option value="umum">Berita Umum (Kampus)</option>
+            <option value="organisasi">Organisasi (BEM/Himpunan)</option>
+            <option value="ukm">Unit Kegiatan Mahasiswa (UKM)</option>
           </select>
         </div>
 
         <div>
-          <label class="block text-gray-700 font-semibold mb-2">Gambar (Opsional)</label>
-          <input type="file" (change)="onFileSelected($event)" accept="image/*"
-            class="w-full px-4 py-2 border border-gray-300 bg-white rounded-lg cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+          <label class="block text-gray-700 font-bold mb-2">Status</label>
+          <select [(ngModel)]="berita.status" name="status" class="w-full px-4 py-3 border rounded-lg">
+            <option value="draft">Draft (Simpan dulu)</option>
+            <option value="publik">Publik (Langsung Tayang)</option>
+          </select>
         </div>
       </div>
 
-      <div *ngIf="previewUrl" class="mb-6 p-2 border rounded-lg bg-gray-50 text-center">
-        <p class="text-sm text-gray-500 mb-2">Preview Gambar:</p>
-        <img [src]="previewUrl" class="h-48 mx-auto rounded-lg shadow-md object-cover">
+      <div *ngIf="kategoriPemilik === 'organisasi'" class="mb-6 p-4 bg-blue-50 rounded border border-blue-200">
+        <label class="block text-blue-800 font-bold mb-2">Pilih Organisasi</label>
+        <select [(ngModel)]="tempIdOrganisasi" name="pilihOrg" class="w-full px-4 py-3 border rounded-lg">
+           <option [ngValue]="null">-- Pilih Organisasi --</option>
+           <option *ngFor="let org of listOrganisasi" [value]="org.idOrganisasi">{{ org.namaOrganisasi }}</option>
+        </select>
+      </div>
+
+      <div *ngIf="kategoriPemilik === 'ukm'" class="mb-6 p-4 bg-green-50 rounded border border-green-200">
+        <label class="block text-green-800 font-bold mb-2">Pilih UKM</label>
+        <select [(ngModel)]="tempIdUkm" name="pilihUkm" class="w-full px-4 py-3 border rounded-lg">
+           <option [ngValue]="null">-- Pilih UKM --</option>
+           <option *ngFor="let ukm of listUkm" [value]="ukm.idUkm">{{ ukm.namaUkm }}</option>
+        </select>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-gray-700 font-bold mb-2">Gambar Berita</label>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
       </div>
 
       <div class="mb-8">
-        <label class="block text-gray-700 font-semibold mb-2">Isi Berita <span class="text-red-500">*</span></label>
-        <textarea class="w-full px-4 py-3 border border-gray-300 bg-white rounded-lg h-48 focus:ring-2 focus:ring-blue-500 transition"
-          [(ngModel)]="berita.isi" name="isi" required pattern=".*\S.*" #isi="ngModel" placeholder="Tulis isi berita disini..."></textarea>
-
-        <div *ngIf="isi.invalid && (isi.dirty || isi.touched)" class="mt-1">
-          <small *ngIf="isi.errors?.['required']" class="text-red-500 block">Isi berita wajib diisi.</small>
-          <small *ngIf="isi.errors?.['pattern']" class="text-red-500 block font-bold">Jangan hanya spasi kosong!</small>
-        </div>
+        <label class="block text-gray-700 font-bold mb-2">Isi Berita</label>
+        <textarea [(ngModel)]="berita.isi" name="isi" required class="w-full px-4 py-3 border rounded-lg h-40"></textarea>
       </div>
 
       <div class="flex justify-end gap-4 border-t pt-6">
-        <button type="button" routerLink="/dashboard/berita" class="px-6 py-2.5 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition">Batal</button>
-
-        <button type="submit" [disabled]="beritaForm.invalid"
-          [class]="beritaForm.invalid ? 'bg-gray-400 cursor-not-allowed opacity-70' : 'bg-blue-600 hover:bg-blue-700 shadow-lg'"
-          class="px-6 py-2.5 text-white font-bold rounded-lg transition">
-          Simpan Berita
-        </button>
+        <button type="button" routerLink="/dashboard/berita" class="px-6 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Batal</button>
+        <button type="submit" class="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Simpan Berita</button>
       </div>
 
     </form>

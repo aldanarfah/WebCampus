@@ -1,54 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { UkmService } from '../../../../services/ukm.service';
-import { Ukm } from '../../../../models/ukm.model';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-@Component({
-  selector: 'app-ukm-edit',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './ukm-edit.component.html',
-  styleUrl: './ukm-edit.component.css'
-})
-export class UkmEditComponent implements OnInit {
+import { UkmEditComponent } from './ukm-edit.component';
 
-  ukm: Ukm = {
-    namaUkm: '',
-    deskripsi: '',
-    ketua: '',
-    periode: '',
-    status: 'aktif'
-  };
+describe('UkmEditComponent', () => {
+  let component: UkmEditComponent;
+  let fixture: ComponentFixture<UkmEditComponent>;
 
-  id!: number;
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [UkmEditComponent]
+    })
+    .compileComponents();
 
-  constructor(
-    private ukmService: UkmService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    fixture = TestBed.createComponent(UkmEditComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-  ngOnInit(): void {
-    // 1. Ambil ID dari URL
-    this.id = this.route.snapshot.params['id'];
-
-    // 2. Ambil Data Lama
-    this.ukmService.get(this.id).subscribe({
-      next: (data) => this.ukm = data,
-      error: (e) => console.error(e)
-    });
-  }
-
-  updateUkm(): void {
-    // 3. Simpan Perubahan
-    this.ukmService.update(this.id, this.ukm).subscribe({
-      next: (res) => {
-        alert('Data UKM berhasil diperbarui!');
-        this.router.navigate(['/dashboard/ukm']);
-      },
-      error: (e) => console.error(e)
-    });
-  }
-}
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
         { name: 'Jadwal', path: '/akademik/jadwal' }
       ]
     },
-    
+
       {
   name: 'Aktivitas Kampus',
   path: '/aktivitas',
