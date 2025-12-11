@@ -1,4 +1,3 @@
-import { AlumniKarirComponent } from './components/alumni-karir/alumni-karir.component';
 import { Routes } from '@angular/router';
 
 // Home
@@ -12,7 +11,35 @@ import { VisiMisiComponent } from './components/profil/visi-misi/visi-misi.compo
 import { StrukturOrganisasiComponent } from './components/profil/struktur-organisasi/struktur-organisasi.component';
 import { SaranaComponent } from './components/profil/sarana/sarana.component';
 
+// Aktivitas Kampus
+import { AktivitasComponent } from './components/aktivitas/aktivitas/aktivitas.component';
+import { AktivitasHomeComponent } from './components/aktivitas/aktivitas-home/aktivitas-home.component';
+import { OrmawaUkmComponent } from './components/aktivitas/ormawa-ukm/ormawa-ukm.component';
 
+import { HmtiComponent } from './components/aktivitas/ormawa-ukm/hmti/hmti.component';
+import { HmtroComponent } from './components/aktivitas/ormawa-ukm/hmtro/hmtro.component';
+import { HmtsComponent } from './components/aktivitas/ormawa-ukm/hmts/hmts.component';
+import { HimaakaComponent } from './components/aktivitas/ormawa-ukm/himaaka/himaaka.component';
+import { BemComponent } from './components/aktivitas/ormawa-ukm/bem/bem.component';
+import { MapalaComponent } from './components/aktivitas/ormawa-ukm/mapala/mapala.component';
+import { WiraComponent } from './components/aktivitas/ormawa-ukm/wira/wira.component';
+
+import { BeritaComponent } from './components/aktivitas/berita/berita.component';
+import { EventComponent } from './components/aktivitas/event/event.component';
+
+
+// Alumni-Karir
+import { AlumniKarirComponent } from './components/alumni-karir/alumni-karir/alumni-karir.component';
+import { AlumniKarirHomeComponent } from './components/alumni-karir/alumni-karir-home/alumni-karir-home.component';
+
+import { KegiatanAlumniComponent } from './components/alumni-karir/kegiatan-alumni/kegiatan-alumni.component';
+import { DetailKegiatanComponent } from './components/alumni-karir/kegiatan-alumni/detail-kegiatan/detail-kegiatan.component';
+
+import { KataAlumniComponent } from './components/alumni-karir/kata-alumni/kata-alumni.component';
+import { DetailKataComponent } from './components/alumni-karir/kata-alumni/detail-kata/detail-kata.component';
+
+import { LokerComponent } from './components/alumni-karir/loker/loker.component';
+import { DetailLokerComponent } from './components/alumni-karir/loker/detail-loker/detail-loker.component';
 
 // Akademik
 import { AkademikComponent } from './components/akademik/akademik/akademik.component';
@@ -26,20 +53,6 @@ import { TIComponent } from './components/akademik/data-prodi/ti/ti.component';
 import { SipilComponent } from './components/akademik/data-prodi/sipil/sipil.component';
 import { TROComponent } from './components/akademik/data-prodi/tro/tro.component';
 import { AkuntansiComponent } from './components/akademik/data-prodi/akuntansi/akuntansi.component';
-
-
-// Alumni
-import { AlumniKarirComponent as AlumniKarirHomeComponent } from './components/alumni-karir/alumni-karir.component';
-import { KegiatanAlumniComponent } from './components/alumni-karir/kegiatan-alumni/kegiatan-alumni.component';
-import { DetailKegiatanComponent } from './components/alumni-karir/kegiatan-alumni/detail-kegiatan/detail-kegiatan.component';
-
-
-import { KataAlumniComponent } from './components/alumni-karir/kata-alumni/kata-alumni.component';
-import { DetailKataComponent } from './components/alumni-karir/kata-alumni/detail-kata/detail-kata.component';
-
-import { LokerComponent } from './components/alumni-karir/loker/loker.component';
-import { DetailLokerComponent } from './components/alumni-karir/loker/detail-loker/detail-loker.component';
-
 
 // PMB
 import { PmbComponent } from './components/pmb/pmb/pmb.component';
@@ -154,6 +167,31 @@ export const routes: Routes = [
     { path: 'event/tambah', component: EventTambahComponent },
     { path: 'event/edit/:id', component: EventEditComponent },
   ],
+},
+
+
+  {
+  path: 'aktivitas',
+  component: AktivitasComponent,
+  children: [
+    { path: '', component: AktivitasHomeComponent },
+
+    // Ormawa & UKM (halaman utama)
+    { path: 'ormawa-ukm', component: OrmawaUkmComponent },
+
+    // 7 organisasi
+    { path: 'ormawa-ukm/hmti', component: HmtiComponent },
+    { path: 'ormawa-ukm/hmtro', component: HmtroComponent },
+    { path: 'ormawa-ukm/hmts', component: HmtsComponent },
+    { path: 'ormawa-ukm/himaaka', component: HimaakaComponent },
+    { path: 'ormawa-ukm/bem', component: BemComponent },
+    { path: 'ormawa-ukm/mapala', component: MapalaComponent },
+    { path: 'ormawa-ukm/wira', component: WiraComponent },
+
+    // berita & event
+    { path: 'berita', component: BeritaComponent },
+    { path: 'event', component: EventComponent },
+  ]
 },
 
   //Alumni-Karir
