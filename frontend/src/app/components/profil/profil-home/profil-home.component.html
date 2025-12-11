@@ -1,11 +1,11 @@
 <!-- HERO -->
 <section class="hero relative h-[80vh]">
-  <img src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780" alt="Hero" class="w-full h-full object-cover">
+  <img src="/assets/img/profil1.jpg" alt="Hero" class="w-full h-full object-cover">
   <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
     <h1 class="text-white text-4xl md:text-6xl font-bold">Profil Kampus</h1>
   </div>
 </section>
- 
+
 <!-- TENTANG KAMPUS -->
 <section class="tentang-kampus py-16 px-6 md:px-20">
   <h2 class="text-3xl md:text-5xl font-bold mb-12">Tentang Kampus</h2>
@@ -40,7 +40,7 @@ Give You Best Facility for Study</h2>
       <p class="mb-4">
         Nikmati berbagai fasilitas yang mendukung kenyamanan dan pengembangan diri mahasiswa — mulai dari ruang belajar modern, laboratorium lengkap, hingga area rekreasi yang membuat suasana kampus semakin hidup.
       </p>
-      <button 
+      <button
         [routerLink]="['/profil/sarana']"
         class="bg-[#002D72] text-white px-6 py-2 rounded hover:bg-blue-700 transition">
         Lihat Fasilitas Lain
@@ -50,9 +50,9 @@ Give You Best Facility for Study</h2>
 
   <!-- Carousel Fasilitas -->
   <div class="carousel relative overflow-hidden h-64 md:h-80 mx-auto max-w-4xl">
-    <img 
-      [src]="fasilitasImages[currentIndex].image" 
-      [alt]="fasilitasImages[currentIndex].alt" 
+    <img
+      [src]="fasilitasImages[currentIndex].image"
+      [alt]="fasilitasImages[currentIndex].alt"
       class="w-full h-full object-cover rounded-lg transition-opacity duration-700"
     >
   </div>
