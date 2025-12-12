@@ -1,73 +1,82 @@
-<!-- HERO -->
-<section class="hero relative h-[80vh]">
-  <img src="/assets/img/kampus2.jpg"alt="Hero" class="w-full h-full object-cover">
+<section class="hero relative h-[50vh] md:h-[60vh] mb-10">
+  <img src="/assets/img/kampus2.jpg" alt="Hero" class="w-full h-full object-cover">
   <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
     <h1 class="text-white text-4xl md:text-6xl font-bold">Jadwal</h1>
   </div>
 </section>
 
-<!-- MENU NAVIGASI -->
-<div class="container mt-4">
-  <nav class="d-flex gap-4 menu-sejarah">
-    <a routerLink="/" class="menu-link">Home</a>
-    <a routerLink="/akademik" class="menu-link">Akademik</a>
-    <span class="menu-active">Jadwal</span>
-  </nav>
-</div>
+<div class="container mx-auto px-4 md:px-10 pb-20">
 
-<div class="flex flex-col mt-5">
+  <div class="mb-8">
+    <nav class="flex gap-2 text-sm text-gray-500">
+      <a routerLink="/" class="hover:text-blue-800">Home</a>
+      <span>/</span>
+      <a routerLink="/akademik" class="hover:text-blue-800">Akademik</a>
+      <span>/</span>
+      <span class="font-bold text-black">Jadwal</span>
+    </nav>
+  </div>
 
-  <!-- FILTER PRODI -->
-  <div class="max-w-6xl px-24 mb-6">
-  <div class="flex gap-2 mb-4">
-    <button *ngFor="let p of prodiList"
-            (click)="filterProdi=p.value"
-            [class.bg-blue-600]="filterProdi===p.value"
-            [class.text-white]="filterProdi===p.value"
-            class="px-4 py-2 border border-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition-colors">
-      {{ p.label }}
+  <div class="flex flex-wrap gap-3 mb-6">
+    <button *ngFor="let prodi of listProdi"
+            (click)="activeProdi = prodi"
+            class="px-5 py-2 rounded-full border border-[#002D72] text-sm font-medium transition-colors duration-200"
+            [ngClass]="activeProdi === prodi ? 'bg-[#002D72] text-white' : 'bg-white text-[#002D72] hover:bg-blue-50'">
+      {{ prodi }}
     </button>
   </div>
-  </div>
 
-  <!-- PILLS TINGKAT KELAS -->
-  <div class="max-w-6xl px-24 mb-12">
-  <div class="flex gap-2 mb-6">
-    <button *ngFor="let t of [1,2,3]"
-            (click)="filterTingkat=t"
-            [class.bg-blue-600]="filterTingkat===t"
-            [class.text-white]="filterTingkat===t"
-            class="px-4 py-2 border border-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition-colors">
-      Tingkat {{ t }}
+  <div class="flex flex-wrap gap-3 mb-12">
+    <button *ngFor="let kls of listTingkat"
+            (click)="activeKelas = kls"
+            class="px-6 py-1.5 rounded-full border border-[#002D72] text-sm font-medium transition-colors duration-200"
+            [ngClass]="activeKelas === kls ? 'bg-[#002D72] text-white' : 'bg-white text-[#002D72] hover:bg-blue-50'">
+      {{ kls }}
     </button>
   </div>
-  </div>
 
-  <!-- TABEL JADWAL -->
-  <div class="max-w-6xl px-24 mb-12 mx-auto">
-  <div *ngFor="let kelas of getKelasTampil()">
-    <h3 class="text-xl font-semibold text-[#002D72] mt-4 mb-2">{{ kelas }} ({{ filterProdi.toUpperCase() }})</h3>
-    <div class="overflow-x-auto">
-      <table class="min-w-full border border-gray-300 text-center">
-        <thead class="bg-gray-200">
+  <div *ngFor="let kelas of getClassesToShow()" class="mb-16">
+
+    <h3 class="text-lg font-bold text-[#002D72] mb-4">{{ kelas }}</h3>
+
+    <div class="overflow-x-auto border border-gray-300 rounded-lg shadow-sm">
+      <table class="min-w-full text-center text-xs md:text-sm border-collapse">
+
+        <thead class="bg-gray-100 text-gray-700">
           <tr>
-            <th class="border border-gray-300 px-2 py-1">Hari / Jam</th>
-            <th *ngFor="let jam of jamArray" class="border border-gray-300 px-2 py-1">Jam {{ jam }}</th>
+            <th class="p-2 border border-gray-300 w-24 sticky left-0 bg-gray-100 z-10">Hari / Jam</th>
+            <th *ngFor="let j of jamList" class="p-2 border border-gray-300 min-w-[100px]">
+              Jam {{ j }}
+            </th>
           </tr>
         </thead>
+
         <tbody>
-          <tr *ngFor="let h of hari; let hariIndex=index">
-            <td class="border border-gray-300 px-2 py-1 font-semibold">{{ h }}</td>
-            <td *ngFor="let jam of jamArray; let jamIndex=index" class="border border-gray-300 px-2 py-1 text-left p-1">
-              <div class="text-sm font-semibold">{{ jadwal[kelas][hariIndex][jamIndex].matkul }}</div>
-              <div class="text-xs text-gray-600">{{ jadwal[kelas][hariIndex][jamIndex].dosen }}</div>
-              <div class="text-xs text-gray-600">{{ jadwal[kelas][hariIndex][jamIndex].ruang }}</div>
+          <tr *ngFor="let hari of hariList; let hIndex = index">
+            <td class="p-3 font-bold bg-white border border-gray-300 sticky left-0 z-10">
+              {{ hari }}
+            </td>
+
+            <td *ngFor="let j of jamList; let jIndex = index" class="border border-gray-300 p-0 h-24 align-top relative">
+
+              <ng-container *ngIf="getCell(kelas, hIndex, jIndex) as matkul">
+                <div class="w-full h-full p-1 flex flex-col justify-center items-center gap-1"
+                     [ngClass]="matkul.color"> <span class="font-bold text-[10px] leading-tight">{{ matkul.name }}</span>
+                  <span class="text-[9px]">{{ matkul.dosen }}</span>
+                  <span class="text-[9px] font-semibold bg-white/50 px-1 rounded">{{ matkul.room }}</span>
+
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="!getCell(kelas, hIndex, jIndex)">
+                <div class="w-full h-full bg-white"></div>
+              </ng-container>
+
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>
   </div>
 
 </div>
