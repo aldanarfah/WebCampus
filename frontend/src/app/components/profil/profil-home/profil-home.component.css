@@ -68,3 +68,121 @@
         height: 60vh;
     }
 }
+/* Layout Dasar */
+.campus-section {
+  padding: 40px;
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: 700;
+}
+
+.card-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap; /* Agar responsif di HP */
+}
+
+/* Styling Kartu */
+.card {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden; /* Penting agar gambar tidak keluar batas saat di-zoom */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Gambar Latar */
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease; /* Animasi zoom halus */
+}
+
+/* Overlay Gelap (Gradient) agar teks terbaca */
+.card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+  transition: background 0.3s ease;
+}
+
+/* Konten Teks */
+.card-content {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 2;
+  color: white;
+  transform: translateY(20px); /* Turun sedikit awalnya */
+  transition: transform 0.3s ease;
+}
+
+.card-content h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  opacity: 0; /* Sembunyikan deskripsi awalnya */
+  height: 0;
+  transition: opacity 0.3s ease, height 0.3s ease;
+}
+
+.btn-arrow {
+  text-decoration: none;
+  color: #fff; /* Warna aksen misal kuning/emas */
+  font-weight: bold;
+  font-size: 0.9rem;
+  opacity: 0;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* --- BAGIAN INTERAKTIF (HOVER) --- */
+
+/* Saat mouse di atas kartu */
+.card:hover {
+  transform: translateY(-5px); /* Kartu naik sedikit */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Gambar nge-zoom dikit */
+.card:hover img {
+  transform: scale(1.1);
+}
+
+/* Overlay jadi lebih gelap sedikit agar teks makin jelas */
+.card:hover::after {
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 100%);
+}
+
+/* Teks naik ke posisi normal */
+.card:hover .card-content {
+  transform: translateY(0);
+}
+
+/* Deskripsi muncul */
+.card:hover .card-content p,
+.card:hover .btn-arrow {
+  opacity: 1;
+  height: auto;
+}
