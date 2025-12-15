@@ -1,6 +1,7 @@
 package com.backend.backend.controller;
 
 import com.backend.backend.model.Event;
+import com.backend.backend.repository.EventRepository;
 import com.backend.backend.service.EventService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,9 +19,11 @@ import java.util.List;
 public class EventController {
 
     private final EventService eventService;
+    private final EventRepository eventRepository;
 
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, EventRepository eventRepository) {
         this.eventService = eventService;
+        this.eventRepository = eventRepository;
     }
 
     @GetMapping
@@ -35,34 +38,38 @@ public class EventController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    // --- PERBAIKAN NAMA METHOD DISINI ---
+    // UPDATE METHOD INI
+    @GetMapping("/organisasi/{id}")
+    public ResponseEntity<List<Event>> getEventByOrganisasi(@PathVariable Long id) {
+        // PERBAIKAN: Gunakan Event.Status.publik (atau PUBLIK jika enumnya uppercase)
+        List<Event> list = eventRepository.findByOrganisasi_IdOrganisasiAndStatusAndDihapusPadaIsNullOrderByTanggalMulaiDesc(id, Event.Status.publik);
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/ukm/{id}")
+    public ResponseEntity<List<Event>> getEventByUkm(@PathVariable Long id) {
+        List<Event> list = eventRepository.findByUkm_IdUkmAndStatusAndDihapusPadaIsNullOrderByTanggalMulaiDesc(id, Event.Status.publik);
+        return ResponseEntity.ok(list);
+    }
+
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Event> createEvent(
             @RequestPart("event") String eventJson,
             @RequestPart(value = "filePoster", required = false) MultipartFile filePoster
     ) {
         try {
-            // 1. Setup Mapper
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new JavaTimeModule());
-            // Mencegah error jika ada field JSON yang tidak ada di Java Class
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-            // 2. Debugging: Lihat apa yang dikirim Frontend (Cek Terminal Anda!)
-            System.out.println("JSON Diterima: " + eventJson);
-
-            // 3. Convert JSON ke Object Event
             Event event = mapper.readValue(eventJson, Event.class);
 
-            // 4. Validasi Debugging untuk ID Admin
             if (event.getDibuatOleh() != null) {
                 System.out.println("Sukses! ID Admin Pembuat: " + event.getDibuatOleh().getIdAdmin());
-            } else {
-                System.out.println("PERINGATAN: Data 'dibuatOleh' masih Kosong/Null!");
             }
 
-            // 5. Simpan ke Database via Service
             Event created = eventService.create(event, filePoster);
-            
             return new ResponseEntity<>(created, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();

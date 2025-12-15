@@ -55,6 +55,18 @@ public class BeritaService {
         return beritaRepository.findById(id);
     }
 
+    // --- [BARU] FILTER BERDASARKAN ORGANISASI ---
+    public List<Berita> findByOrganisasi(Long idOrganisasi) {
+        // Mencari berita milik ID Organisasi tertentu yang belum dihapus
+        return beritaRepository.findByOrganisasi_IdOrganisasiAndDihapusPadaIsNullOrderByTanggalPublikasiDesc(idOrganisasi);
+    }
+
+    // --- [BARU] FILTER BERDASARKAN UKM ---
+    public List<Berita> findByUkm(Long idUkm) {
+        // Mencari berita milik ID UKM tertentu yang belum dihapus
+        return beritaRepository.findByUkm_IdUkmAndDihapusPadaIsNullOrderByTanggalPublikasiDesc(idUkm);
+    }
+
     public Berita create(Berita berita, MultipartFile fileGambar) {
         if (fileGambar != null) {
             berita.setGambarBerita(simpanFile(fileGambar));

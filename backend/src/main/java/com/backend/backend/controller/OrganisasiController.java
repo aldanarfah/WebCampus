@@ -2,9 +2,9 @@ package com.backend.backend.controller;
 
 import com.backend.backend.model.Organisasi;
 import com.backend.backend.service.OrganisasiService;
-import com.fasterxml.jackson.databind.DeserializationFeature; // Import Penting
-import com.fasterxml.jackson.databind.ObjectMapper; // Import Jackson
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule; // Import untuk handle Tanggal
+import com.fasterxml.jackson.databind.DeserializationFeature; 
+import com.fasterxml.jackson.databind.ObjectMapper; 
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule; 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,18 +24,31 @@ public class OrganisasiController {
         this.organisasiService = organisasiService;
     }
 
+    // 1. ENDPOINT UTAMA (UNTUK ADMIN DASHBOARD)
+    // URL: http://localhost:8080/api/organisasi
+    // Mengembalikan SEMUA data (termasuk yang nonaktif) agar Admin bisa mengelola
+    @GetMapping
+    public List<Organisasi> getAllOrganisasiAdmin() {
+        return organisasiService.findAllOrganisasiAdmin(); 
+    }
+
+    // 2. ENDPOINT KHUSUS PUBLIC (UNTUK HALAMAN DEPAN)
+    // URL: http://localhost:8080/api/organisasi/public
+    // Hanya mengembalikan yang statusnya 'AKTIF'
+    @GetMapping("/public")
+    public List<Organisasi> getAllOrganisasiPublic() {
+        return organisasiService.findAllOrganisasiPublic();
+    }
+
     // CREATE (POST) dengan Upload File
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Organisasi> createOrganisasi(
-            @RequestPart("organisasi") String organisasiJson, // Data teks dikirim sebagai JSON String
+            @RequestPart("organisasi") String organisasiJson, 
             @RequestPart(value = "fileLogo", required = false) MultipartFile fileLogo,
             @RequestPart(value = "fileStruktur", required = false) MultipartFile fileStruktur
     ) {
         try {
-            // Ubah String JSON menjadi Object Organisasi Java
             ObjectMapper objectMapper = new ObjectMapper();
-            
-            // KONFIGURASI PENTING (Agar tidak error saat baca tanggal atau field asing)
             objectMapper.registerModule(new JavaTimeModule());
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
@@ -44,15 +57,9 @@ public class OrganisasiController {
             Organisasi createdOrg = organisasiService.createOrganisasi(organisasi, fileLogo, fileStruktur);
             return new ResponseEntity<>(createdOrg, HttpStatus.CREATED);
         } catch (Exception e) {
-            e.printStackTrace(); // Cek log error di terminal jika gagal
+            e.printStackTrace(); 
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    // READ ALL
-    @GetMapping
-    public List<Organisasi> getAllOrganisasi() {
-        return organisasiService.findAllOrganisasi();
     }
 
     // READ BY ID
@@ -72,8 +79,6 @@ public class OrganisasiController {
     ) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            
-            // KONFIGURASI PENTING (Agar tidak error 500 saat edit)
             objectMapper.registerModule(new JavaTimeModule());
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
@@ -87,7 +92,7 @@ public class OrganisasiController {
                 return ResponseEntity.notFound().build();
             }
         } catch (Exception e) {
-            e.printStackTrace(); // Cek log error di terminal jika gagal
+            e.printStackTrace(); 
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

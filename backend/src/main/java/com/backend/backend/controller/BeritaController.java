@@ -1,6 +1,7 @@
 package com.backend.backend.controller;
 
 import com.backend.backend.model.Berita;
+import com.backend.backend.repository.BeritaRepository;
 import com.backend.backend.service.BeritaService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,18 +19,18 @@ import java.util.List;
 public class BeritaController {
 
     private final BeritaService beritaService;
+    private final BeritaRepository beritaRepository;
 
-    public BeritaController(BeritaService beritaService) {
+    public BeritaController(BeritaService beritaService, BeritaRepository beritaRepository) {
         this.beritaService = beritaService;
+        this.beritaRepository = beritaRepository;
     }
 
-    // READ ALL
     @GetMapping
     public List<Berita> getAllBerita() {
         return beritaService.findAll();
     }
 
-    // READ BY ID
     @GetMapping("/{id}")
     public ResponseEntity<Berita> getBeritaById(@PathVariable Long id) {
         return beritaService.findById(id)
@@ -37,7 +38,21 @@ public class BeritaController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // CREATE (VERSI AMAN)
+    // --- PERBAIKAN NAMA METHOD DISINI ---
+    @GetMapping("/organisasi/{id}")
+    public ResponseEntity<List<Berita>> getBeritaByOrganisasi(@PathVariable Long id) {
+        // PERBAIKAN: Gunakan Berita.Status.publik (Bukan string "publik")
+        // Jika merah/error, coba ganti jadi: Berita.Status.PUBLIK
+        List<Berita> list = beritaRepository.findByOrganisasi_IdOrganisasiAndStatusAndDihapusPadaIsNullOrderByTanggalPublikasiDesc(id, Berita.Status.publik);
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/ukm/{id}")
+    public ResponseEntity<List<Berita>> getBeritaByUkm(@PathVariable Long id) {
+        List<Berita> list = beritaRepository.findByUkm_IdUkmAndStatusAndDihapusPadaIsNullOrderByTanggalPublikasiDesc(id, Berita.Status.publik);
+        return ResponseEntity.ok(list);
+    }
+
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Berita> createBerita(
             @RequestPart("berita") String beritaJson,
@@ -50,15 +65,11 @@ public class BeritaController {
 
             Berita berita = mapper.readValue(beritaJson, Berita.class);
 
-            // --- TAMBAHAN PENTING (SAFETY NET) ---
-            // Ini menjaga agar tidak error jika Frontend lupa kirim ID
             if (berita.getDibuatOleh() == null) {
-                berita.setDibuatOleh(1L); // Isi default ID 1 (Super Admin)
+                berita.setDibuatOleh(1L); 
             }
-            // -------------------------------------
 
             Berita created = beritaService.create(berita, fileGambar);
-            
             return new ResponseEntity<>(created, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,7 +77,6 @@ public class BeritaController {
         }
     }
 
-    // UPDATE
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Berita> updateBerita(
             @PathVariable Long id,
@@ -89,7 +99,6 @@ public class BeritaController {
         }
     }
 
-    // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteBerita(@PathVariable Long id) {
         if (beritaService.delete(id)) {

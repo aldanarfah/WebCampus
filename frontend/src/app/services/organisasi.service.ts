@@ -7,30 +7,46 @@ import { Organisasi } from '../models/organisasi.model';
   providedIn: 'root'
 })
 export class OrganisasiService {
-  // Pastikan port sesuai backend kamu
+  // Base URL Backend
   private baseUrl = 'http://localhost:8080/api/organisasi';
+  private beritaUrl = 'http://localhost:8080/api/berita';
+  private eventUrl = 'http://localhost:8080/api/event';
 
   constructor(private http: HttpClient) { }
 
+  // 1. UNTUK ADMIN (Dapat semua data)
   getAll(): Observable<Organisasi[]> {
     return this.http.get<Organisasi[]>(this.baseUrl);
+  }
+
+  // 2. UNTUK PUBLIC
+  getAllPublic(): Observable<Organisasi[]> {
+    return this.http.get<Organisasi[]>(`${this.baseUrl}/public`);
   }
 
   get(id: number): Observable<Organisasi> {
     return this.http.get<Organisasi>(`${this.baseUrl}/${id}`);
   }
 
-  // UBAH DISINI: Parameter sekarang FormData
   create(data: FormData): Observable<any> {
     return this.http.post(this.baseUrl, data);
   }
 
-  // UBAH DISINI: Parameter sekarang FormData
   update(id: number, data: FormData): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}`, data);
   }
 
   delete(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
+  // === INTEGRASI BARU: AMBIL BERITA & EVENT BERDASARKAN ID ORGANISASI ===
+  
+  getBeritaByOrganisasi(idOrganisasi: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.beritaUrl}/organisasi/${idOrganisasi}`);
+  }
+
+  getEventByOrganisasi(idOrganisasi: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.eventUrl}/organisasi/${idOrganisasi}`);
   }
 }

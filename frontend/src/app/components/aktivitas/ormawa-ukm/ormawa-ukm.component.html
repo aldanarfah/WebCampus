@@ -1,108 +1,107 @@
-<!-- HERO -->
-<section class="hero relative h-[80vh]">
-  <img
-    src="/assets/img/UKM-2025.jpg"
-    alt="Hero"
-    class="w-full h-full object-cover"
-  />
-  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-    <h1 class="text-white text-4xl md:text-6xl font-bold text-center">
-      Organisasi Mahasiswa dan UKM
+<section class="hero relative d-flex align-items-center justify-content-center">
+  <img src="assets/img/ormawa-ukm2.jpg" alt="Hero Ormawa" class="absolute w-full h-full object-cover">
+
+  <div class="absolute inset-0 bg-black/40 z-10"></div>
+
+  <div class="container relative z-20 text-center px-4">
+    <h1 class="text-white text-3xl md:text-5xl font-bold leading-tight drop-shadow-xl">
+      Kreativitas & Inovasi <br> Mahasiswa Polinema
     </h1>
+    <p class="text-gray-100 mt-3 text-base md:text-lg max-w-2xl mx-auto drop-shadow-md">
+      Mewujudkan generasi unggul melalui kegiatan akademik dan non-akademik yang inspiratif.
+    </p>
   </div>
 </section>
 
-<!-- MENU NAVIGASI -->
-<div class="container mx-auto px-6 mt-4">
-  <nav class="flex gap-4 menu-akademik">
-    <a routerLink="/" class="menu-link">Home</a>
-    <a routerLink="/aktivitas" class="menu-link">Kehidupan Kampus</a>
-    <span class="menu-active">Organisasi Mahasiswa dan UKM</span>
+<div class="container mx-auto px-6 mt-6 mb-2">
+  <nav class="flex flex-wrap gap-2 md:gap-4 text-sm md:text-base items-center justify-center md:justify-start">
+    <a routerLink="/" class="text-gray-500 hover:text-blue-600 transition no-underline">Home</a>
+    <span class="text-gray-400">/</span>
+    <a routerLink="/aktivitas" class="text-gray-500 hover:text-blue-600 transition no-underline">Kehidupan Kampus</a>
+    <span class="text-gray-400">/</span>
+    <span class="font-bold text-blue-900">Organisasi Mahasiswa & UKM</span>
   </nav>
 </div>
 
-<!-- ORGANISASI MAHASISWA -->
-<section class="py-10">
-  <h2 class="text-center text-xl font-semibold text-blue-900 mb-8">
-    Organisasi Mahasiswa
-  </h2>
+<section class="py-10 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-center text-2xl md:text-3xl font-bold text-blue-900 mb-8 relative inline-block w-full">
+      Organisasi Mahasiswa
+      <span class="block w-16 h-1 bg-blue-500 mx-auto mt-2 rounded"></span>
+    </h2>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 items-stretch">
 
-    <a routerLink="/aktivitas/ormawa-ukm/bem" class="cursor-pointer">
-      <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition w-full h-80">
-        <p class="w-40 text-center text-blue-900 font-semibold mb-4 px-6 py-1 border border-blue-400 rounded-xl">
-          BEM
-        </p>
-        <img src="assets/img/bem.png" class="w-40 h-40 object-cover rounded-full border shadow">
+      <a *ngFor="let org of listOrganisasi"
+         [routerLink]="['/aktivitas/ormawa-ukm/detail', org.idOrganisasi]"
+         class="group cursor-pointer no-underline h-full">
+
+        <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 h-full border border-gray-100 p-6 flex flex-col items-center justify-start">
+
+          <div class="w-28 h-28 mb-2 rounded-full border-4 border-gray-50 shadow-inner overflow-hidden flex-shrink-0 flex items-center justify-center bg-white relative group-hover:scale-105 transition duration-500">
+            <img [src]="imageBaseUrl + org.gambarLogo"
+                 [alt]="org.namaOrganisasi"
+                 class="w-full h-full object-contain p-1"
+                 onerror="this.src='assets/img/default-logo.png'">
+          </div>
+
+          <div class="w-full flex items-center justify-center">
+            <p class="text-center text-blue-900 font-bold text-sm md:text-base leading-snug px-1 pb-1 border-b-2 border-transparent group-hover:border-blue-500 transition-all duration-300">
+              {{ org.namaOrganisasi }}
+            </p>
+          </div>
+
+        </div>
+      </a>
+
+      <div *ngIf="listOrganisasi.length === 0" class="col-span-full text-center py-10 text-gray-500">
+        <div class="flex flex-col items-center">
+            <i class="fas fa-folder-open text-4xl mb-3 text-gray-300"></i>
+            <p>Belum ada data Organisasi Mahasiswa.</p>
+        </div>
       </div>
-    </a>
 
-    <a routerLink="/aktivitas/ormawa-ukm/hmti" class="cursor-pointer">
-      <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition w-full h-80">
-        <p class="w-40 text-center text-blue-900 font-semibold mb-4 px-6 py-1 border border-blue-400 rounded-xl">
-          HMTI
-        </p>
-        <img src="assets/img/hmti.png" class="w-40 h-40 object-cover rounded-full border shadow">
-      </div>
-    </a>
-
-    <a routerLink="/aktivitas/ormawa-ukm/hmts" class="cursor-pointer">
-      <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition w-full h-80">
-        <p class="w-40 text-center text-blue-900 font-semibold mb-4 px-6 py-1 border border-blue-400 rounded-xl">
-          HMTS
-        </p>
-        <img src="assets/img/hmts.png" class="w-40 h-40 object-cover rounded-full border shadow">
-      </div>
-    </a>
-
-    <a routerLink="/aktivitas/ormawa-ukm/hmtro" class="cursor-pointer">
-      <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition w-full h-80">
-        <p class="w-40 text-center text-blue-900 font-semibold mb-4 px-6 py-1 border border-blue-400 rounded-xl">
-          HMTRO
-        </p>
-        <img src="assets/img/hmtro.png" class="w-40 h-40 object-cover rounded-full border shadow">
-      </div>
-    </a>
-
-    <a routerLink="/aktivitas/ormawa-ukm/himaaka" class="cursor-pointer">
-      <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition w-full h-80">
-        <p class="w-40 text-center text-blue-900 font-semibold mb-4 px-6 py-1 border border-blue-400 rounded-xl">
-          Hima Aka
-        </p>
-        <img src="assets/img/hima-aka.png" class="w-40 h-40 object-cover rounded-full border shadow">
-      </div>
-    </a>
-
+    </div>
   </div>
 </section>
 
-<!-- UNIT KEGIATAN MAHASISWA (UKM) -->
-<section class="py-10">
-  <h2 class="text-center text-xl font-semibold text-blue-900 mb-8">
-    Unit Kegiatan Mahasiswa
-  </h2>
+<section class="py-10 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-center text-2xl md:text-3xl font-bold text-blue-900 mb-8 relative inline-block w-full">
+      Unit Kegiatan Mahasiswa
+      <span class="block w-16 h-1 bg-yellow-400 mx-auto mt-2 rounded"></span>
+    </h2>
 
-  <div class="flex justify-center">
-    <div class="inline-grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center items-stretch">
 
-      <a routerLink="/aktivitas/ormawa-ukm/mapala" class="cursor-pointer">
-        <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition w-64 h-80">
-          <img src="assets/img/bem.png" class="w-40 h-40 object-cover rounded-full border shadow mb-4">
-          <p class="w-40 text-center text-blue-900 font-semibold py-1 border border-blue-400 rounded-xl">
-            MAPALA
-          </p>
+      <a *ngFor="let ukm of listUkm"
+         [routerLink]="['/aktivitas/ormawa-ukm/detail', ukm.idUkm]"
+         class="group cursor-pointer no-underline h-full">
+
+        <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 h-full border border-gray-100 p-6 flex flex-col items-center justify-start">
+
+          <div class="w-28 h-28 mb-2 rounded-full border-4 border-gray-50 shadow-inner overflow-hidden flex-shrink-0 flex items-center justify-center bg-white relative group-hover:scale-105 transition duration-500">
+            <img [src]="imageBaseUrl + ukm.gambarLogo"
+                 [alt]="ukm.namaUkm"
+                 class="w-full h-full object-contain p-1"
+                 onerror="this.src='assets/img/default-logo.png'">
+          </div>
+
+          <div class="w-full flex items-center justify-center">
+            <p class="text-center text-blue-900 font-bold text-sm md:text-base leading-snug px-1 pb-1 border-b-2 border-transparent group-hover:border-yellow-400 transition-all duration-300">
+              {{ ukm.namaUkm }}
+            </p>
+          </div>
+
         </div>
       </a>
 
-      <a routerLink="/aktivitas/ormawa-ukm/wira" class="cursor-pointer">
-        <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition w-64 h-80">
-          <img src="assets/img/hmti.png" class="w-40 h-40 object-cover rounded-full border shadow mb-4">
-          <p class="w-40 text-center text-blue-900 font-semibold py-1 border border-blue-400 rounded-xl">
-            Kewirausahaan
-          </p>
+      <div *ngIf="listUkm.length === 0" class="col-span-full text-center py-10 text-gray-500">
+         <div class="flex flex-col items-center">
+            <i class="fas fa-folder-open text-4xl mb-3 text-gray-300"></i>
+            <p>Belum ada data Unit Kegiatan Mahasiswa.</p>
         </div>
-      </a>
+      </div>
 
     </div>
   </div>
