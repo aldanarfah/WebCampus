@@ -1,9 +1,70 @@
-.hero h1 {
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+/* Tambahan styling khusus (opsional) */
+
+.hero {
+  position: relative;
+  width: 100%;
+
+  /* Kalau mau persis Akademik, ganti 80vh jadi 60vh */
+  height: 80vh;
+  min-height: 400px;
+
+  overflow: hidden;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero img {
   position: absolute;
-  left: 40px;
-  bottom: 40px;
-  font-size: 2rem;
-  color: white;
-  font-weight: bold;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  /* Fokus ke area atas (wajah) supaya kepala tidak kepotong */
+  object-position: center 70%;
+
+  /* Transisi halus untuk efek zoom */
+  transition: transform 0.8s ease-in-out;
+
+  z-index: 0;
+}
+
+/* EFEK HOVER: Gambar nge-zoom saat mouse masuk area hero */
+.hero:hover img {
+  transform: scale(1.05); /* Zoom in 5% */
+}
+
+/* Overlay Hitam (Agar teks Putih TERBACA JELAS) */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+  z-index: 1;
+  /* Overlay tidak boleh menghalangi klik, jadi pakai none */
+  pointer-events: none;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+  /* HAPUS 'pointer-events: none' AGAR TOMBOL BISA DIKLIK */
+}
+
+.hero h1 {
+  z-index: 20;
+  position: relative;
+  /* Bayangan lebih tebal dan luas */
+  text-shadow: 0 4px 30px rgba(0,0,0,0.9), 0 2px 5px rgba(0,0,0,0.8);
+}
+
+/* Responsive improvement (opsional) */
+@media (max-width: 768px) {
+    .hero {
+        height: 60vh;
+    }
 }

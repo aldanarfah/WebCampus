@@ -1,51 +1,67 @@
 /* HERO */
 
 /* Hero Carousel tinggi */
-#heroCarousel {
-  height: 100vh; /* bisa ganti 80vh kalau mau lebih tinggi */
-  overflow: hidden;
-}
-
-/* Semua item mengikuti tinggi carousel */
-#heroCarousel .carousel-item {
-  height: 100%;
-}
-
-
-/* Gambar memenuhi area */
-.hero-img {
-  height: 100%;
+.hero {
+  position: relative;
   width: 100%;
-  object-fit: cover; /* supaya gambar tidak gepeng */
-}
 
-/* Posisi caption */
-.hero-caption {
-  position: absolute;
-  left: 40px;
-  bottom: 40px;
-  font-size: 2rem;
-  color: white;
-  font-weight: bold;
-  text-shadow: 0px 4px 12px rgba(0,0,0,0.6);
-}
-
-
-.hero-img {
+  /* Kalau mau persis Akademik, ganti 80vh jadi 60vh */
   height: 100vh;
-  object-fit: cover;
+  min-height: 700px;
+
+  overflow: hidden;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero-caption {
+.hero img {
   position: absolute;
-  bottom: 30px;
-  left: 40px;
-  color: white;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 12px 20px;
-  border-radius: 10px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  /* Fokus ke area atas (wajah) supaya kepala tidak kepotong */
+  object-position: center 70%;
+
+  /* Transisi halus untuk efek zoom */
+  transition: transform 0.8s ease-in-out;
+
+  z-index: 0;
 }
 
+/* EFEK HOVER: Gambar nge-zoom saat mouse masuk area hero */
+.hero:hover img {
+  transform: scale(1.05); /* Zoom in 5% */
+}
+
+/* Overlay Hitam (Agar teks Putih TERBACA JELAS) */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+  z-index: 1;
+  /* Overlay tidak boleh menghalangi klik, jadi pakai none */
+  pointer-events: none;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+  /* HAPUS 'pointer-events: none' AGAR TOMBOL BISA DIKLIK */
+}
+
+.hero h1 {
+  z-index: 20;
+  position: relative;
+  /* Bayangan lebih tebal dan luas */
+  text-shadow: 0 4px 30px rgba(0,0,0,0.9), 0 2px 5px rgba(0,0,0,0.8);
+}
 /* PROFIL */
 
 .profil-section {
@@ -148,18 +164,18 @@
 
 /* Gambar besar */
 .berita-big-img {
-  width: 100%;       
+  width: 100%;
   height: 400px;      /* tinggi card besar */
-  object-fit: cover; 
+  object-fit: cover;
   border-radius: 12px;
   display: block;
 }
 
 /* Gambar kecil */
 .berita-small-img {
-  width: 100%;       
+  width: 100%;
   height: 195px;      /* setengah dari card besar */
-  object-fit: cover; 
+  object-fit: cover;
   border-radius: 12px;
   display: block;
 }
@@ -181,7 +197,7 @@
 
 
 
-/* EVENT */ 
+/* EVENT */
 .event-card img {
   width: 100%;
   height: 180px;

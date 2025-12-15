@@ -29,9 +29,9 @@ export class ProfilHomeComponent implements OnInit {
   currentIndex = 0;
 
   cards: Card[] = [
-    { title: 'Sejarah', image: 'https://plus.unsplash.com/premium_photo-1680807988328-7ba28ad24d9f?w=780', link: ['/profil/sejarah'] },
-    { title: 'Visi & Misi', image: 'https://images.unsplash.com/photo-1677594334053-afe4b41aa0a3?w=780', link: ['/profil/visi-misi'] },
-    { title: 'Struktur Organisasi', image: 'https://images.unsplash.com/photo-1462536943532-57a629f6cc60?w=780', link: ['/profil/struktur-organisasi'] }
+    { title: 'Sejarah', image: '/assets/img/h.png', link: ['/profil/sejarah'] },
+    { title: 'Visi & Misi', image: '/assets/img/VISI-MISI.png', link: ['/profil/visi-misi'] },
+    { title: 'Struktur Organisasi', image: '/assets/img/Struktur-Organisasi.png', link: ['/profil/struktur-organisasi'] }
   ];
 
   stats: Statistik[] = [

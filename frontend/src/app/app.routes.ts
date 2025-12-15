@@ -164,7 +164,10 @@ export const routes: Routes = [
     ]
   },
 
-  { path: 'pmb', component: PmbComponent },
-  { path: 'pmb/beasiswa', component: BeasiswaComponent },
-  { path: 'kontak', component: KontakComponent },
+ { path: 'pmb', component: PmbComponent },
+{ path: 'pmb/beasiswa', component: BeasiswaComponent },
+
+
+  //Kontak
+  { path: 'kontak', component: KontakComponent },
 ];
