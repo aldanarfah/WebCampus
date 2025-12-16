@@ -14,15 +14,16 @@ import { SaranaComponent } from './components/profil/sarana/sarana.component';
 // Aktivitas Kampus
 import { AktivitasComponent } from './components/aktivitas/aktivitas/aktivitas.component';
 import { AktivitasHomeComponent } from './components/aktivitas/aktivitas-home/aktivitas-home.component';
-import { OrmawaUkmComponent } from './components/aktivitas/ormawa-ukm/ormawa-ukm.component';
 
-// IMPORT KOMPONEN BARU (DETAIL ORGANISASI)
+// Import Komponen Ormawa & UKM
+import { OrmawaUkmComponent } from './components/aktivitas/ormawa-ukm/ormawa-ukm.component';
+import { DetailUkmComponent } from './components/aktivitas/ormawa-ukm/detail-ukm/detail-ukm.component';
 import { DetailOrganisasiComponent } from './components/aktivitas/ormawa-ukm/detail-organisasi/detail-organisasi.component';
 
 import { BeritaComponent } from './components/aktivitas/berita/berita.component';
 import { EventComponent } from './components/aktivitas/event/event.component';
 
-// Alumni-Karir & Lainnya (Saya persingkat import agar fokus, biarkan yang lain tetap ada)
+// Alumni-Karir
 import { AlumniKarirComponent } from './components/alumni-karir/alumni-karir/alumni-karir.component';
 import { AlumniKarirHomeComponent } from './components/alumni-karir/alumni-karir-home/alumni-karir-home.component';
 import { KegiatanAlumniComponent } from './components/alumni-karir/kegiatan-alumni/kegiatan-alumni.component';
@@ -138,11 +139,17 @@ export const routes: Routes = [
     component: AktivitasComponent,
     children: [
       { path: '', component: AktivitasHomeComponent },
+
+      // === ROUTE LIST ORMAWA & UKM (INI YANG SEBELUMNYA HILANG) ===
       { path: 'ormawa-ukm', component: OrmawaUkmComponent },
 
-      // === ROUTE DINAMIS ===
-      // Menggunakan DetailOrganisasiComponent untuk menangkap ID
+      // === ROUTE DINAMIS DETAIL ===
+
+      // 1. Detail Organisasi
       { path: 'ormawa-ukm/detail/:id', component: DetailOrganisasiComponent },
+
+      // 2. Detail UKM
+      { path: 'ormawa-ukm/ukm-detail/:id', component: DetailUkmComponent },
 
       { path: 'berita', component: BeritaComponent },
       { path: 'event', component: EventComponent },
@@ -164,10 +171,10 @@ export const routes: Routes = [
     ]
   },
 
- { path: 'pmb', component: PmbComponent },
-{ path: 'pmb/beasiswa', component: BeasiswaComponent },
+  // PMB
+  { path: 'pmb', component: PmbComponent },
+  { path: 'pmb/beasiswa', component: BeasiswaComponent },
 
-
-  //Kontak
-  { path: 'kontak', component: KontakComponent },
+  // Kontak
+  { path: 'kontak', component: KontakComponent },
 ];
