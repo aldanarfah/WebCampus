@@ -2,7 +2,7 @@
   <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
 </div>
 
-<div *ngIf="!isLoading && organisasi" class="bg-white min-h-screen">
+<div *ngIf="!isLoading && ukm" class="bg-white min-h-screen">
 
   <section class="hero-section">
     <div class="hero-bg">
@@ -10,12 +10,12 @@
       <div class="hero-overlay"></div>
     </div>
     <div class="hero-content">
-      <h1 class="hero-title">{{ organisasi.namaOrganisasi }}</h1>
-      <p class="hero-desc">{{ organisasi.deskripsi }}</p>
+      <h1 class="hero-title">{{ ukm.namaUkm }}</h1>
+      <p class="hero-desc">{{ ukm.deskripsi }}</p>
       <div class="hero-badge-container">
         <div class="hero-badge-label">KETUA</div>
         <div class="hero-badge-name">
-           {{ organisasi.ketua }}
+           {{ ukm.ketua }} <span class="hero-badge-period">({{ ukm.periode }})</span>
         </div>
       </div>
     </div>
@@ -23,13 +23,10 @@
 
   <div class="container mx-auto px-4 py-4">
     <nav class="flex text-sm text-gray-500">
-      <a routerLink="/" class="hover:text-blue-600 no-underline transition-colors">Home</a>
-      <span class="mx-2">/</span>
-      <a routerLink="/aktivitas" class="hover:text-blue-600 no-underline transition-colors">Kehidupan Kampus</a>
-      <span class="mx-2">/</span>
-      <a routerLink="/aktivitas/ormawa-ukm" class="hover:text-blue-600 no-underline transition-colors">Ormawa & UKM</a>
-      <span class="mx-2">/</span>
-      <span class="font-bold text-blue-900">{{ organisasi.namaOrganisasi }}</span>
+      <a routerLink="/" class="hover:text-blue-600 no-underline">Home</a> <span class="mx-2">/</span>
+      <a routerLink="/aktivitas" class="hover:text-blue-600 no-underline">Kehidupan Kampus</a> <span class="mx-2">/</span>
+      <a routerLink="/aktivitas/ormawa-ukm" class="hover:text-blue-600 no-underline">Ormawa & UKM</a> <span class="mx-2">/</span>
+      <span class="font-bold text-blue-900">{{ ukm.namaUkm }}</span>
     </nav>
   </div>
 
@@ -40,21 +37,19 @@
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
             <h2 class="text-lg font-bold text-gray-800">Struktur Organisasi</h2>
-            <p class="text-xs text-gray-500 mt-1">Bagan kepengurusan periode {{ organisasi.periode }}</p>
+            <p class="text-xs text-gray-500 mt-1">Bagan kepengurusan periode {{ ukm.periode }}</p>
           </div>
-
           <div class="p-6 flex justify-center items-center flex-col">
-            <img *ngIf="organisasi.strukturOrganisasi"
-                 [src]="imageBaseUrl + organisasi.strukturOrganisasi"
-                 alt="Struktur Organisasi"
+            <img *ngIf="ukm.strukturOrganisasi"
+                 [src]="imageBaseUrl + ukm.strukturOrganisasi"
+                 alt="Struktur UKM"
                  class="max-w-full max-h-[500px] object-contain cursor-zoom-in hover:opacity-95 transition rounded"
-                 (click)="openModal({id:0, type:'struktur', judul:'Struktur Organisasi', tanggal:'', gambar: imageBaseUrl + organisasi.strukturOrganisasi, isi: ''})">
+                 (click)="openModal({id:0, type:'struktur', judul:'Struktur Organisasi', tanggal:'', gambar: imageBaseUrl + ukm.strukturOrganisasi, isi: ''})">
 
-            <div *ngIf="!organisasi.strukturOrganisasi" class="py-12 text-center text-gray-400 italic bg-gray-50 w-full rounded border border-dashed border-gray-300">
+            <div *ngIf="!ukm.strukturOrganisasi" class="py-12 text-center text-gray-400 italic bg-gray-50 w-full rounded border border-dashed border-gray-300">
               <i class="far fa-image text-3xl mb-2"></i><br>
-              Belum ada gambar struktur organisasi.
+              Belum ada gambar struktur.
             </div>
-
             <p class="text-center text-[10px] text-gray-400 mt-3 italic">*Klik gambar untuk melihat lebih jelas</p>
           </div>
         </div>
@@ -68,21 +63,20 @@
           <div class="p-6 space-y-5">
             <div>
               <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Penanggung Jawab</p>
-              <p class="text-sm font-semibold text-gray-800">{{ organisasi.penanggungJawab }}</p>
+              <p class="text-sm font-semibold text-gray-800">{{ ukm.penanggungJawab }}</p>
             </div>
-            <hr class="border-gray-100">
-            <div>
+            <hr class="border-gray-100" *ngIf="ukm.namaProdi">
+            <div *ngIf="ukm.namaProdi">
               <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Prodi Naungan</p>
-              <p class="text-sm font-semibold text-gray-800">{{ organisasi.namaProdi }}</p>
+              <p class="text-sm font-semibold text-gray-800">{{ ukm.namaProdi }}</p>
             </div>
           </div>
         </div>
 
         <div class="bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl shadow-lg p-6 text-white relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-24 h-24 bg-white opacity-10 rounded-full -mr-10 -mt-10 blur-xl"></div>
           <h3 class="font-bold text-lg mb-1">Ingin Bergabung?</h3>
-          <p class="text-xs text-green-100 mb-6 opacity-90">Hubungi kami untuk info pendaftaran atau kerjasama.</p>
-          <a [href]="getLinkWA(organisasi.contactPerson)" target="_blank"
+          <p class="text-xs text-green-100 mb-6 opacity-90">Hubungi kami untuk info pendaftaran.</p>
+          <a [href]="getLinkWA(ukm.contactPerson)" target="_blank"
              class="block w-full bg-white text-green-600 font-bold text-sm py-3 rounded-lg hover:bg-green-50 transition text-center shadow-md no-underline">
             <i class="fab fa-whatsapp text-lg align-middle mr-1"></i> Chat WhatsApp
           </a>
@@ -108,21 +102,13 @@
         <div *ngFor="let item of listBerita"
              class="flex-none w-[280px] md:w-[320px] bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden snap-center flex flex-col hover:shadow-md transition cursor-pointer group"
              (click)="openModal(item)">
-
           <div class="h-40 overflow-hidden relative">
             <img [src]="item.gambar" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='assets/img/berita1.jpg'">
           </div>
-
           <div class="p-4 flex flex-col flex-grow">
-            <div class="text-[10px] text-gray-400 mb-2 uppercase font-bold tracking-wide text-blue-600">
-              {{ item.tanggal }}
-            </div>
-            <h3 class="font-bold text-sm text-gray-800 mb-2 line-clamp-2 leading-relaxed group-hover:text-blue-600">
-              {{ item.judul }}
-            </h3>
-            <p class="text-xs text-gray-500 line-clamp-2 mb-3 leading-relaxed">
-              {{ item.isi }}
-            </p>
+            <div class="text-[10px] text-gray-400 mb-2 uppercase font-bold tracking-wide text-blue-600">{{ item.tanggal }}</div>
+            <h3 class="font-bold text-sm text-gray-800 mb-2 line-clamp-2 leading-relaxed group-hover:text-blue-600">{{ item.judul }}</h3>
+            <p class="text-xs text-gray-500 line-clamp-2 mb-3 leading-relaxed">{{ item.isi }}</p>
             <span class="text-blue-600 text-xs font-bold mt-auto hover:underline">Baca Selengkapnya &rarr;</span>
           </div>
         </div>
@@ -147,25 +133,17 @@
         <div *ngFor="let item of listEvent"
              class="flex-none w-[280px] md:w-[320px] bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden snap-center flex flex-col hover:shadow-md transition cursor-pointer group"
              (click)="openModal(item)">
-
           <div class="h-40 overflow-hidden relative">
             <img [src]="item.gambar" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='assets/img/event1.jpg'">
-            <div class="absolute top-2 right-2 bg-yellow-400 text-blue-900 text-[10px] font-bold px-2 py-0.5 rounded shadow">
-              {{ item.status }}
-            </div>
+            <div class="absolute top-2 right-2 bg-yellow-400 text-blue-900 text-[10px] font-bold px-2 py-0.5 rounded shadow">{{ item.status }}</div>
           </div>
-
           <div class="p-4 flex flex-col flex-grow">
             <div class="flex items-center gap-2 mb-2">
                <i class="far fa-calendar-alt text-blue-500 text-xs"></i>
                <span class="text-xs font-bold text-gray-700">{{ item.tanggal }}</span>
             </div>
-            <h3 class="font-bold text-sm text-gray-800 mb-2 line-clamp-2 leading-relaxed group-hover:text-blue-600">
-              {{ item.judul }}
-            </h3>
-            <p class="text-xs text-gray-500 line-clamp-2 mb-3 leading-relaxed">
-              {{ item.isi }}
-            </p>
+            <h3 class="font-bold text-sm text-gray-800 mb-2 line-clamp-2 leading-relaxed group-hover:text-blue-600">{{ item.judul }}</h3>
+            <p class="text-xs text-gray-500 line-clamp-2 mb-3 leading-relaxed">{{ item.isi }}</p>
             <span class="text-blue-600 text-xs font-bold mt-auto hover:underline">Detail Event &rarr;</span>
           </div>
         </div>
@@ -177,7 +155,6 @@
 
 <div *ngIf="selectedItem" class="fixed inset-0 z-50 flex items-center justify-center p-4">
   <div class="absolute inset-0 bg-black/75 backdrop-blur-sm transition-opacity" (click)="closeModal()"></div>
-
   <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto relative z-10 animate-fade-in-up flex flex-col">
 
     <button (click)="closeModal()" class="absolute top-3 right-3 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 transition z-20">
@@ -186,18 +163,16 @@
 
     <div class="h-64 md:h-[400px] w-full relative bg-gray-900 flex justify-center items-center flex-shrink-0">
       <img [src]="selectedItem.gambar" class="w-full h-full object-contain">
-
       <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 to-transparent p-6 pt-12">
         <h2 class="text-white text-xl md:text-2xl font-bold leading-tight shadow-sm">{{ selectedItem.judul }}</h2>
       </div>
     </div>
 
     <div class="p-6">
-
       <div class="flex items-center justify-between text-xs text-gray-500 mb-6 border-b border-gray-100 pb-4">
         <div class="flex items-center gap-4">
           <span *ngIf="selectedItem.tanggal"><i class="far fa-calendar-alt mr-1"></i> {{ selectedItem.tanggal }}</span>
-          <span><i class="fas fa-user-edit mr-1"></i> Diposting oleh: <b>{{ organisasi?.namaOrganisasi }}</b></span>
+          <span><i class="fas fa-user-edit mr-1"></i> Diposting oleh: <b>{{ ukm?.namaUkm }}</b></span>
         </div>
       </div>
 
@@ -210,7 +185,6 @@
             <p class="text-[10px] text-gray-400 uppercase font-bold mb-0.5">Waktu Selesai</p>
             <p class="text-xs font-semibold text-blue-900">{{ selectedItem.tanggalSelesai }}</p>
         </div>
-
         <div>
             <p class="text-[10px] text-gray-400 uppercase font-bold mb-0.5">Lokasi</p>
             <p class="text-xs font-semibold text-gray-700 flex items-center gap-1">
@@ -233,7 +207,6 @@
           Daftar Sekarang <i class="fas fa-external-link-alt ml-1"></i>
         </a>
       </div>
-
     </div>
   </div>
 </div>

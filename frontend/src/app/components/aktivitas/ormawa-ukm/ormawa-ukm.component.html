@@ -75,8 +75,8 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center items-stretch">
 
       <a *ngFor="let ukm of listUkm"
-         [routerLink]="['/aktivitas/ormawa-ukm/detail', ukm.idUkm]"
-         class="group cursor-pointer no-underline h-full">
+   [routerLink]="['/aktivitas/ormawa-ukm/ukm-detail', ukm.idUkm]"  
+   class="group cursor-pointer no-underline h-full">
 
         <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 h-full border border-gray-100 p-6 flex flex-col items-center justify-start">
 
