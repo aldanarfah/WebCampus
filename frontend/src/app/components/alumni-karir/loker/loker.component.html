@@ -14,61 +14,155 @@
     <span class="menu-active">Lowongan Kerja</span>
   </nav>
 </div>
-<!-- CONTENT WRAPPER -->
 
+<!-- ================= LIST LOKER ================= -->
+<div class="container my-5 w-75">
 
+  <!-- CARD 1 -->
+  <div class="card mb-4 shadow-sm overflow-hidden">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="/assets/img/company-1.jpg"
+             class="img-fluid h-100 object-fit-cover"
+             alt="Company">
+      </div>
+      <div class="col-md-8 d-flex align-items-center">
+        <div class="p-4 w-100">
+          <h4 class="fw-semibold">CEO</h4>
+          <p class="text-muted mb-1">
+            PT. Bersatu Teguh Berpencar Jadi Acar
+          </p>
+          <p class="small text-secondary">New York City</p>
 
-<section class="bg-gray-50 pb-20 pt-5">
-  <div class="container mx-auto px-6 flex justify-center">
-
-    <div class="bg-white w-full max-w-5xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] rounded-lg p-8 md:p-12 border border-gray-100">
-
-      <div class="flex flex-col md:flex-row gap-8 mb-10">
-
-        <div class="w-full md:w-[240px] shrink-0">
-          <div class="bg-blue-200 w-full aspect-square rounded-md"></div>
-        </div>
-
-        <div class="flex-1 flex flex-col justify-between">
-
-          <div class="space-y-4 text-gray-800 text-sm md:text-base">
-            <div class="flex flex-col sm:flex-row sm:items-start">
-              <span class="font-bold w-44 shrink-0">Posisi:</span>
-              <span class="font-bold">CEO</span>
-            </div>
-
-            <div class="flex flex-col sm:flex-row sm:items-start">
-              <span class="font-bold w-44 shrink-0">Nama Perusahaan:</span>
-              <span class="font-bold">PT. Bersatu Teguh Berpencar Jadi Acar</span>
-            </div>
-
-            <div class="flex flex-col sm:flex-row sm:items-start">
-              <span class="font-bold w-44 shrink-0">Lokasi:</span>
-              <span class="font-bold">Newyork City</span>
-            </div>
-          </div>
-
-          <div class="mt-8">
-            <button class="bg-black text-white text-sm font-medium px-10 py-3 rounded-md hover:bg-gray-800 transition-all shadow-md">
-              Lamar
-            </button>
-          </div>
-
+          <button
+            class="btn btn-sm btn-outline-dark mt-2"
+            data-bs-toggle="modal"
+            data-bs-target="#detailLokerModal">
+            Detail Loker
+          </button>
         </div>
       </div>
+    </div>
+  </div>
 
-      <hr class="border-gray-200 mb-8">
+  <!-- CARD 2 -->
+  <div class="card mb-4 shadow-sm overflow-hidden">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="/assets/img/company-2.jpg"
+             class="img-fluid h-100 object-fit-cover"
+             alt="Company">
+      </div>
+      <div class="col-md-8 d-flex align-items-center">
+        <div class="p-4 w-100">
+          <h4 class="fw-semibold">Frontend Developer</h4>
+          <p class="text-muted mb-1">
+            PT. Teknologi Masa Depan
+          </p>
+          <p class="small text-secondary">Jakarta</p>
 
-      <div class="text-sm text-gray-700 leading-loose space-y-6 text-justify">
-        <p>
-          Perusahaan PT. Bersatu Teguh Berpencar Jadi Acar adalah perusahaan yang berlokasi di Newyork gini gaksih tulisannya, apa New York ya itulah. Sekarang sedang mencari kandidat yang cocok untuk posisi CEO karena CEO mereka sudah tergila-gila dengan Y/N. Ga ngotak bucinnya makanya dipecat, bikin saham turun, dibenci 1 kantor gaktuh. Anyway, jadi CEO gak harus pinter kok, ipk dibawah 3 pun bisa jadi CEO, wong jadi menteri aja bisa masa jadi CEO gabisa. Perusahaan ini bergerak di bidang kelapa sawit, eh di New York ada kebun sawit gaksih, gatau sih, yaudahlah.
-        </p>
-        <p>
-          Dengan persyaratan minimal 1000 tahun pengalaman kerja kalau tak sembahyang apa gunanya. Silahkan kumpulkan CVmu sekarang!
-        </p>
+          <button
+            class="btn btn-sm btn-outline-dark mt-2"
+            data-bs-toggle="modal"
+            data-bs-target="#detailLokerModal">
+            Detail Loker
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="card mb-4 shadow-sm overflow-hidden">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="/assets/img/company-3.jpg"
+             class="img-fluid h-100 object-fit-cover"
+             alt="Company">
+      </div>
+      <div class="col-md-8 d-flex align-items-center">
+        <div class="p-4 w-100">
+          <h4 class="fw-semibold">Backend Developer</h4>
+          <p class="text-muted mb-1">
+            PT. Digital Solusi Nusantara
+          </p>
+          <p class="small text-secondary">Surabaya</p>
+
+          <button
+            class="btn btn-sm btn-outline-dark mt-2"
+            data-bs-toggle="modal"
+            data-bs-target="#detailLokerModal">
+            Detail Loker
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= MODAL DETAIL LOKER ================= -->
+<div class="modal fade" id="detailLokerModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-0 rounded-3">
+
+      <!-- HEADER -->
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold">Detail Lowongan Kerja</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- BODY -->
+      <div class="modal-body bg-light">
+
+        <div class="bg-white rounded-3 shadow-sm p-4 mb-4">
+          <div class="row g-4">
+
+            <div class="col-md-3">
+              <div class="bg-primary-subtle ratio ratio-1x1 rounded"></div>
+            </div>
+
+            <div class="col-md-9 d-flex flex-column justify-content-between">
+
+              <div>
+                <p><strong>Posisi:</strong> CEO</p>
+                <p><strong>Nama Perusahaan:</strong>
+                  PT. Bersatu Teguh Berpencar Jadi Acar
+                </p>
+                <p><strong>Lokasi:</strong> New York City</p>
+              </div>
+
+              <div class="mt-3">
+                <button class="btn btn-dark px-4">
+                  Lamar
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3 shadow-sm p-4 text-muted">
+          <p>
+            PT. Bersatu Teguh Berpencar Jadi Acar adalah perusahaan yang
+            berlokasi di New York. Saat ini sedang mencari kandidat
+            untuk posisi CEO.
+          </p>
+          <p>
+            Dengan persyaratan minimal 1000 tahun pengalaman kerja.
+            Silakan kumpulkan CV Anda sekarang.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Tutup
+        </button>
       </div>
 
     </div>
-
   </div>
-</section>
+</div>
