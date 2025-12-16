@@ -1,6 +1,6 @@
 /* Hero Section */
 .hero-section {
-    height: 90vh; /* Tinggi hampir layar penuh */
+    height: 100vh; /* Tinggi hampir layar penuh */
     min-height: 500px;
 }
 
@@ -107,6 +107,8 @@
 .hero-title-animate {
   animation: fadeInUp 1s ease-out forwards;
   opacity: 0; /* Mulai dari transparan */
+  font-size: 56px;      /* ubah sesuai kebutuhan */
+  font-weight: 700;
 }
 
 /* Terapkan ke Sub-judul (muncul lebih lambat/delay) */
@@ -114,6 +116,8 @@
   animation: fadeInUp 1s ease-out forwards;
   animation-delay: 0.3s; /* Delay 0.3 detik biar muncul belakangan */
   opacity: 0;
+  font-size: 24px;      /* ubah sesuai kebutuhan */
+  margin-top: 12px;
 }
 /* --- 3. NAVBAR STYLES --- */
 
