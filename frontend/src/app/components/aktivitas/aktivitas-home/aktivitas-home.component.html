@@ -1,98 +1,96 @@
-<!-- HERO -->
-<section class="hero relative h-[80vh]">
-  <img src="/assets/img/Aktivitas-campus.jpg" alt="Hero" class="w-full h-full object-cover">
-  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-    <h1 class="text-white text-4xl md:text-6xl font-bold">Kehidupan Kampus</h1>
+<section class="hero relative d-flex align-items-center justify-content-center">
+  <img src="assets/img/Aktivitas.jpg" alt="Hero">
+
+  <div class="container relative z-20 text-center px-4">
+    <h1 class="text-white text-4xl md:text-6xl font-bold leading-tight drop-shadow-lg">
+      Kreativitas & Inovasi <br> Mahasiswa Polinema
+    </h1>
+    <p class="text-gray-200 mt-4 text-lg md:text-xl max-w-2xl mx-auto">
+      Mewujudkan generasi unggul melalui kegiatan akademik dan non-akademik yang inspiratif.
+    </p>
   </div>
 </section>
 
-<!-- KURIKULUM -->
-<section class="container my-5">
-  <div class="row align-items-center">
-    <div class="col-md-6 ormawa-image-wrapper">
-      <!-- Judul di atas gambar -->
-      <h2 class="fw-bold mb-3">Organisasi Mahasiswa dan UKM</h2>
+<section class="container my-5 py-5">
+  <div class="row align-items-center gy-5">
 
-      <img
-        src="https://images.unsplash.com/flagged/photo-1554473675-d0904f3cbf38?w=780"
-        class="img-fluid rounded-3 shadow"
-        alt="Kurikulum">
+    <div class="col-md-6">
+      <div class="ormawa-image-wrapper">
+        <img
+          src="assets/img/ormawa_ukm1.jpg"
+          class="img-fluid"
+          alt="Organisasi dan UKM">
+      </div>
+    </div>
 
-      <!-- Tombol overlay di bawah kiri -->
-      <a routerLink="/aktivitas/ormawa-ukm" class="btn ormawa-btn d-flex align-items-center gap-2 px-4">
-        Lihat Organisasi & UKM
-        <span class="arrow">➜</span>
+    <div class="col-md-6 ps-md-5">
+      <h2 class="fw-bold mb-3" style="color: #022B72; font-size: 2.5rem;">Organisasi & UKM</h2>
+      <div style="width: 80px; height: 4px; background: #FF914D; margin-bottom: 20px; border-radius: 10px;"></div>
+
+      <p class="text-secondary" style="font-size: 1.05rem; line-height: 1.8;">
+        <strong>Organisasi kampus</strong> adalah wadah resmi untuk melatih kepemimpinan, seperti BEM dan Himpunan Jurusan.
+        <br><br>
+        Sedangkan <strong>Unit Kegiatan Mahasiswa (UKM)</strong> adalah tempat menyalurkan hobi spesifik. Bergabunglah dan kembangkan potensimu!
+      </p>
+
+      <a routerLink="/aktivitas/ormawa-ukm" class="btn ormawa-btn">
+        Lihat Daftar Organisasi & UKM
       </a>
     </div>
 
-    <div class="col-md-6">
-      <p>
-        Kampus ini menerapkan kurikulum dengan pendekatan Outcome Based Education (OBE)
-        — yaitu menekankan capaian pembelajaran (learning outcomes) yang jelas dan relevan
-        dengan kebutuhan dunia kerja.
+  </div>
+</section>
+
+<section class="w-full py-5 bg-white">
+  <div class="container">
+    <div class="row align-items-center gy-4">
+
+      <div class="col-md-6 text-md-start text-center pe-md-5 order-2 order-md-1">
+        <h2 class="text-3xl font-bold text-[#002E73] mb-3">Berita Kampus</h2>
+        <div style="height: 4px; width: 60px; background-color: #FF914D; margin-bottom: 1rem; border-radius: 2px;"></div>
+        <p class="text-gray-600 mb-4 text-lg">
+          Mahasiswa Program Studi D-III Teknologi Sipil Polinema PSDKU Lumajang berhasil meraih K3 Terbaik di Civil Creartive Competition 2025.
+        </p>
+        <a routerLink="/aktivitas/berita" class="btn-lihat">
+          Lihat Semua Berita
+        </a>
+      </div>
+
+      <div class="col-md-6 order-1 order-md-2">
+        <div class="img-shape-wrapper rounded-l-[200px] border-r-4 border-[#002E73]">
+          <img src="assets/img/Aktivitas3.jpg"
+               alt="Berita Kampus" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="w-full py-5 mb-5 bg-white">
+  <div class="container">
+    <div class="row align-items-center gy-4">
+
+      <div class="col-md-6">
+        <div class="img-shape-wrapper rounded-r-[200px] border-l-4 border-[#002E73]">
+          <img src="assets/img/event1.jpg"
+               alt="Event Kampus" />
+        </div>
+      </div>
+
+      <div class="col-md-6 ps-md-5">
+      <h2 class="fw-bold mb-3" style="color: #022B72; font-size: 2.5rem;">Event Kampus</h2>
+      <div style="width: 80px; height: 4px; background: #FF914D; margin-bottom: 20px; border-radius: 10px;"></div>
+
+      <p class="text-secondary" style="font-size: 1.05rem; line-height: 1.8;">
+        Politeknik Negeri Malang Kampus Lumajang menandai era baru pendidikan tinggi di kabupaten Lumajang dalam kuliah umum perdana di Pendopo Arya Wiraraja, Kamis 28 November 2025,
+          Bupati Lumajang Indah Amperawati menitipkan pesan penting bagi mahasiswa baru "masa studi adalah disiplin, kerja keras, mentalitas positif, dan konsistensi dalam belajar".
       </p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================
-     SECTION BERITA KAMPUS
-============================ -->
-<section class="w-full py-20">
-  <div class="flex flex-col md:flex-row items-center">
-
-    <!-- Foto (KIRI) -->
-    <div class="md:w-1/2 rounded-r-[200px] overflow-hidden shadow-md">
-      <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b"
-           class="w-full h-96 object-cover rounded-r-[200px]" />
-    </div>
-
-    <!-- Text (KANAN) -->
-    <div class="md:w-1/2 flex flex-col justify-center text-right px-6">
-      <h2 class="text-2xl font-bold text-[#002E73] mb-3">Berita Kampus</h2>
-      <p class="text-gray-600 mb-6">Berita seputar kegiatan dan informasi terbaru di Polinema</p>
-
-      <!-- Bungkus tombol supaya selebar teks -->
-      <div class="self-end">
-        <a routerLink="/aktivitas/berita"
-           class="inline-block bg-white text-[#FF914D] px-4 py-2 rounded-full
-                  font-semibold text-sm border border-[#FF914D]
-                  hover:bg-[#FF914D] hover:text-white transition">
-          Lihat
+        <a routerLink="/aktivitas/event" class="btn-lihat">
+          Lihat Event
         </a>
       </div>
+
     </div>
-
-  </div>
-</section>
-
-<!-- ============================
-     SECTION EVENT KAMPUS
-============================ -->
-<section class="w-full py-20">
-  <div class="flex flex-col md:flex-row items-center">
-
-    <!-- Text (KIRI) -->
-    <div class="md:w-1/2 flex flex-col justify-center text-left px-6">
-      <h2 class="text-2xl font-bold text-[#002E73] mb-3">Event Kampus</h2>
-      <p class="text-gray-600 mb-6">Mari lihat event–event yang akan datang</p>
-
-      <!-- Bungkus tombol supaya selebar teks -->
-      <div class="self-start">
-        <a routerLink="/aktivitas/event"
-           class="inline-block bg-white text-[#FF914D] px-4 py-2 rounded-full
-                  font-semibold text-sm border border-[#FF914D]
-                  hover:bg-[#FF914D] hover:text-white transition">
-          Lihat
-        </a>
-      </div>
-    </div>
-
-    <!-- Foto (KANAN) -->
-    <div class="md:w-1/2 rounded-l-[200px] overflow-hidden shadow-md">
-      <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d"
-           class="w-full h-96 object-cover rounded-l-[200px]" />
-    </div>
-
   </div>
 </section>

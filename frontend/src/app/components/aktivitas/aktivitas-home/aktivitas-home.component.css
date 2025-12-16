@@ -1,54 +1,171 @@
-.hero h1 {
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+/* =========================================
+   1. HERO SECTION (Tinggi Seperti Akademik)
+   ========================================= */
+/* =========================================
+   1. HERO SECTION (Zoom on Hover)
+   ========================================= */
+.hero {
+  position: relative;
+  width: 100%;
+
+  /* Kalau mau persis Akademik, ganti 80vh jadi 60vh */
+  height: 80vh; 
+  min-height: 400px; 
+
+  overflow: hidden; 
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero img {
   position: absolute;
-  left: 40px;
-  bottom: 40px;
-  font-size: 2rem;
-  color: white;
-  font-weight: bold;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  /* Fokus ke area atas (wajah) supaya kepala tidak kepotong */
+  object-position: center 40%; 
+
+  /* Transisi halus untuk efek zoom */
+  transition: transform 0.8s ease-in-out;
+  
+  z-index: 0;
 }
 
-.ormawa-image-wrapper h2 {
-  font-size: 2.5rem;      /* ukuran font, bisa disesuaikan */
-  color: #022B72;         /* warna biru gelap */
-  font-weight: 700;       /* tebal */
-  margin-bottom: 1rem;    /* jarak bawah dari gambar */
+/* EFEK HOVER: Gambar nge-zoom saat mouse masuk area hero */
+.hero:hover img {
+  transform: scale(1.05); /* Zoom in 5% */
 }
 
+/* Overlay Hitam (Agar teks Putih TERBACA JELAS) */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+  z-index: 1; 
+  /* Overlay tidak boleh menghalangi klik, jadi pakai none */
+  pointer-events: none; 
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+  /* HAPUS 'pointer-events: none' AGAR TOMBOL BISA DIKLIK */
+}
+
+.hero h1 {
+  z-index: 20;
+  position: relative;
+  /* Bayangan lebih tebal dan luas */
+  text-shadow: 0 4px 30px rgba(0,0,0,0.9), 0 2px 5px rgba(0,0,0,0.8);
+}
+
+/* =========================================
+   2. ORMAWA & UKM (Layout Rapi)
+   ========================================= */
+/* Container Gambar */
+.ormawa-image-wrapper {
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Bayangan biar timbul */
+  padding: 0 !important; /* Reset padding bootstrap jika ada */
+}
 
 .ormawa-image-wrapper img {
-  width: 100%;        /* Lebar mengikuti container */
-  height: 250px;      /* Tinggi tetap */
-  object-fit: cover;  /* Memotong gambar supaya tidak melebar */
-  border-radius: 1rem; /* Rounded sesuai sebelumnya */
+  width: 100%;
+  height: 350px; /* Tinggi gambar diperbesar sedikit biar proporsional */
+  object-fit: cover;
+  object-position: center 80%; /* Fokus tengah tinggi */
+  transition: transform 0.5s ease;
 }
 
-
-.ormawa-image-wrapper {
-  position: relative; /* patokan tombol overlay */
+.ormawa-image-wrapper:hover img {
+  transform: scale(1.05); /* Zoom dikit saat hover */
 }
 
+/* Tombol Ormawa (Dipindah ke kolom teks) */
 .ormawa-btn {
-  position: absolute;
-  padding: 20px 200px; /* lebih besar */
-  width: 60%;
-  bottom: -22px;
-  right: -90px;
-  top: auto;
-  left: auto;
   background: #022B72;
-  border: none;
-  border-radius: 14px;
-  font-size: 1rem;
+  border: 2px solid #022B72;
   color: white;
-  text-decoration: none;
-  transition: background 0.3s ease;
+  border-radius: 50px; /* Lebih bulat modern */
+  padding: 12px 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 20px; /* Jarak dari teks paragraf */
+  display: inline-flex;
+  align-items: center;
+  width: fit-content; /* Lebar mengikuti konten, bukan full */
 }
 
+/* Efek Hover Tombol */
 .ormawa-btn:hover {
-  background: #001f4d; /* warna lebih gelap saat hover */
+  background-color: transparent !important;
+  color: #022B72 !important;
+  border-color: #022B72;
+  transform: translateX(5px); /* Geser kanan dikit */
 }
 
-.ormawa-btn .arrow {
-  font-size: 20px;
+.arrow {
+  margin-left: 10px;
+  transition: transform 0.3s;
+}
+
+.ormawa-btn:hover .arrow {
+  transform: translateX(5px);
+}
+
+/* =========================================
+   3. BERITA & EVENT (Bentuk Unik)
+   ========================================= */
+/* Wrapper Gambar Unik */
+.img-shape-wrapper {
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.img-shape-wrapper:hover {
+  transform: translateY(-5px); /* Naik dikit saat hover */
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.img-shape-wrapper img {
+  width: 100%;
+  height: 400px; /* Tinggi konsisten */
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.img-shape-wrapper:hover img {
+  transform: scale(1.1); /* Gambar dalam zoom */
+}
+
+/* Tombol Lihat (Berita & Event) */
+.btn-lihat {
+  background: #022B72;
+  border: 2px solid #022B72;
+  color: white;
+  border-radius: 50px; /* Lebih bulat modern */
+  padding: 12px 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 20px; /* Jarak dari teks paragraf */
+  display: inline-flex;
+  align-items: center;
+  width: fit-content; /* Lebar mengikuti konten, bukan full */
+}
+
+.btn-lihat:hover {
+  background-color: transparent !important;
+  color: #022B72 !important;
+  border-color: #022B72;
+  transform: translateX(5px); /* Geser kanan dikit */
 }

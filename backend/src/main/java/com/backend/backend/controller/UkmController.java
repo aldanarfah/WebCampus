@@ -45,10 +45,17 @@ public class UkmController {
         }
     }
 
-    // READ ALL
+    // 1. ENDPOINT ADMIN (Semua Data)
     @GetMapping
-    public List<Ukm> getAllUkm() {
-        return ukmService.findAllUkm();
+    public List<Ukm> getAllUkmAdmin() {
+        return ukmService.findAllUkmAdmin();
+    }
+
+    // 2. ENDPOINT PUBLIC (Hanya Aktif) - [PERBAIKAN UTAMA]
+    @GetMapping("/public")
+    public List<Ukm> getAllUkmPublic() {
+        // Jangan pakai organisasiService disini, tapi ukmService
+        return ukmService.findAllUkmPublic();
     }
 
     // READ BY ID
