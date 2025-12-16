@@ -1,149 +1,158 @@
-<!-- HERO SECTION -->
-<section class="hero relative d-flex align-items-center justify-content-center">
-  <img src="assets/img/profil1.jpg" alt="Hero">
+<section class="hero-section position-relative d-flex align-items-center justify-content-center text-white overflow-hidden">
+  <img src="assets/img/profil1.jpg" alt="Kampus Polinema" class="hero-bg">
 
-  <div class="container relative z-20 text-center px-4">
-    <h1 class="text-white text-4xl md:text-6xl font-bold leading-tight drop-shadow-lg">
-      Polinema<br> PSDKU Lumajang
-    </h1>
-    <p class="text-gray-200 mt-4 text-lg md:text-xl max-w-2xl mx-auto">
-      Mewujudkan generasi unggul melalui kegiatan akademik dan non-akademik yang inspiratif.
-    </p>
+  <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.6;"></div>
+  <div class="card card-hover-effect">
+   </div>
+
+  <div class="container position-relative z-2 text-center px-3">
+    <h1 class="hero-title-animate ...">Polinema PSDKU Lumajang</h1>
+<p class="hero-subtitle-animate ...">Mewujudkan generasi unggul melalui kegiatan akademik dan non akademik yang inspiratif.
+
+</p>
   </div>
 </section>
 
-<!-- PROFIL SECTION -->
-<div class="container my-5 profil-section">
-  <div class="row">
+<section class="container my-5 py-4">
+  <div class="row g-4 align-items-center">
 
-    <!-- 4 Cards -->
-    <div class="col-lg-8">
-      <div class="row g-4">
-        <div class="col-md-6" *ngFor="let card of profileCards">
-          <div class="profile-card">
-            <img [src]="card.img" class="profile-img" />
-            <div class="profile-label">{{ card.title }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Text di kanan -->
-    <div class="col-lg-4 d-flex flex-column justify-content-center ps-lg-4 mt-4 mt-lg-0">
-      <h3 class="fw-bold">Profil</h3>
-      <p>Politeknik Negeri Malang (Polinema) PSDKU Lumajang merupakan salah satu Program Studi di Luar Kampus Utama (PSDKU) yang dikelola langsung oleh Politeknik Negeri Malang, sebuah perguruan tinggi vokasi negeri unggulan di Jawa Timur.</p>
-      <button
-      [routerLink]="['/profil']"
-      class="btn btn-primary mt-2">Lihat Profil</button>
-    </div>
-
-  </div>
-</div>
-
-<!-- BERITA SECTION -->
-<div class="container my-5">
-
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3>Berita</h3>
-    <button
-    [routerLink]="['/aktivitas/berita']"
-    class="btn btn-outline-primary">Lihat Semua</button>
-  </div>
-
-  <div class="row g-4">
-
-    <!-- Berita Besar -->
-    <div class="col-lg-6">
-      <div class="berita-img-wrapper position-relative">
-        <img [src]="beritaBig.img" class="berita-big-img" />
-        <div class="berita-title-overlay">{{ beritaBig.title }}</div>
-      </div>
-    </div>
-
-    <!-- Berita Kecil -->
-    <div class="col-lg-6">
+    <div class="col-lg-7 order-2 order-lg-1">
       <div class="row g-3">
-
-        <div class="col-12" *ngFor="let b of beritaSmall">
-          <div class="berita-img-wrapper position-relative">
-            <img [src]="b.img" class="berita-small-img" />
-            <div class="berita-title-overlay">{{ b.title }}</div>
+        <div class="col-6 col-md-6" *ngFor="let card of profileCards">
+          <div class="card border-0 shadow-sm h-100 overflow-hidden rounded-3">
+            <img [src]="card.img" [alt]="card.title" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 150px; max-height: 200px;">
+            <div class="card-img-overlay d-flex align-items-end p-0">
+              <div class="bg-dark bg-opacity-75 text-white w-100 p-2 text-center small">
+                {{ card.title }}
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
 
+    <div class="col-lg-5 order-1 order-lg-2 mb-4 mb-lg-0">
+      <h6 class="text-primary fw-bold text-uppercase">Tentang Kami</h6>
+      <h2 class="fw-bold mb-3">Profil Kampus</h2>
+      <p class="text-secondary text-justify">
+        Politeknik Negeri Malang (Polinema) PSDKU Lumajang merupakan salah satu Program Studi di Luar Kampus Utama (PSDKU) yang dikelola langsung oleh Politeknik Negeri Malang, perguruan tinggi vokasi negeri unggulan di Jawa Timur.
+      </p>
+      <button [routerLink]="['/profil']" class="btn btn-primary px-4 py-2 rounded-pill">
+        Lihat Profil Lengkap
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<section class="bg-light py-5">
+  <div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="fw-bold m-0">Berita Terbaru</h3>
+      <button [routerLink]="['/aktivitas/berita']" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+        Lihat Semua
+      </button>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100 text-white overflow-hidden rounded-3 position-relative group-hover">
+          <img [src]="beritaBig.img" [alt]="beritaBig.title" class="card-img w-100 h-100 object-fit-cover" style="min-height: 350px;">
+          <div class="card-img-overlay d-flex flex-column justify-content-end bg-gradient-overlay">
+            <span class="badge bg-primary mb-2 w-auto align-self-start">Terbaru</span>
+            <h5 class="card-title fw-bold">{{ beritaBig.title }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="d-flex flex-column gap-3 h-100">
+          <div class="card border-0 shadow-sm overflow-hidden rounded-3 flex-fill position-relative group-hover" *ngFor="let b of beritaSmall">
+            <div class="row g-0 h-100">
+              <div class="col-4">
+                <img [src]="b.img" [alt]="b.title" class="img-fluid w-100 h-100 object-fit-cover">
+              </div>
+              <div class="col-8">
+                <div class="card-body d-flex align-items-center h-100">
+                  <h6 class="card-title fw-semibold m-0">{{ b.title }}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
   </div>
-</div>
+</section>
 
-<!-- EVENT SECTION -->
-<div class="container my-5">
-  <div class="row">
+<section class="container my-5 py-4">
+  <div class="row align-items-center">
 
-    <!-- Deskripsi -->
-    <div class="col-lg-4">
-      <h3>Event</h3>
-      <p> Daftar event kampus terbaru yang akan datang.</p>
+    <div class="col-lg-4 mb-4 mb-lg-0">
+      <h3 class="fw-bold">Agenda & Event</h3>
+      <p class="text-secondary">Jangan lewatkan berbagai kegiatan seru dan bermanfaat yang akan diselenggarakan di kampus kami.</p>
+
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-dark rounded-circle" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev" style="width: 45px; height: 45px;">
+          <i class="bi bi-chevron-left">❮</i>
+        </button>
+        <button class="btn btn-primary rounded-circle" type="button" data-bs-target="#eventCarousel" data-bs-slide="next" style="width: 45px; height: 45px;">
+          <i class="bi bi-chevron-right">❯</i>
+        </button>
+      </div>
     </div>
 
-    <!-- Carousel -->
     <div class="col-lg-8">
-      <div id="eventCarousel" class="carousel slide" data-bs-interval="false">
-
+      <div id="eventCarousel" class="carousel slide" data-bs-ride="false">
         <div class="carousel-inner">
 
-          <!-- Slide 1 -->
           <div class="carousel-item active">
             <div class="row g-3">
-              <div class="col-6" *ngFor="let e of eventSlide1">
-                <div class="event-card text-center">
-                  <img [src]="e.img" />
-                  <p>{{ e.title }}</p>
+              <div class="col-md-6" *ngFor="let e of eventSlide1">
+                <div class="card border-0 shadow-sm h-100">
+                  <img [src]="e.img" class="card-img-top object-fit-cover" style="height: 200px;" [alt]="e.title">
+                  <div class="card-body">
+                    <h6 class="card-title fw-bold text-truncate">{{ e.title }}</h6>
+                    <a href="#" class="btn btn-sm btn-link text-decoration-none p-0">Detail Event &rarr;</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Slide 2 -->
           <div class="carousel-item">
             <div class="row g-3">
-              <div class="col-6" *ngFor="let e of eventSlide2">
-                <div class="event-card text-center">
-                  <img [src]="e.img" />
-                  <p>{{ e.title }}</p>
+              <div class="col-md-6" *ngFor="let e of eventSlide2">
+                <div class="card border-0 shadow-sm h-100">
+                  <img [src]="e.img" class="card-img-top object-fit-cover" style="height: 200px;" [alt]="e.title">
+                  <div class="card-body">
+                    <h6 class="card-title fw-bold text-truncate">{{ e.title }}</h6>
+                    <a href="#" class="btn btn-sm btn-link text-decoration-none p-0">Detail Event &rarr;</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Slide 3 -->
-          <div class="carousel-item">
+           <div class="carousel-item">
             <div class="row g-3">
-              <div class="col-6" *ngFor="let e of eventSlide3">
-                <div class="event-card text-center">
-                  <img [src]="e.img" />
-                  <p>{{ e.title }}</p>
+              <div class="col-md-6" *ngFor="let e of eventSlide3">
+                <div class="card border-0 shadow-sm h-100">
+                  <img [src]="e.img" class="card-img-top object-fit-cover" style="height: 200px;" [alt]="e.title">
+                  <div class="card-body">
+                    <h6 class="card-title fw-bold text-truncate">{{ e.title }}</h6>
+                    <a href="#" class="btn btn-sm btn-link text-decoration-none p-0">Detail Event &rarr;</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
         </div>
-
-        <!-- Tombol di bawah -->
-        <div class="d-flex justify-content-center mt-3 gap-3">
-          <button class="btn btn-primary" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
-            ❮ Prev
-          </button>
-
-          <button class="btn btn-primary" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
-            Next ❯
-          </button>
-        </div>
-
       </div>
     </div>
 
   </div>
-</div>
+</section>
