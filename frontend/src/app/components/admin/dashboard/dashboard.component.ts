@@ -11,6 +11,7 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
+  currentDate = new Date();
 
   constructor(private authService: AuthService) {}
 

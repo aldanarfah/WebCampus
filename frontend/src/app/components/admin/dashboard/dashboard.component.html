@@ -1,63 +1,89 @@
-<div class="flex min-h-screen bg-gray-100">
+<div class="flex h-screen bg-gray-100 font-sans">
 
-  <aside class="w-64 bg-white shadow-md border-r p-5 flex flex-col fixed h-full">
+  <aside class="w-64 bg-[#111827] text-white flex flex-col shadow-2xl transition-all duration-300 z-20 hidden md:flex">
 
-    <div class="flex-grow">
-      <h2 class="text-xl font-bold mb-6 text-gray-800 border-b pb-4">ADMIN PANEL</h2>
-
-      <nav class="flex flex-col space-y-2">
-        <a routerLink="/dashboard"
-           routerLinkActive="bg-gray-200 text-blue-600"
-           [routerLinkActiveOptions]="{exact: true}"
-           class="p-2 rounded hover:bg-gray-100 text-gray-700 font-medium transition cursor-pointer">
-           Dashboard
-        </a>
-
-        <a routerLink="/dashboard/organisasi"
-           routerLinkActive="bg-gray-200 text-blue-600"
-           class="p-2 rounded hover:bg-gray-100 text-gray-700 font-medium transition cursor-pointer">
-           Organisasi
-        </a>
-
-        <a routerLink="/dashboard/ukm"
-           routerLinkActive="bg-gray-200 text-blue-600"
-           class="p-2 rounded hover:bg-gray-100 text-gray-700 font-medium transition cursor-pointer">
-           UKM
-        </a>
-
-        <a routerLink="/dashboard/berita"
-           routerLinkActive="bg-gray-200 text-blue-600"
-           class="p-2 rounded hover:bg-gray-100 text-gray-700 font-medium transition cursor-pointer">
-           Berita
-        </a>
-
-        <a routerLink="/dashboard/event"
-           routerLinkActive="bg-gray-200 text-blue-600"
-           class="p-2 rounded hover:bg-gray-100 text-gray-700 font-medium transition cursor-pointer">
-           Event
-        </a>
-        <a  routerLink="/dashboard/users"
-            routerLinkActive="bg-gray-200 text-blue-600"
-            class="p-2 rounded hover:bg-gray-100 text-gray-700 font-medium transition cursor-pointer">
-            Manajemen Admin
-        </a>
-      </nav>
+    <div class="h-20 flex items-center gap-3 px-6 border-b border-gray-700/50 bg-[#0f172a]">
+      <img src="assets/img/logoLogin1.jpg" alt="Logo" class="h-10 w-auto">
+      <div>
+        <h1 class="font-bold text-lg tracking-wide leading-none">PANEL ADMIN</h1>
+        <p class="text-[10px] text-gray-400">Polinema PSDKU Lumajang</p>
+      </div>
     </div>
 
-    <div class="mt-auto border-t border-gray-200 pt-4">
-      <button (click)="onLogout()"
-        class="flex items-center w-full px-2 py-2 text-red-600 hover:bg-red-50 rounded transition-colors duration-200 font-medium">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-        </svg>
-        Logout
+    <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-1">
+
+      <a routerLink="/dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
+         class="nav-item">
+        <i class="fas fa-tachometer-alt w-6 text-center"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider px-4 mt-6 mb-2">Master Data</div>
+
+      <a routerLink="/dashboard/organisasi" routerLinkActive="active-link" class="nav-item">
+        <i class="fas fa-building w-6 text-center"></i>
+        <span>Organisasi</span>
+      </a>
+
+      <a routerLink="/dashboard/ukm" routerLinkActive="active-link" class="nav-item">
+        <i class="fas fa-users w-6 text-center"></i>
+        <span>Data UKM</span>
+      </a>
+
+      <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider px-4 mt-6 mb-2">Konten & Publikasi</div>
+
+      <a routerLink="/dashboard/berita" routerLinkActive="active-link" class="nav-item">
+        <i class="far fa-newspaper w-6 text-center"></i>
+        <span>Berita & Artikel</span>
+      </a>
+
+      <a routerLink="/dashboard/event" routerLinkActive="active-link" class="nav-item">
+        <i class="far fa-calendar-alt w-6 text-center"></i>
+        <span>Agenda Event</span>
+      </a>
+
+      <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider px-4 mt-6 mb-2">Pengaturan</div>
+
+      <a routerLink="/dashboard/users" routerLinkActive="active-link" class="nav-item">
+        <i class="fas fa-user-shield w-6 text-center"></i>
+        <span>Manajemen Admin</span>
+      </a>
+
+    </nav>
+
+    <div class="p-4 border-t border-gray-700/50 bg-[#0f172a]">
+      <button (click)="onLogout()" class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white py-2.5 rounded-lg transition-colors shadow-lg group">
+        <i class="fas fa-power-off group-hover:animate-pulse"></i>
+        <span class="font-semibold text-sm">Keluar Sistem</span>
       </button>
     </div>
-
   </aside>
 
-  <main class="flex-1 p-8 ml-64">
-    <router-outlet></router-outlet>
-  </main>
 
+  <div class="flex-1 flex flex-col overflow-hidden relative">
+
+    <header class="h-20 bg-white shadow-sm flex items-center justify-between px-8 z-10">
+      <div class="flex items-center gap-4 text-gray-500">
+        <button class="md:hidden text-gray-600 hover:text-blue-900">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+        <span class="text-sm font-medium">{{ currentDate | date:'EEEE, d MMMM y' }}</span>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="text-right hidden md:block">
+          <div class="text-sm font-bold text-gray-800">Administrator</div>
+          <div class="text-xs text-green-600 font-medium">● Online</div>
+        </div>
+        <div class="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 border-2 border-white shadow-sm">
+          <i class="fas fa-user"></i>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6 md:p-8">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
 </div>

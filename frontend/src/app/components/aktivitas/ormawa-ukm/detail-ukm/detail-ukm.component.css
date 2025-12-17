@@ -11,20 +11,26 @@
 .animate-fade-in-up { animation: fadeInUp 0.3s ease-out forwards; }
 
 /* =========================================
-   2. HERO SECTION
+   2. HERO SECTION (REVISI FINAL)
    ========================================= */
 .hero-section {
     position: relative;
-    height: 500px;
+    /* Height disesuaikan permintaanmu */
+    height: 615px;
     width: 100%;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    /* Hapus duplikasi overflow yang tadi ada 2x */
     overflow: hidden;
+
     background-color: #111827;
-    padding-top: 60px;
+    padding-top: 50px;
 }
 
+/* Background Image */
 .hero-bg {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -36,6 +42,13 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+    /* Efek transisi zoom */
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* === PERBAIKAN DI SINI (Tadi kurung tutupnya hilang) === */
+.hero-section:hover .hero-bg img {
+    transform: scale(1.1); /* Perbesar gambar 10% */
 }
 
 .hero-overlay {
@@ -44,6 +57,7 @@
     background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
 }
 
+/* Konten Teks */
 .hero-content {
     position: relative;
     z-index: 10;
@@ -68,14 +82,14 @@
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 25px;
-    display: -webkit-box;
-    line-clamp: 3;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    /* Deskripsi tampil penuh (tanpa titik-titik) */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+/* Badge Ketua */
 .hero-badge-container {
     display: inline-flex;
     align-items: center;

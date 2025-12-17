@@ -9,55 +9,61 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css' // Pastikan nama file css sesuai (styleUrl atau styleUrls)
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-  loginData = {
-    username: '',
-    password: ''
-  };
+  username: string = '';
+  password: string = '';
+
+  // === TAMBAHAN BARU UNTUK PASSWORD ===
+  showPassword: boolean = false; // Defaultnya sembunyi (false)
 
   errorMessage: string = '';
   isLoading: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {
-    // Cek login status (opsional, tergantung logic authService Anda)
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/dashboard']);
     }
   }
 
+  // === FUNGSI BARU UNTUK MENGUBAH STATUS PASSWORD ===
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
   onLogin(): void {
-    if (!this.loginData.username || !this.loginData.password) {
+    if (!this.username || !this.password) {
       this.errorMessage = 'Username dan Password wajib diisi!';
+      setTimeout(() => this.errorMessage = '', 3000);
       return;
     }
 
     this.isLoading = true;
     this.errorMessage = '';
 
-    this.authService.login(this.loginData).subscribe({
+    const loginPayload = {
+      username: this.username,
+      password: this.password
+    };
+
+    this.authService.login(loginPayload).subscribe({
       next: (response) => {
-        console.log('Login Berhasil, Data dari Backend:', response);
-
-        // -----------------------------------------------------------
-        // 1. FIX PENTING: SIMPAN MANUAL KE LOCAL STORAGE
-        // Kita simpan respons (data admin) dengan kunci 'admin'
-        // agar EventTambahComponent bisa membacanya.
-        // -----------------------------------------------------------
+        console.log('Login Berhasil:', response);
         localStorage.setItem('admin', JSON.stringify(response));
-
-        // Tetap panggil fungsi bawaan service (jika ada logic lain disana)
         this.authService.saveAdmin(response);
-
-        // Redirect ke dashboard
         this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         console.error('Login Gagal:', error);
         this.isLoading = false;
-        this.errorMessage = 'Username atau Password salah!';
+
+        if (error.status === 401 || error.status === 404) {
+             this.errorMessage = 'Username atau Password salah.';
+        } else {
+             this.errorMessage = 'Terjadi kesalahan server. Coba lagi nanti.';
+        }
       }
     });
   }
