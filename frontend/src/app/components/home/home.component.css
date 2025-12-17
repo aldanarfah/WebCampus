@@ -146,3 +146,178 @@
 .navbar-custom.scrolled .nav-link {
   color: #333;
 }
+
+/* PROFIL */
+
+.profil-section {
+  margin-top: 100px !important;
+}
+
+/* GRID 2×2 */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+/* CARD */
+.profile-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: visible;        /* biar label nggak kepotong */
+  padding-bottom: 30px;     /* ruang untuk label bawah */
+}
+
+/* GAMBAR */
+.profile-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+/* LABEL */
+.profile-label {
+  position: absolute;
+  background: linear-gradient(to bottom, rgba(0, 77, 194, 0.8), rgba(0, 45, 114, 0.92));
+  color: white;
+  padding: 50px 26px; /* lebih besar */
+  border-radius: 14px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  width: 72%;
+  line-height: 1.3;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* POSISI LABEL SESUAI CONTOH GAMBAR */
+/* CARD 1 = kanan bawah */
+.col-md-6:nth-child(1) .profile-label {
+  bottom: -22px;
+  right: -22px;
+  top: auto;
+  left: auto;
+}
+
+/* CARD 2 = kanan atas */
+.col-md-6:nth-child(2) .profile-label {
+  top: -50px;
+  right: -22px;
+  bottom: auto;
+  left: auto;
+}
+
+/* CARD 3 = kanan bawah */
+.col-md-6:nth-child(3) .profile-label {
+  bottom: -22px;
+  right: -22px;
+  top: auto;
+  left: auto;
+}
+
+/* CARD 4 = kanan atas */
+.col-md-6:nth-child(4) .profile-label {
+  top: -50px;
+  right: -22px;
+  bottom: auto;
+  left: auto;
+}
+
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-label {
+    width: 80%;
+    font-size: 1.2rem;
+  }
+}
+
+
+/* BERITA */
+/* Wrapper gambar agar overlay absolute mengikuti gambar */
+.berita-img-wrapper {
+  position: relative;
+  display: block;      /* width menyesuaikan parent */
+  border-radius: 12px;
+  overflow: hidden;    /* supaya overlay tidak keluar sudut bulat */
+}
+
+/* Gambar besar */
+.berita-big-img {
+  width: 100%;       
+  height: 400px;      /* tinggi card besar */
+  object-fit: cover; 
+  border-radius: 12px;
+  display: block;
+}
+
+/* Gambar kecil */
+.berita-small-img {
+  width: 100%;       
+  height: 195px;      /* setengah dari card besar */
+  object-fit: cover; 
+  border-radius: 12px;
+  display: block;
+}
+
+/* Overlay teks */
+.berita-title-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px 20px;
+  background: linear-gradient(to top, #002D72, rgba(0,45,114,0.5), transparent);
+  color: white;
+  border-radius: 0 0 12px 12px;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+
+
+/* EVENT */ 
+.event-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.event-card p {
+  margin-top: 8px;
+  padding: 4px 8px;
+  font-weight: 600;
+  height: 80px;            /* tinggi kotak */
+  color: #002D72; /* teks biru */
+  border: 2px solid #002D72; /* garis kotak biru */
+  background-color: transparent; /* kotak transparan */
+  border-radius: 6px; /* opsional, sudut kotak agak membulat */
+  text-align: center;
+  max-width: 100%; /* tidak melebihi lebar gambar */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; /* kalau teks terlalu panjang */
+}
+
+#eventCarousel button {
+  width: 100px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.event-card.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-card.clickable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}

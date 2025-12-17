@@ -6,17 +6,16 @@
   </div>
 </section>
 
-<div class="container mx-auto px-4 md:px-10 pb-20">
+<!-- MENU NAVIGASI -->
+<div class="container mt-4">
+  <nav class="d-flex gap-4 menu-sejarah">
+    <a routerLink="/" class="menu-link">Home</a>
+    <a routerLink="/akademik" class="menu-link">Akademik</a>
+    <span class="menu-active">Dosen dan Staff</span>
+  </nav>
+</div>
 
-  <div class="mb-8">
-    <nav class="flex gap-2 text-sm text-gray-500">
-      <a routerLink="/" class="hover:text-blue-800">Home</a>
-      <span>/</span>
-      <a routerLink="/akademik" class="hover:text-blue-800">Akademik</a>
-      <span>/</span>
-      <span class="font-bold text-black">Jadwal</span>
-    </nav>
-  </div>
+<div class="container mx-auto px-4 md:px-10 pb-20 mt-10">
 
   <div class="flex flex-wrap gap-3 mb-6">
     <button *ngFor="let prodi of listProdi"
