@@ -12,9 +12,13 @@
 
 /* semua bar jadi kaca */
 .glass-bar {
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(253,253,253,0.7));
-
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.45),
+    rgba(245, 247, 250, 0.55)
+  );
 }
+
 
 .sticky-nav {
     position: sticky;
@@ -119,10 +123,10 @@
   padding: 10px 0;
   position: relative;
   z-index: 9999;
-  background: linear-gradient(
+ background: linear-gradient(
     to bottom,
-    rgba(253, 253, 253, 0.7),   /* warna ujung bawah topbar */
-    rgba(253, 253, 253, 0)   /* lebih terawang di bawah */
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0)
   );
  
 }
