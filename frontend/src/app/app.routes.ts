@@ -21,7 +21,9 @@ import { DetailUkmComponent } from './components/aktivitas/ormawa-ukm/detail-ukm
 import { DetailOrganisasiComponent } from './components/aktivitas/ormawa-ukm/detail-organisasi/detail-organisasi.component';
 
 import { BeritaComponent } from './components/aktivitas/berita/berita.component';
+import { DetailBeritaComponent } from './components/aktivitas/berita/detail-berita/detail-berita.component';
 import { EventComponent } from './components/aktivitas/event/event.component';
+import { DetailEventComponent } from './components/aktivitas/event/detail-event/detail-event.component';
 
 // Alumni-Karir
 import { AlumniKarirComponent } from './components/alumni-karir/alumni-karir/alumni-karir.component';
@@ -152,7 +154,9 @@ export const routes: Routes = [
       { path: 'ormawa-ukm/ukm-detail/:id', component: DetailUkmComponent },
 
       { path: 'berita', component: BeritaComponent },
+      { path: 'berita/:slug', component: DetailBeritaComponent },
       { path: 'event', component: EventComponent },
+      { path: 'event/:slug', component: DetailEventComponent }
     ]
   },
 

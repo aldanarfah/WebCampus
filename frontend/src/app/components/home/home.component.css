@@ -237,30 +237,38 @@
   }
 }
 
+/* ================= BERITA ================= */
 
-/* BERITA */
 /* Wrapper gambar agar overlay absolute mengikuti gambar */
 .berita-img-wrapper {
   position: relative;
-  display: block;      /* width menyesuaikan parent */
+  display: block;
   border-radius: 12px;
-  overflow: hidden;    /* supaya overlay tidak keluar sudut bulat */
+  overflow: hidden; /* supaya overlay tidak keluar sudut bulat */
+  cursor: pointer;  /* cursor tangan untuk klik */
+  transition: transform 0.2s, box-shadow 0.2s; /* animasi halus */
+}
+
+/* Efek hover: sedikit naik dan shadow */
+.berita-img-wrapper:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 /* Gambar besar */
 .berita-big-img {
-  width: 100%;       
-  height: 400px;      /* tinggi card besar */
-  object-fit: cover; 
+  width: 100%;
+  height: 400px; /* tinggi card besar */
+  object-fit: cover;
   border-radius: 12px;
   display: block;
 }
 
 /* Gambar kecil */
 .berita-small-img {
-  width: 100%;       
-  height: 195px;      /* setengah dari card besar */
-  object-fit: cover; 
+  width: 100%;
+  height: 195px; /* setengah dari card besar */
+  object-fit: cover;
   border-radius: 12px;
   display: block;
 }
@@ -278,8 +286,18 @@
   box-sizing: border-box;
   font-weight: bold;
   font-size: 1rem;
+  pointer-events: none; /* supaya overlay tidak menghalangi klik */
 }
 
+.clickable {
+  cursor: pointer;        /* ganti cursor jadi jari telunjuk */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.clickable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
 
 
 /* EVENT */ 
@@ -290,21 +308,33 @@
   border-radius: 12px;
 }
 
-.event-card p {
-  margin-top: 8px;
+.event-text {
+  margin-top: 6px;
   padding: 4px 8px;
-  font-weight: 600;
-  height: 80px;            /* tinggi kotak */
-  color: #002D72; /* teks biru */
-  border: 2px solid #002D72; /* garis kotak biru */
-  background-color: transparent; /* kotak transparan */
-  border-radius: 6px; /* opsional, sudut kotak agak membulat */
+  height: 100px;             /* tinggi kotak */
+  border: 2px solid #002D72; /* garis kotak */
+  border-radius: 6px;
+  background-color: transparent;
   text-align: center;
-  max-width: 100%; /* tidak melebihi lebar gambar */
+  display: flex;
+  flex-direction: column;   /* agar title & subtitle vertikal */
+  justify-content: center;  /* posisi teks di tengah kotak */
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis; /* kalau teks terlalu panjang */
 }
+
+.event-title {
+  color: #002D72;  /* biru */
+  font-weight: 600; /* tebal */
+  font-size: 1rem;
+}
+
+.event-subtitle {
+  color: #000;     /* hitam */
+  font-weight: 400; /* reguler */
+  font-size: 0.9rem;
+}
+
+
 
 #eventCarousel button {
   width: 100px;

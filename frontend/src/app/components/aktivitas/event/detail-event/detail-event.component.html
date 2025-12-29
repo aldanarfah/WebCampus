@@ -1,0 +1,38 @@
+<section class="relative h-[60vh]">
+  <img
+    [src]="event?.gambar"
+    class="w-full h-full object-cover"
+  />
+  <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
+    <h1 class="text-white text-4xl md:text-5xl font-bold text-center">
+      {{ event?.judul }}
+    </h1>
+  </div>
+</section>
+
+<!-- MENU NAVIGASI -->
+<div class="container mt-4">
+  <nav class="d-flex gap-4 menu-akademik">
+    <a routerLink="/" class="menu-link">Home</a>
+    <a routerLink="/aktivitas" class="menu-link">Kehidupan Kampus</a>
+    <a routerLink="/aktivitas/event" class="menu-link">Event</a>
+    <span class="menu-active">Detail Event</span>
+  </nav>
+</div>
+
+<div class="container mx-auto px-6 py-10 max-w-4xl">
+  <p class="text-gray-500 mb-4">
+    {{ event?.tanggal }}
+  </p>
+
+  <p class="text-gray-700 leading-relaxed">
+    {{ event?.deskripsi }}
+  </p>
+
+  <a
+    routerLink="/aktivitas/event"
+    class="inline-block mt-8 text-[#002D72] font-semibold hover:underline"
+  >
+    ← Kembali ke daftar event
+  </a>
+</div>

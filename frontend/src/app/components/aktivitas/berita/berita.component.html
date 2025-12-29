@@ -15,83 +15,37 @@
   </nav>
 </div>
 
+<!-- DAFTAR BERITA -->
 <div class="event-container bg-gray-50 min-h-screen mt-10">
   <div class="container mx-auto px-6 py-6">
+
     <h2 class="text-2xl font-bold mb-6 text-[#002D72] text-center">
-      Event Kampus
+      Berita Kampus
     </h2>
 
     <div class="space-y-6">
-     <div
-  *ngFor="let e of beritaLain"
-  class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col lg:flex-row hover:shadow-xl transition"
->
-  <img
-    [src]="e.gambar"
-    [alt]="e.judul"
-    class="w-full lg:w-1/3 h-60 object-cover"
-  />
-
-  <div class="p-6 flex flex-col justify-between lg:w-2/3">
-    <div>
-      <h3
-        class="text-xl font-semibold text-[#002D72]"
+      <div
+        *ngFor="let b of berita"
+        class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col lg:flex-row hover:shadow-xl transition cursor-pointer"
+        [routerLink]="['/aktivitas/berita', b.slug]"
       >
-        {{ e.judul }}
-      </h3>
-    </div>
+        <img [src]="b.gambar" class="w-full lg:w-1/3 h-60 object-cover" />
 
-    <div class="mt-4">
-      <button
-  class="inline-block bg-[#002D72] text-white px-4 py-2 rounded-lg hover:bg-[#0043a8] transition"
-  (click)="openModal(e)">
-  Lihat Detail
-</button>
-    </div>
-  </div>
+        <div class="p-6 lg:w-2/3">
+          <h3 class="text-xl font-semibold text-[#002D72]">
+            {{ b.judul }}
+          </h3>
 
-<!-- POPUP DETAIL BERITA -->
-<div
-  *ngIf="selectedBerita"
-  class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
->
-  <div class="bg-white rounded-2xl shadow-xl max-w-2xl w-full mx-4 relative">
+          <p class="text-sm text-gray-500 mt-1">
+            {{ b.tanggal }}
+          </p>
 
-    <!-- Header -->
-    <div class="p-6 border-b">
-      <h3 class="text-2xl font-bold text-[#002D72]">
-        {{ selectedBerita.judul }}
-      </h3>
-      <button
-        class="absolute top-4 right-4 text-gray-500 hover:text-black text-2xl"
-        (click)="closeModal()">
-        &times;
-      </button>
-    </div>
-
-    <!-- Body -->
-    <div class="p-6 space-y-4">
-      <img
-        [src]="selectedBerita.gambar"
-        [alt]="selectedBerita.judul"
-        class="w-full h-64 object-cover rounded-lg"
-      />
-      <p class="text-gray-700 leading-relaxed">
-        {{ selectedBerita.deskripsi }}
-      </p>
-    </div>
-
-    <!-- Footer -->
-    <div class="p-6 border-t text-right">
-      <button
-        class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700"
-        (click)="closeModal()">
-        Tutup
-      </button>
+          <p class="text-gray-600 mt-3">
+            {{ b.deskripsi }}
+          </p>
+        </div>
+      </div>
     </div>
 
   </div>
 </div>
-</div>
-    </div>
-  </div>  
