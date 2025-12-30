@@ -1,17 +1,17 @@
 <div class="min-h-screen flex items-center justify-center relative overflow-hidden">
 
   <img src="assets/img/login.jpg" alt="Background Kampus" class="absolute inset-0 w-full h-full object-cover">
-
   <div class="absolute inset-0 bg-gradient-to-br from-blue-900/80 to-black/60"></div>
 
   <div class="relative z-10 w-full max-w-md p-8 mx-4">
-
     <div class="bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl rounded-2xl p-8 animate-fade-in-up">
 
       <div class="text-center mb-8">
-        <div class="inline-block mb-4">
-           <img src="assets/img/logoLogin1.jpg" alt="Logo" class="h-20 w-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">
-        </div>
+        <div class="inline-block mb-4 transition-transform hover:scale-105 duration-300">
+        <img src="assets/img/logoLogin1.jpg"
+        alt="Logo Polinema"
+        class="h-24 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+      </div>
         <h2 class="text-2xl font-bold text-white tracking-wide">Admin Portal</h2>
         <p class="text-blue-200 text-xs mt-1">Sistem Informasi Ormawa & UKM</p>
       </div>
@@ -23,31 +23,33 @@
       <form (ngSubmit)="onLogin()" class="space-y-5">
 
         <div class="relative group">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <i class="fas fa-user text-blue-200 group-focus-within:text-white transition-colors"></i>
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <i class="fas fa-user text-blue-200 group-focus-within:text-white transition-colors text-lg"></i>
           </div>
           <input
             type="text"
             [(ngModel)]="username"
             name="username"
-            class="block w-full pl-10 pr-3 py-3 bg-black/20 border border-white/10 rounded-lg text-white placeholder-blue-200/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-black/40 focus:border-transparent transition-all text-sm"
+            style="padding-left: 3.5rem;"
+            class="block w-full pr-4 py-3 bg-black/20 border border-white/10 rounded-lg text-white placeholder-blue-200/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-black/40 focus:border-transparent transition-all text-sm"
             placeholder="Username"
             autocomplete="off">
         </div>
 
         <div class="relative group">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <i class="fas fa-lock text-blue-200 group-focus-within:text-white transition-colors"></i>
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <i class="fas fa-lock text-blue-200 group-focus-within:text-white transition-colors text-lg"></i>
           </div>
 
           <input
             [type]="showPassword ? 'text' : 'password'"
             [(ngModel)]="password"
             name="password"
-            class="block w-full pl-10 pr-10 py-3 bg-black/20 border border-white/10 rounded-lg text-white placeholder-blue-200/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-black/40 focus:border-transparent transition-all text-sm"
+            style="padding-left: 3.5rem;"
+            class="block w-full pr-12 py-3 bg-black/20 border border-white/10 rounded-lg text-white placeholder-blue-200/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-black/40 focus:border-transparent transition-all text-sm"
             placeholder="Password">
 
-          <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+          <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
             <button type="button" (click)="togglePasswordVisibility()" class="text-blue-200 hover:text-white focus:outline-none transition-colors p-1">
                <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
             </button>
@@ -58,9 +60,7 @@
           type="submit"
           [disabled]="isLoading"
           class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed mt-6">
-
           <span *ngIf="!isLoading">MASUK SISTEM</span>
-
           <svg *ngIf="isLoading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>

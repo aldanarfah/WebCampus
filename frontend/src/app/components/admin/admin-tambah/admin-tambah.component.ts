@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
-import { Admin } from '../../../models/admin.model';
 
 @Component({
   selector: 'app-admin-tambah',
@@ -13,30 +12,40 @@ import { Admin } from '../../../models/admin.model';
   styleUrl: './admin-tambah.component.css'
 })
 export class AdminTambahComponent {
-
-  admin: Admin = {
+  
+  // Model data
+  admin = {
     namaAdmin: '',
     username: '',
     password: '',
     email: ''
   };
 
-  constructor(private adminService: AdminService, private router: Router) {}
+  isLoading = false;
+  errorMessage = '';
 
+  constructor(
+    private adminService: AdminService,
+    private router: Router
+  ) {}
+
+  // PERBAIKAN: Saya ubah nama fungsi dari 'onSubmit' menjadi 'saveAdmin'
+  // agar cocok dengan panggilan di HTML (ngSubmit)="saveAdmin()"
   saveAdmin(): void {
-    if (!this.admin.namaAdmin || !this.admin.username || !this.admin.password) {
-      alert('Nama, Username, dan Password wajib diisi!');
-      return;
-    }
+    this.isLoading = true;
+    this.errorMessage = '';
 
-    this.adminService.create(this.admin).subscribe({
+    // Pastikan memanggil createAdmin (sesuai service yang sudah kita perbaiki)
+    this.adminService.createAdmin(this.admin).subscribe({
       next: () => {
-        alert('Admin baru berhasil ditambahkan!');
+        alert('Admin berhasil ditambahkan!');
+        this.isLoading = false;
         this.router.navigate(['/dashboard/users']);
       },
-      error: (e) => {
+      error: (e: any) => {
         console.error(e);
-        alert('Gagal menambah admin. Username mungkin sudah dipakai.');
+        this.isLoading = false;
+        this.errorMessage = e.error?.message || 'Gagal menambahkan admin.';
       }
     });
   }

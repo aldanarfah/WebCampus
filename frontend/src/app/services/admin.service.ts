@@ -1,29 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Admin } from '../models/admin.model'; // Pastikan path model benar
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-  // Arahkan ke Backend Spring Boot
-  private baseUrl = 'http://localhost:8080/api/admin';
+  // Sesuaikan URL ini dengan port backend Springboot kamu
+  private apiUrl = 'http://localhost:8080/api/admin'; 
 
   constructor(private http: HttpClient) { }
 
-  // 1. Ambil Semua Admin
-  getAll(): Observable<Admin[]> {
-    return this.http.get<Admin[]>(this.baseUrl, { withCredentials: true });
+  // 1. Method untuk Ambil Semua Data (findAllAdmin)
+  findAllAdmin(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
   }
 
-  // 2. Tambah Admin Baru
-  create(data: Admin): Observable<any> {
-    return this.http.post(this.baseUrl, data, { withCredentials: true });
+  // 2. Method untuk Hapus Data (deleteAdmin)
+  deleteAdmin(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  // 3. Hapus Admin
-  delete(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, { withCredentials: true });
+  // 3. Method Create (Dipakai di tambah-admin nanti)
+  createAdmin(data: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, data);
+  }
+  
+  // 4. Method Get By ID (Opsional)
+  getById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 }

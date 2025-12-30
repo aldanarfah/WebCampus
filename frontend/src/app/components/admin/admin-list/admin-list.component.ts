@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AdminService } from '../../../services/admin.service';
-import { Admin } from '../../../models/admin.model';
+import { AdminService } from '../../../services/admin.service'; // Pastikan path ini benar
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-list',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, HttpClientModule], // Tambah HttpClientModule biar aman
   templateUrl: './admin-list.component.html',
   styleUrl: './admin-list.component.css'
 })
 export class AdminListComponent implements OnInit {
-  adminList: Admin[] = [];
+  
+  adminList: any[] = []; 
 
   constructor(private adminService: AdminService) {}
 
@@ -21,20 +22,32 @@ export class AdminListComponent implements OnInit {
   }
 
   fetchData(): void {
-    this.adminService.getAll().subscribe({
-      next: (data) => this.adminList = data,
-      error: (e) => console.error(e)
+    // Nama fungsi sekarang sudah cocok dengan Service
+    this.adminService.findAllAdmin().subscribe({
+      // PERBAIKAN: Tambahkan ': any' agar TypeScript tidak error
+      next: (data: any) => {
+        this.adminList = data;
+        console.log('Data Admin:', data);
+      },
+      // PERBAIKAN: Tambahkan ': any'
+      error: (e: any) => console.error('Gagal ambil data:', e)
     });
   }
 
-  hapusAdmin(id: number): void {
+  deleteAdmin(id: number): void {
     if (confirm('Yakin ingin menghapus Admin ini?')) {
-      this.adminService.delete(id).subscribe({
+      // Nama fungsi sudah cocok dengan Service
+      this.adminService.deleteAdmin(id).subscribe({
         next: () => {
           alert('Admin berhasil dihapus!');
-          this.fetchData();
+          this.fetchData(); 
         },
-        error: (e) => alert('Gagal menghapus admin (Mungkin Super Admin tidak bisa dihapus).')
+        // PERBAIKAN: Tambahkan ': any'
+        error: (error: any) => {
+          console.error(error);
+          const pesan = error.error?.message || 'Gagal menghapus admin (Mungkin Super Admin).';
+          alert(pesan);
+        }
       });
     }
   }

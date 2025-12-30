@@ -22,19 +22,25 @@
       <tbody>
         <tr *ngFor="let item of adminList; let i = index" class="hover:bg-gray-50">
           <td class="p-4">{{ i + 1 }}</td>
-          <td class="p-4 font-medium">{{ item.namaAdmin }}</td>
+
+          <td class="p-4 font-medium">{{ item.namaAdmin || item.nama_admin }}</td>
+
           <td class="p-4 bg-gray-50 font-mono text-blue-600 text-sm">{{ item.username }}</td>
           <td class="p-4 text-gray-500">{{ item.email }}</td>
 
           <td class="p-4 text-center">
-            <button *ngIf="item.idAdmin !== 1"
-                    class="text-red-600 hover:text-red-800 transition"
-                    (click)="hapusAdmin(item.idAdmin!)">
-              Hapus
-            </button>
-            <span *ngIf="item.idAdmin === 1" class="text-xs font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded">
-              SUPER ADMIN
+
+          <button
+            *ngIf="item.username !== 'adminpolinema'"
+            (click)="deleteAdmin(item.idAdmin)" 
+            class="text-red-600 hover:text-red-800 font-medium transition duration-200">
+            Hapus
+          </button>
+
+            <span *ngIf="item.username.toLowerCase() === 'adminpolinema'" class="text-gray-400 text-xs italic flex items-center justify-center gap-1">
+              <i class="fas fa-lock"></i> Protected
             </span>
+
           </td>
         </tr>
       </tbody>

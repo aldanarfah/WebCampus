@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms'; // Pastikan ini ada
 import { OrganisasiService } from '../../../../services/organisasi.service';
 import { Organisasi } from '../../../../models/organisasi.model';
 
-// Interface Data Tampilan
 interface ContentItem {
   id: number;
   judul: string;
-  tanggal: string;          // Untuk tampilan card
-  tanggalMulai?: string;    // Untuk detail modal
-  tanggalSelesai?: string;  // Untuk detail modal
+  tanggal: string;
+  tanggalMulai?: string;
+  tanggalSelesai?: string;
   gambar: string;
   isi: string;
-  type: 'berita' | 'event' | 'struktur'; 
+  type: 'berita' | 'event' | 'struktur';
   lokasi?: string;
   harga?: string;
   linkPendaftaran?: string;
@@ -23,18 +23,15 @@ interface ContentItem {
 @Component({
   selector: 'app-detail-organisasi',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './detail-organisasi.component.html',
   styleUrl: './detail-organisasi.component.css'
 })
 export class DetailOrganisasiComponent implements OnInit {
   organisasi?: Organisasi;
   isLoading: boolean = true;
-  
-  // URL Gambar Backend
-  imageBaseUrl = 'http://localhost:8080/uploads/'; 
+  imageBaseUrl = 'http://localhost:8080/uploads/';
 
-  // Mapping Hero (Masih Manual karena DB tidak ada kolom hero)
   heroImages: { [key: number]: string } = {
     47: 'assets/img/bem1.jpg',
     48: 'assets/img/bem1.jpg',
@@ -47,8 +44,16 @@ export class DetailOrganisasiComponent implements OnInit {
   };
   currentHeroImage: string = 'assets/img/gedung-default.jpg';
 
+  // --- BERITA ---
   listBerita: ContentItem[] = [];
+  filteredBerita: ContentItem[] = [];
+  searchKeyword: string = '';
+
+  // --- EVENT (UPDATE) ---
   listEvent: ContentItem[] = [];
+  filteredEvent: ContentItem[] = []; // Penampung hasil filter event
+  searchEventKeyword: string = '';   // Keyword pencarian event
+
   selectedItem: ContentItem | null = null;
 
   constructor(
@@ -62,8 +67,7 @@ export class DetailOrganisasiComponent implements OnInit {
       const orgId = Number(id);
       this.loadData(orgId);
       this.setHeroImage(orgId);
-      
-      // PANGGIL DATA ASLI DARI DATABASE
+
       this.loadBerita(orgId);
       this.loadEvent(orgId);
     }
@@ -82,27 +86,38 @@ export class DetailOrganisasiComponent implements OnInit {
     });
   }
 
-  // === LOAD BERITA REAL ===
+  // === SEARCH BERITA ===
   loadBerita(id: number) {
     this.organisasiService.getBeritaByOrganisasi(id).subscribe({
       next: (data) => {
-        // Mapping dari Format DB ke Format Tampilan
         this.listBerita = data.map((item: any) => ({
-          id: item.idBerita || item.id_berita, // Handle camelCase atau snake_case
+          id: item.idBerita || item.id_berita,
           type: 'berita',
           judul: item.judul,
           isi: item.isi,
-          gambar: item.gambarBerita ? (this.imageBaseUrl + item.gambarBerita) : 'assets/img/berita1.jpg', // Cek camelCase dr backend
-          tanggal: new Date(item.tanggalPublikasi).toLocaleDateString('id-ID', { 
-            day: 'numeric', month: 'short', year: 'numeric' 
+          gambar: item.gambarBerita ? (this.imageBaseUrl + item.gambarBerita) : 'assets/img/berita1.jpg',
+          tanggal: new Date(item.tanggalPublikasi).toLocaleDateString('id-ID', {
+            day: 'numeric', month: 'short', year: 'numeric'
           })
         }));
+        this.filteredBerita = [...this.listBerita];
       },
       error: (err) => console.error('Gagal load berita:', err)
     });
   }
 
-  // === LOAD EVENT REAL ===
+  onSearch(): void {
+    if (!this.searchKeyword || this.searchKeyword.trim() === '') {
+      this.filteredBerita = [...this.listBerita];
+    } else {
+      const keyword = this.searchKeyword.toLowerCase();
+      this.filteredBerita = this.listBerita.filter(item =>
+        item.judul.toLowerCase().includes(keyword)
+      );
+    }
+  }
+
+  // === SEARCH EVENT (BARU) ===
   loadEvent(id: number) {
     this.organisasiService.getEventByOrganisasi(id).subscribe({
       next: (data) => {
@@ -112,33 +127,39 @@ export class DetailOrganisasiComponent implements OnInit {
           judul: item.namaEvent || item.nama_event,
           isi: item.deskripsi,
           gambar: item.gambarEvent ? (this.imageBaseUrl + item.gambarEvent) : 'assets/img/event1.jpg',
-          
-          // Format Tanggal Singkat untuk Card
-          tanggal: new Date(item.tanggalMulai).toLocaleDateString('id-ID', { 
-            day: 'numeric', month: 'short', year: 'numeric' 
-          }),
 
-          // Format Lengkap untuk Modal
+          tanggal: new Date(item.tanggalMulai).toLocaleDateString('id-ID', {
+            day: 'numeric', month: 'short', year: 'numeric'
+          }),
           tanggalMulai: new Date(item.tanggalMulai).toLocaleString('id-ID', {
             weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
           }) + ' WIB',
-          
           tanggalSelesai: new Date(item.tanggalSelesai).toLocaleString('id-ID', {
             weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
           }) + ' WIB',
-
           lokasi: item.lokasi,
-          // Format Harga
           harga: item.harga == 0 ? 'Gratis' : 'Rp ' + new Intl.NumberFormat('id-ID').format(item.harga),
-          
           linkPendaftaran: item.linkPendaftaran || item.link_pendaftaran,
-          
-          // Status Event Logic
           status: this.cekStatusEvent(item.tanggalMulai, item.tanggalSelesai)
         }));
+
+        // INISIALISASI FILTER EVENT
+        this.filteredEvent = [...this.listEvent];
       },
       error: (err) => console.error('Gagal load event:', err)
     });
+  }
+
+  // LOGIKA PENCARIAN EVENT
+  onSearchEvent(): void {
+    if (!this.searchEventKeyword || this.searchEventKeyword.trim() === '') {
+      this.filteredEvent = [...this.listEvent];
+    } else {
+      const keyword = this.searchEventKeyword.toLowerCase();
+      this.filteredEvent = this.listEvent.filter(item =>
+        item.judul.toLowerCase().includes(keyword)
+      );
+    }
   }
 
   cekStatusEvent(mulai: string, selesai: string): string {

@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { LucideAngularModule, Search } from 'lucide-angular';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,9 @@ import { LucideAngularModule, Search } from 'lucide-angular';
 export class HeaderComponent implements OnInit {
 
   Search = Search;
+
+  // Default True (Muncul di awal)
+  showGlobalSearch: boolean = true;
 
   navigation = [
     { name: 'Home', path: '/' },
@@ -37,25 +41,24 @@ export class HeaderComponent implements OnInit {
         { name: 'Jadwal', path: '/akademik/jadwal' }
       ]
     },
-
-      {
-  name: 'Aktivitas Kampus',
-  path: '/aktivitas',
-  children: [
-    { name: 'Ormawa & UKM', path: '/aktivitas/ormawa-ukm' },
-    { name: 'Berita', path: '/aktivitas/berita' },
-    { name: 'Event', path: '/aktivitas/event' }
-  ]
-},
-     {
-    name: 'Alumni & Karir',
-    path: '/alumni-karir',
-    children: [
-      { name: 'Kegiatan Alumni', path: '/alumni-karir/kegiatan-alumni' },
-      { name: 'Kata Alumni', path: '/alumni-karir/kata-alumni' },
-      { name: 'Lowongan Kerja', path: '/alumni-karir/loker' }
-    ]
-  },
+    {
+      name: 'Aktivitas Kampus',
+      path: '/aktivitas',
+      children: [
+        { name: 'Ormawa & UKM', path: '/aktivitas/ormawa-ukm' },
+        { name: 'Berita', path: '/aktivitas/berita' },
+        { name: 'Event', path: '/aktivitas/event' }
+      ]
+    },
+    {
+      name: 'Alumni & Karir',
+      path: '/alumni-karir',
+      children: [
+        { name: 'Kegiatan Alumni', path: '/alumni-karir/kegiatan-alumni' },
+        { name: 'Kata Alumni', path: '/alumni-karir/kata-alumni' },
+        { name: 'Lowongan Kerja', path: '/alumni-karir/loker' }
+      ]
+    },
     {
       name: 'PMB',
       path: '/pmb',
@@ -65,7 +68,24 @@ export class HeaderComponent implements OnInit {
     }
   ];
 
+  constructor(private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.checkUrl(event.url);
+    });
+  }
+
   ngOnInit(): void {
-    // sticky scroll handler sudah dihapus
+    this.checkUrl(this.router.url);
+  }
+
+  checkUrl(url: string): void {
+    // Logika untuk menyembunyikan search bar di halaman detail
+    if (url.includes('/ormawa-ukm/detail') || url.includes('/detail/')) {
+      this.showGlobalSearch = false; // Sembunyikan
+    } else {
+      this.showGlobalSearch = true;  // Munculkan
+    }
   }
 }

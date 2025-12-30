@@ -1,19 +1,18 @@
 <header class="glass-header">
 
-  <!-- TOP BAR --> 
   <div class="glass-bar topbar">
     <div class="left">
       <img src="assets/img/logo_polinema-removebg.png" class="logo">
-      <div> 
+      <div>
         <h1 class="top-title">
-          <span class="blue-text">POLITEKNIK NEGERI</span> 
+          <span class="blue-text">POLITEKNIK NEGERI</span>
           <span class="orange-text"> MALANG</span>
         </h1>
         <p class="top-sub">PSDKU Lumajang</p>
       </div>
     </div>
 
-    <div class="right">
+    <div class="right" *ngIf="showGlobalSearch">
       <div class="search-box">
         <input type="text" placeholder="Cari...">
         <lucide-icon [img]="Search" [size]="18" class="s-icon"></lucide-icon>
@@ -22,11 +21,10 @@
     </div>
   </div>
 
-  <!-- NAVBAR -->
   <nav class="glass-bar navbar-area sticky-nav">
     <ul class="menu">
       <li *ngFor="let item of navigation" class="menu-item">
-        <a 
+        <a
           [routerLink]="item.path"
           routerLinkActive="active"
           class="menu-link"
