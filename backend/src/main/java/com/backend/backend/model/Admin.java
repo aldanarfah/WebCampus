@@ -1,15 +1,15 @@
 package com.backend.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty; // <--- 1. Tambahkan Import ini
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import java.time.LocalDateTime;
+import java.time.LocalDateTime; // Import wajib untuk waktu
 
 @Entity
 @Table(name = "admin")
-@Data
+@Data // Lombok otomatis membuat Getter, Setter, ToString, dll
 @NoArgsConstructor
 @AllArgsConstructor
 public class Admin {
@@ -25,7 +25,6 @@ public class Admin {
     @Column(length = 50, unique = true, nullable = false)
     private String username;
 
-    // 👇 2. TAMBAHKAN ANOTASI INI DI ATAS PASSWORD
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(length = 255, nullable = false)
     private String password; 
@@ -35,4 +34,12 @@ public class Admin {
 
     @Column(name = "tanggal_dibuat", insertable = false, updatable = false)
     private LocalDateTime tanggalDibuat;
+
+    // --- TAMBAHAN FITUR KEAMANAN (RATE LIMITING) ---
+    
+    @Column(name = "failed_attempts")
+    private int failedAttempts = 0; // Menghitung berapa kali salah password
+
+    @Column(name = "locked_until")
+    private LocalDateTime lockedUntil; // Menandai sampai kapan akun dikunci
 }
