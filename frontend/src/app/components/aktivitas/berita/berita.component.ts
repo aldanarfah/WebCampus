@@ -11,45 +11,27 @@ import { RouterModule } from '@angular/router';
 })
 export class BeritaComponent {
 
-  // =====================
-  // DATA BERITA
-  // =====================
-  beritaUtama = {
-    judul: 'Mahasiswa Teknik Informatika Raih Juara Nasional Hackathon 2025',
-    gambar: '/assets/img/event2.jpg',
-    ringkasan:
-      'Tim mahasiswa HMTI berhasil meraih juara 1 dalam ajang hackathon nasional dengan aplikasi inovatif berbasis AI yang membantu UMKM digitalisasi usahanya.',
-    path: '/aktivitas/berita/hackathon-2025'
-  };
-
-  beritaLain = [
+  berita = [
     {
-      judul: 'UKM Mapala Sukses Mendaki Gunung Rinjani',
-      gambar: '/assets/img/event3.jpg',
-      deskripsi: 'UKM Mapala berhasil melakukan pendakian Gunung Rinjani dengan aman dan sukses.'
+      judul: 'TIM INOVATOR DIGITAL RAIH PENGHARGAAN TERTINGGI',
+      tanggal: '15 Desember 2025',
+      gambar: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      deskripsi: 'Turnamen Mobile Legends: Bang Bang tingkat kampus yang mempertemukan tim-tim terbaik antar jurusan, sebagai ajang kompetisi, sportivitas, dan pengembangan bakat di bidang e-sport.',
+      slug: 'tim-inovator-digital-raih-penghargaan-tertinggi'
     },
     {
-      judul: 'BEM Gelar Seminar Nasional Kepemimpinan 2025',
-      gambar: '/assets/img/event4.jpg',
-      deskripsi: 'BEM menyelenggarakan seminar nasional dengan tema kepemimpinan mahasiswa.'
+      judul: 'TIM TRO KEMBALI MENOREHKAN PRESTASI GEMILANG PADA AJANG KONTES MOBILHEMATENERGI (KMHE) 2025',
+      tanggal: '5 Januari 2026',
+      gambar: '/assets/img/KMHE.jpg',
+      deskripsi: 'Workshop pengenalan Git dan GitHub yang membahas dasar version control, kolaborasi tim, serta praktik langsung pengelolaan repository untuk mendukung pengembangan perangkat lunak.',
+      slug: 'tim-tro-menorehkan-prestasi-kmhe-2025'
     },
     {
-      judul: 'HMTI Kembangkan Sistem Absensi Berbasis QR Code',
-      gambar: '/assets/img/event5.jpg',
-      deskripsi: 'HMTI mengembangkan sistem absensi modern menggunakan QR Code.'
+      judul: 'FOKUS PADA PENGEMBANGAN INFRASTRUKTUR BERKELANJUTAN YANG RELEVAN DENAGAN TEKNIK SIPIL DAN PROYEK PROYEK MASA KINI',
+      tanggal: '20 Februari 2026',
+      gambar: '/assets/img/sipil3.jpg',
+      deskripsi: 'Pameran inovasi teknologi yang menampilkan karya, produk, dan riset mahasiswa di bidang teknologi informasi dan rekayasa, sebagai wadah kreativitas dan inovasi.',
+      slug: 'fokus-pengembangan-infrastruktur-teknik-sipil'
     }
   ];
-
-  // =====================
-  // STATE MODAL
-  // =====================
-  selectedBerita: any = null;
-
-  openModal(berita: any): void {
-    this.selectedBerita = berita;
-  }
-
-  closeModal(): void {
-    this.selectedBerita = null;
-  }
 }

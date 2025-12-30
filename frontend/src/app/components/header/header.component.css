@@ -12,9 +12,9 @@
 
 /* semua bar jadi kaca */
 .glass-bar {
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(253,253,253,0.7));
-
+  background-color: rgba(180, 180, 180, 0.25);
 }
+
 
 .sticky-nav {
     position: sticky;
@@ -29,8 +29,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 24px; /* DULU 12px 30px */
-  height: 64px;      /* BIAR FIX GA TERLALU TINGGI */
+  padding: 4px 16px; /* DULU 12px 30px */
+  height: 50px;      /* BIAR FIX GA TERLALU TINGGI */
 }
 
 /* LOGO */
@@ -47,7 +47,7 @@
 }
 
 .blue-text {
-  color: #002D72;  /* biru, sama seperti sebelumnya */
+  color: #ffffff;  /* biru, sama seperti sebelumnya */
 }
 
 .orange-text {
@@ -116,14 +116,10 @@
    NAVBAR AREA
 ================================ */
 .navbar-area {
-  padding: 10px 0;
+  padding: 6px 0;
   position: relative;
   z-index: 9999;
-  background: linear-gradient(
-    to bottom,
-    rgba(253, 253, 253, 0.7),   /* warna ujung bawah topbar */
-    rgba(253, 253, 253, 0)   /* lebih terawang di bawah */
-  );
+ background-color: rgba(180, 180, 180, 0.25);
  
 }
 
@@ -155,7 +151,7 @@
 
 /* ACTIVE MENU */
 .active {
-  border-bottom: 2px solid #003a7d !important;
+  border-bottom: 2px solid #ffffff !important;
 }
 
 /* ================================

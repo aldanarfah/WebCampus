@@ -34,30 +34,65 @@ export class HomeComponent {
   // ================= BERITA =================
   beritaBig = {
     title: 'TIM INOVATOR DIGITAL RAIH PENGHARGAAN TERTINGGI',
-    img: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    img: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    slug: 'tim-inovator-digital-raih-penghargaan-tertinggi'
   };
 
   beritaSmall = [
     {
-      title: 'TIM TRO KEMBALI MENOREHKAN PRESTASI GEMILANG PADA AJANG KONTES MOBILHEMATENERGI (KMHE) 2025 ',
-      img: '/assets/img/KMHE.jpg'
+      title: 'TIM TRO KEMBALI MENOREHKAN PRESTASI GEMILANG PADA AJANG KONTES MOBILHEMATENERGI (KMHE) 2025',
+      img: '/assets/img/KMHE.jpg',
+      slug: 'tim-tro-menorehkan-prestasi-kmhe-2025'
     },
     {
       title: 'FOKUS PADA PENGEMBANGAN INFRASTRUKTUR BERKELANJUTAN YANG RELEVAN DENAGAN TEKNIK SIPIL DAN PROYEK PROYEK MASA KINI',
-      img: '/assets/img/sipil3.jpg'
+      img: '/assets/img/sipil3.jpg',
+      slug: 'fokus-pengembangan-infrastruktur-teknik-sipil'
     }
   ];
 
+
   // ================= EVENT =================
   // otomatis dipakai di 2 slide
-  events = [
-    { title: 'Event MLBB', img: 'https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Z2FtaW5nfGVufDB8fDB8fHww' },
-    { title: 'Git & Github An Introduction', img: '/assets/img/git.jpg' },
-    { title: 'Pelatian Coding', img: '/assets/img/pelatian-coding.jpeg' },
-    { title: 'AICONIC', img: '/assets/img/AICONIC.jpg' },
-    { title: 'Campus Indutry Collabboration', img: '/assets/img/CIC.jpeg' },
-    { title: 'Seminar FACULTY OF INDUSTRIAL TECHNOLOGY', img: '/assets/img/seminar.png' },
-  ];
+ events = [
+  { 
+    title: 'MLBB Mobile Legends : Bang Bang Tournament', 
+    subtitle: 'Buktikan skill-mu di Event Mobile Legends Kampus 2025', 
+    img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    slug: 'mlbb-tournament'
+  },
+  { 
+    title: 'Git & Github An Introduction', 
+    subtitle: 'Information Technology Bootcamp', 
+    img: '/assets/img/git.jpg',
+    slug: 'git-github-introduction'
+  },
+  { 
+    title: 'Tech Innovation Fair', 
+    subtitle: 'Ide Brillianmu Bisa Ubah Masa Depan', 
+    img: '/assets/img/pelatian-coding.jpeg',
+    slug: 'tech-innovation-fair'
+  },
+  { 
+    title: 'AICONIC', 
+    subtitle: 'AI and Digital Marketing: Transforming Bussiness throught Intelligent Technologies',
+    img: '/assets/img/AICONIC.jpg',
+    slug: 'aiconic'
+  },
+  { 
+    title: 'Campus Indutry Collabboration', 
+    subtitle: 'Politeknik Negerii Malang Kampus Lumajang', 
+    img: '/assets/img/CIC.jpeg',
+    slug: 'campus-industry-collaboration'
+  },
+  { 
+    title: 'Seminar FACULTY OF INDUSTRIAL TECHNOLOGY', 
+    subtitle: 'Mari datang untuk mengetahui lebih banyak tentang industri teknologi', 
+    img: '/assets/img/seminar.png',
+    slug: 'seminar-faculty-industrial-tech'
+  },
+];
+
 
   // untuk *ngFor pada slide
   eventSlide1 = this.events.slice(0, 2);

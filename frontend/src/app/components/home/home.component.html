@@ -1,7 +1,7 @@
 <section class="hero-section position-relative d-flex align-items-center justify-content-center text-white overflow-hidden">
   <img src="assets/img/profil1.jpg" alt="Kampus Polinema" class="hero-bg">
 
-  <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.6;"></div>
+  <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.2;"></div>
   <div class="card card-hover-effect">
    </div>
 
@@ -41,6 +41,7 @@
   </div>
 </div>
 
+<!-- BERITA TERBARU -->
 <section class="bg-light py-5">
   <div class="container">
 
@@ -52,8 +53,10 @@
     </div>
 
     <div class="row g-4">
+      <!-- Berita Besar -->
       <div class="col-lg-6">
-        <div class="card border-0 shadow-sm h-100 text-white overflow-hidden rounded-3 position-relative group-hover">
+        <div class="card border-0 shadow-sm h-100 text-white overflow-hidden rounded-3 position-relative group-hover clickable"
+             [routerLink]="['/aktivitas/berita', beritaBig.slug]">
           <img [src]="beritaBig.img" [alt]="beritaBig.title" class="card-img w-100 h-100 object-fit-cover" style="min-height: 350px;">
           <div class="card-img-overlay d-flex flex-column justify-content-end bg-gradient-overlay">
             <span class="badge bg-primary mb-2 w-auto align-self-start">Terbaru</span>
@@ -62,9 +65,12 @@
         </div>
       </div>
 
+      <!-- Berita Kecil -->
       <div class="col-lg-6">
         <div class="d-flex flex-column gap-3 h-100">
-          <div class="card border-0 shadow-sm overflow-hidden rounded-3 flex-fill position-relative group-hover" *ngFor="let b of beritaSmall">
+          <div class="card border-0 shadow-sm overflow-hidden rounded-3 flex-fill position-relative group- clickable"
+               *ngFor="let b of beritaSmall"
+               [routerLink]="['/aktivitas/berita', b.slug]">
             <div class="row g-0 h-100">
               <div class="col-4">
                 <img [src]="b.img" [alt]="b.title" class="img-fluid w-100 h-100 object-fit-cover">
@@ -78,6 +84,7 @@
           </div>
         </div>
       </div>
+
     </div>
 
   </div>
@@ -90,7 +97,7 @@
     <!-- Deskripsi -->
     <div class="col-lg-4">
   <h3 class="font-bold text-lg">Event</h3>
-  <p class="font-semibold">Daftar event kampus terbaru yang akan datang.</p>
+  <p class="font-semibold">Beragam kegiatan seru hadir di kampus kami setiap semester! Mulai dari kompetisi e-sport, pameran inovasi teknologi, hingga ajang unjuk bakat mahasiswa. Yuk, ikuti berbagai event menarik, perluas relasi, dan tunjukkan potensi terbaikmu di setiap kesempatan!</p>
 </div>
 
 
@@ -105,9 +112,12 @@
             <div class="row g-3">
               <div class="col-6" *ngFor="let e of eventSlide1">
                 <div class="event-card text-center clickable"
-    routerLink="/aktivitas/event">
+                  [routerLink]="['/aktivitas/event', e.slug]">
                   <img [src]="e.img" />
-                  <p>{{ e.title }}</p>
+                  <p class="event-text">
+    <span class="event-title">{{ e.title }}</span><br />
+    <span class="event-subtitle">{{ e.subtitle }}</span>
+  </p>
                 </div>
               </div>
             </div>
@@ -118,9 +128,12 @@
             <div class="row g-3">
               <div class="col-6" *ngFor="let e of eventSlide2">
                 <div class="event-card text-center clickable"
-    routerLink="/aktivitas/event">
+                  [routerLink]="['/aktivitas/event', e.slug]">
                   <img [src]="e.img" />
-                  <p>{{ e.title }}</p>
+                  <p class="event-text">
+    <span class="event-title">{{ e.title }}</span><br />
+    <span class="event-subtitle">{{ e.subtitle }}</span>
+  </p>
                 </div>
               </div>
             </div>
@@ -131,9 +144,12 @@
             <div class="row g-3">
               <div class="col-6" *ngFor="let e of eventSlide3">
                 <div class="event-card text-center clickable"
-    routerLink="/aktivitas/event">
+                  [routerLink]="['/aktivitas/event', e.slug]">
                   <img [src]="e.img" />
-                  <p>{{ e.title }}</p>
+                  <p class="event-text">
+    <span class="event-title">{{ e.title }}</span><br />
+    <span class="event-subtitle">{{ e.subtitle }}</span>
+  </p>
                 </div>
               </div>
             </div>
